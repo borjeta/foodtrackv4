@@ -21,3 +21,4 @@ Route::post('/usuarios', 'App\Http\Controllers\Api\UsuarioController@store');
 Route::put('/usuarios/{usuario}', 'App\Http\Controllers\Api\UsuarioController@update');
 Route::delete('/usuarios/{usuario}', 'App\Http\Controllers\Api\UsuarioController@destroy');
 Route::post('/usuarios/login', 'App\Http\Controllers\Api\UsuarioController@login')->middleware('canAccess');
+Route::get('/usuarios/logout', 'App\Http\Controllers\Api\UsuarioController@logout')->middleware('canAccess');

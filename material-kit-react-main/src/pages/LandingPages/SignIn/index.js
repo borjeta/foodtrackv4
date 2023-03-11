@@ -61,12 +61,12 @@ function SignInBasic() {
           headers: {
             "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
-            Authorization: `Bearer ${api_token}`,
+            "Authorization": `${api_token}`,
           },
         })
         .then((res) => {
           setData(res.data);
-          window.location.href = `/home`;
+          alert("Usuario logueado correctamente");
         })
         .catch((err) => {
           console.log(err);

@@ -25,6 +25,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 // Material Kit 2 React themes
 import theme from "assets/theme";
 import Presentation from "layouts/pages/presentation";
+import Logout from "pages/Usuario/Logout";
 
 // Material Kit 2 React routes
 import routes from "routes";
@@ -57,8 +58,7 @@ export default function App() {
       <Routes>
         {getRoutes(routes)}
         <Route path="/presentation" element={<Presentation />} />
-        <Route path="*" element={<Navigate to="/presentation" />} />
-        <Route path="/" element={<Navigate to="/presentation" />} />
+        <Route path="/logout" element={<Logout />} />
       </Routes>
     </ThemeProvider>
   );

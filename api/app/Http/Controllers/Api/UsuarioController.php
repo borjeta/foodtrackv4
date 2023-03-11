@@ -68,4 +68,17 @@ class UsuarioController extends Controller
         }
         return response()->json(['error' => 'Usuario o contraseña incorrectos'], 401);
     }
+
+    public function logout(Request $request)
+    {
+        $usuario = usuario::where('api_token', $request->api_token)->first();
+        if ($usuario) {
+            $usuario->api_token = null;
+            $usuario->date_createtoken = null;
+            $usuario->expires_at = null;
+            $usuario->save();
+            return response()->json(['message' => 'Sesión cerrada correctamente'], 200);
+        }
+        return response()->json(['error' => 'No se ha podido cerrar la sesión'], 401);
+    }
 }
