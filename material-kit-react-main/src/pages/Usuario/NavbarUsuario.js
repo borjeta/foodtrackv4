@@ -1,14 +1,41 @@
-import react from "react";
-import { useEffect, useState } from "react";
-import axios from "axios";
+
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import routes from "routes";
+
+import HomeUsuario from "./HomeUsuario";
+import InfoCuenta from "./InfoCuenta";
+
+
+
 
 function NavbarUsuario() {
+
+    const rutas = [
+
+
+        {
+            name: "home",
+            icon: <i className="fas fa-home" />,
+            component: <HomeUsuario />,
+        },
+        {
+            name: "Mi cuenta",
+            icon: <i className="fas fa-user" />,
+            route: "/micuenta",
+        },
+        {
+            name: "Logout",
+            icon: <i className="fas fa-sign-out-alt" />,
+            route: "/logout",
+        }
+    ];
+
+
+
+
     return (
         <div>
             <DefaultNavbar
-                routes={routes}
+                routes={rutas}
                 action={{
                     type: "external",
                     route: "https://www.creative-tim.com/product/material-kit-react",
@@ -17,7 +44,7 @@ function NavbarUsuario() {
                 }}
                 sticky
             />
-        </div>
+        </div >
     )
 }
 

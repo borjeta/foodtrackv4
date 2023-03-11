@@ -28,6 +28,7 @@ import Presentation from "layouts/pages/presentation";
 import Logout from "pages/Usuario/Logout";
 import HomeUsuario from "pages/Usuario/HomeUsuario";
 import Signin from "pages/LandingPages/SignIn";
+import InfoCuenta from "pages/Usuario/InfoCuenta";
 // Material Kit 2 React routes
 import routes from "routes";
 
@@ -62,6 +63,7 @@ export default function App() {
         <Route path="/logout" element={<Logout />} />
         <Route path="/homeusuario" element={<HomeUsuario />} />
         <Route path="/login" element={<Signin />} />
+        <Route path="/micuenta" element={<InfoCuenta />} />
       </Routes>
     </ThemeProvider>
   );

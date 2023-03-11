@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\usuario;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Str;
 
 
@@ -92,5 +93,21 @@ class UsuarioController extends Controller
             return response()->json(['message' => 'Sesión cerrada correctamente'], 200);
         }
         return response()->json(['error' => 'No se ha podido cerrar la sesión'], 401);
+    }
+
+    public function buscaUsuario(Request $request)
+    {
+        $api_token = $request->header('Authorization');
+        $usuario = usuario::where('api_token', $api_token)->first();
+        return response()->json(['api_token' => $api_token], 200);
+        /*
+        if (
+            $usuario && $usuario->expires_at > now()
+            && $usuario->id == $request->user_id && $usuario->role == $request->role
+        ) {
+            return $usuario;
+        }
+        return response()->json(['error' => 'No tienes permisos para acceder a este recurso'], 401);
+    */
     }
 }
