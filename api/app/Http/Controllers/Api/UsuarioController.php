@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\usuario;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Str;
+use SplTempFileObject;
 
-
-
+use function PHPSTORM_META\map;
 
 class UsuarioController extends Controller
 {
@@ -52,7 +52,26 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, usuario $usuario)
     {
-        //
+
+        $body = $request->all();
+        /* Buscamos el usuario por el nombre */
+        $api_token = $body['headers']['api_token'];
+        $user_id = $body['headers']['user_id'];
+        $role = $body['headers']['role'];
+        $user = usuario::where('id', $user_id)->first();
+        if ($user) {
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->telefono = $request->telefono;
+            $user->ubicacion = $request->ubicacion;
+            if($request->password != null){
+                $user->password = password_hash($request->password, PASSWORD_DEFAULT);
+            }
+            
+            $user->save();
+            return $user;
+        }
+        return response()->json(['error' => 'No tienes permisos para acceder a este recurso'], 401);
     }
 
     /**
@@ -96,18 +115,13 @@ class UsuarioController extends Controller
     }
 
     public function buscaUsuario(Request $request)
-    {
-        $api_token = $request->header('Authorization');
-        $usuario = usuario::where('api_token', $api_token)->first();
-        return response()->json(['api_token' => $api_token], 200);
-        /*
-        if (
-            $usuario && $usuario->expires_at > now()
-            && $usuario->id == $request->user_id && $usuario->role == $request->role
-        ) {
-            return $usuario;
-        }
-        return response()->json(['error' => 'No tienes permisos para acceder a este recurso'], 401);
-    */
+    {/*Cogemos el body de la request */
+        $body = $request->all();
+        /* Buscamos el usuario por el nombre */
+        $api_token = $body['headers']['api_token'];
+        $user_id = $body['headers']['user_id'];
+        $role = $body['headers']['role'];
+        $user = usuario::where('id', $user_id)->first();
+        return response()->json($user, 200);
     }
 }

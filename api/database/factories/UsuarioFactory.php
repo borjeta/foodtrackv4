@@ -31,9 +31,10 @@ class UsuarioFactory extends Factory
             'date_createtoken' => now(),
             'expires_at' => now()->addDays(1),
             'role' => 'user',
-            'avatar' => null,
-            'telefono' => null,
-            'ubicacion' => null,
+            /*pon un avatar al azar entre la imagen 1 y la 10*/
+            'avatar' => 'https://picsum.photos/200/300?random=' . $this->faker->numberBetween(1, 10),
+            'telefono' => $this->faker->phoneNumber,
+            'ubicacion' => $this->faker->address,
             'created_at' => now(),
             'updated_at' => now()
         ];

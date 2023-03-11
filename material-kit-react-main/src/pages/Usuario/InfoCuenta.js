@@ -8,6 +8,8 @@ import Modal from "@mui/material/Modal";
 import Divider from "@mui/material/Divider";
 import Slide from "@mui/material/Slide";
 import Switch from "@mui/material/Switch";
+import Stack from "@mui/material/Stack";
+
 
 
 // @mui icons
@@ -18,6 +20,7 @@ import MKBox from "components/MKBox";
 import MKButton from "components/MKButton";
 import MKTypography from "components/MKTypography";
 import MKInput from "components/MKInput";
+import MKAvatar from "components/MKAvatar";
 /*
  columnas de la tabla usuarios
 id	
@@ -52,15 +55,22 @@ function SimpleModal() {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
-                    "Authorization": '${api_token}',
                     "user_id": `${user_id}`,
+                    "api_token": `${api_token}`,
                     "role": `${role}`
-
                 }
+
             })
             .then((res) => {
-                alert(res.data.api_token);
+                console.log(res.data);
+                setUser(res.data);
+                document.getElementById("name").value = res.data.name;
+                document.getElementById("email").value = res.data.email;
+                document.getElementById("phone").value = res.data.telefono;
+                document.getElementById("ubicacion").value = res.data.ubicacion;
+                alert(res.data.avatar);
             })
+
             .catch((err) => {
                 alert(err);
                 console.log(err);
@@ -68,17 +78,81 @@ function SimpleModal() {
     }, []);
 
 
+    const handleSubmit = (e) => {
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const phone = document.getElementById("phone").value;
+        const ubicacion = document.getElementById("ubicacion").value;
+        const password = document.getElementById("password").value;
+        const password_confirmation = document.getElementById("password_confirmation").value;
+        if (password !== password_confirmation) {
+            alert("Las contraseñas no coinciden");
+            document.getElementById("password");
+            return;
+        }
 
+        axios
+            .put(`http://localhost:8000/api/usuarios/editar/usuario`, {
+                name: name,
+                email: email,
+                telefono: phone,
+                ubicacion: ubicacion,
+                password: password,
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Content-Type": "application/json",
+                    "user_id": `${user_id}`,
+                    "api_token": `${api_token}`,
+                    "role": `${role}`
+                }
+            })
+            .then((res) => {
+                console.log(res.data);
+                window.location.href = `/homeusuario`;
+            }
+            )
+            .catch((err) => {
+                alert(err);
+                <MKAlert color="error">A simple error alert—check it out!</MKAlert>
+            }
+            );
+    }
+
+
+    const handleConfirmDelete = (e) => {
+
+        if (confirmacionBorrado === true) {
+            axios
+                .delete(`http://localhost:8000/api/usuarios/borrar/usuario`, {
+                    headers: {
+                        "Access-Control-Allow-Origin": "*",
+                        "Content-Type": "application/json",
+                        "user_id": `${user_id}`,
+                        "api_token": `${api_token}`,
+                        "role": `${role}`
+                    }
+                })
+                .then((res) => {
+                    console.log(res.data);
+                    window.location.href = `/login`;
+                }
+                )
+                .catch((err) => {
+                    alert(err);
+                    console.log(err);
+                }
+                );
+        }
+
+    }
 
 
 
     const toggleModal = () => setShow(show);
 
 
-
-
     return (
-        <MKBox component="section" py={6} >
+        <MKBox component="section" py={4} >
             <Container>
 
                 <Grid container item xs={12} lg={10} justifyContent="center" mx="auto">
@@ -92,6 +166,7 @@ function SimpleModal() {
                             maxWidth="1000px"
                             display="flex"
                             flexDirection="column"
+
                             borderRadius="xl"
                             bgColor="white"
                             shadow="xl"
@@ -101,110 +176,148 @@ function SimpleModal() {
                                 <CloseIcon fontSize="medium" sx={{ cursor: "pointer" }} onClick={toggleModal} />
                             </MKBox>
                             <Divider sx={{ my: 0 }} />
-                            <MKBox component="section" py={6}>
-                                <Container>
+                            <MKBox
+                                component="section"
+                                py={6}
+                                borderRadius="xl"
+                                bgColor="white"
+                                shadow="xl"
+                            > <MKBox component="section" >
+                                    <Container>
+                                        <Grid container justifyContent="center">
+                                            <Stack direction="row" alignItems="flex-end" spacing={1}>
+                                                <MKAvatar src={user.avatar}
+                                                    alt="xxl" size="xxl" />
+                                            </Stack>
+                                        </Grid>
+                                    </Container>
+                                </MKBox>
+
+                                <Container  >
+                                    <MKButton variant="gradient" color="info" size="large" onClick={() => {
+                                        window.location.href = `/homeusuario`;
+                                    }}>
+                                        volver
+                                    </MKButton>
                                     <Grid container item justifyContent="center" xs={10} lg={7} mx="auto" textAlign="center">
-                                        <MKTypography variant="h3" mb={1}
-                                            style={{ marginBottom: "50px" }}>
+                                        <MKTypography variant="h3" >
                                             Mi cuenta
                                         </MKTypography>
-                                    </Grid>
-                                    <Grid container item
-                                        xs={12}
 
-                                        lg={7}
-                                        sx={{ mx: "auto" }}
-                                    >
-                                        <MKBox width="100%" component="form" method="post" autoComplete="off">
-                                            <MKBox alignItems="center"  >
-                                                <Grid container >
-                                                    <Grid item xs={12} sm={10} >
-                                                        <MKInput
-                                                            id="name"
-                                                            name="name"
-                                                            label="Nombre"
-                                                            variant="outlined"
-                                                            style={{ marginBottom: "20px" }}
+                                        <MKBox width="100%" component="form" method="post" autoComplete="off" >
 
-                                                            required
-                                                            fullWidth
 
-                                                        />
-                                                        <MKInput
-                                                            id="email"
-                                                            name="email"
-                                                            label="Nombre"
-                                                            variant="outlined"
-                                                            style={{ marginBottom: "20px" }}
+                                            <Grid container item
+                                                xs={10}
+                                                md={10}
+                                                lg={10}
+                                                mx="auto"
+                                                textAlign="center"
+                                                justifyContent="center"
+                                                alignItems="center" >
 
-                                                            fullWidth
-                                                            required
+                                                <Grid item xs={12} sm={10} >
 
-                                                        />
-                                                        <MKInput
-                                                            id="phone"
-                                                            name="phone"
-                                                            label="Telefono"
-                                                            variant="outlined"
-                                                            style={{ marginBottom: "20px" }}
 
-                                                            fullWidth
-                                                            required
-                                                        />
-                                                        <MKInput
-                                                            id="password"
-                                                            name="password"
-                                                            label="Password"
-                                                            variant="outlined"
-                                                            style={{ marginBottom: "20px" }}
-                                                            fullWidth
-                                                            required
-                                                        />
-                                                        <MKInput
-                                                            id="password_confirmation"
-                                                            name="password_confirmation"
-                                                            label="Password Confirmation"
-                                                            variant="outlined"
-                                                            style={{ marginBottom: "20px" }}
-                                                            fullWidth
-                                                            required
-                                                        />
-                                                        <MKInput
-                                                            id="ubicacion"
-                                                            name="ubicacion"
-                                                            label="Ubicacion (Ciudad, País)"
-                                                            fullWidth
-                                                            required
-                                                        />
+                                                    <MKTypography variant="h6" mb={1}>
+                                                        Nombre
+                                                    </MKTypography>
 
-                                                    </Grid>
+                                                    <MKInput
+                                                        id="name"
+                                                        name="name"
+                                                        variant="outlined"
+                                                        style={{ marginBottom: "20px" }}
+                                                        required
+                                                        fullWidth
+
+                                                    />
+                                                    <MKTypography variant="h6" mb={1}>
+                                                        Email
+                                                    </MKTypography>
+
+                                                    <MKInput
+                                                        id="email"
+                                                        name="email"
+                                                        label=""
+                                                        variant="outlined"
+                                                        style={{ marginBottom: "20px" }}
+                                                        fullWidth
+                                                        required
+
+                                                    />
+                                                    <MKTypography variant="h6" mb={1}>
+                                                        Teléfono
+                                                    </MKTypography>
+                                                    <MKInput
+                                                        id="phone"
+                                                        name="phone"
+                                                        variant="outlined"
+                                                        style={{ marginBottom: "20px" }}
+                                                        fullWidth
+                                                        required
+                                                    />
+                                                    <MKTypography variant="h6" mb={1}
+                                                    >
+                                                        Password
+                                                    </MKTypography>
+                                                    <MKInput
+                                                        id="password"
+                                                        name="password"
+                                                        type="password"
+                                                        variant="outlined"
+                                                        style={{ marginBottom: "20px" }}
+                                                        fullWidth
+
+                                                    />  <MKTypography variant="h6" mb={1}
+                                                    >
+                                                        Confirmación Password
+                                                    </MKTypography>
+                                                    <MKInput
+                                                        id="password_confirmation"
+                                                        name="password_confirmation"
+                                                        type="password"
+                                                        variant="outlined"
+                                                        style={{ marginBottom: "20px" }}
+                                                        fullWidth
+
+                                                    />
+                                                    <MKTypography variant="h6" mb={1}
+                                                    >
+                                                        Ubicación
+                                                    </MKTypography>
+                                                    <MKInput
+                                                        id="ubicacion"
+                                                        name="ubicacion"
+                                                        fullWidth
+                                                        style={{ marginBottom: "20px" }}
+                                                        required
+                                                    />
+
                                                 </Grid>
-                                                <Grid container item justifyContent="center" xs={12} my={2}>
-                                                    <MKButton type="submit" variant="gradient" color="dark" fullWidth onClick={() => {
-                                                        window.location.href = `/login`;
-                                                    }} >
-                                                        Guardar cambios
-                                                    </MKButton>
-                                                </Grid>
-                                            </MKBox>
+                                            </Grid>
+                                            <Grid container item justifyContent="center" xs={12} my={1}>
+                                                <MKButton onClick={handleSubmit} size="large" variant="gradient" color="warning" >
+                                                    Guardar cambios
+                                                </MKButton>
+                                                &nbsp;
+                                                <MKButton onClick={handleConfirmDelete} size="large" variant="gradient" color="error" >
+                                                    borrar cuenta
+                                                </MKButton>
+
+                                            </Grid>
+
                                         </MKBox>
                                     </Grid>
+
                                 </Container>
                             </MKBox>
-                            <Divider sx={{ my: 0 }} />
-                            <MKBox display="flex" justifyContent="space-between" p={1.5}>
-                                <MKButton variant="gradient" color="warning" onClick={() => {
-                                    window.location.href = `/homeusuario`;
-                                }}>
-                                    volver
-                                </MKButton>
 
-                            </MKBox>
                         </MKBox>
                     </Slide>
                 </Modal>
             </Container>
-        </MKBox>
+        </MKBox >
     );
 }
 

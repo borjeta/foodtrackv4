@@ -29,19 +29,10 @@ function NavbarUsuario() {
         }
     ];
 
-
-
-
     return (
         <div>
             <DefaultNavbar
                 routes={rutas}
-                action={{
-                    type: "external",
-                    route: "https://www.creative-tim.com/product/material-kit-react",
-                    label: "free download",
-                    color: "info",
-                }}
                 sticky
             />
         </div >
