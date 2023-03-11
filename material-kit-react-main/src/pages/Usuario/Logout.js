@@ -11,7 +11,6 @@ function Logout() {
 
     useEffect(() => {
         /*borra el token y el id del usuario de las cookies*/
-
         document.cookie = `api_token=""`;
         document.cookie = `user_id=""`;
         window.location.href = `/login`;

@@ -26,7 +26,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import theme from "assets/theme";
 import Presentation from "layouts/pages/presentation";
 import Logout from "pages/Usuario/Logout";
-
+import HomeUsuario from "pages/Usuario/HomeUsuario";
+import Signin from "pages/LandingPages/SignIn";
 // Material Kit 2 React routes
 import routes from "routes";
 
@@ -57,8 +58,10 @@ export default function App() {
       <CssBaseline />
       <Routes>
         {getRoutes(routes)}
-        <Route path="/presentation" element={<Presentation />} />
+        <Route path="/" element={<Presentation />} />
         <Route path="/logout" element={<Logout />} />
+        <Route path="/homeusuario" element={<HomeUsuario />} />
+        <Route path="/login" element={<Signin />} />
       </Routes>
     </ThemeProvider>
   );

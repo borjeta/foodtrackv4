@@ -51,31 +51,6 @@ function SignInBasic() {
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
   const [data, setData] = useState([]);
 
-  useEffect(() => {
-    /*Si el usuario tiene guardado un token en las cookies, comprobamos si es válido*/
-    if (document.cookie) {
-      const api_token = cookies[0].split("=")[1];
-      const user_id = cookies[1].split("=")[1];
-      axios
-        .get(`http://localhost:8000/api/usuarios/${user_id}`, {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-            "Authorization": `${api_token}`,
-          },
-        })
-        .then((res) => {
-          setData(res.data);
-          alert("Usuario logueado correctamente");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, []);
-
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
     /*recoger datos del formulario*/
@@ -96,10 +71,24 @@ function SignInBasic() {
         }
       )
       .then((res) => {
-        setData(res.data);
-        document.cookie = `api_token=${res.data.api_token}`;
-        document.cookie = `user_id=${res.data.id}`;
-        window.location.href = `/home`;
+        setData(res.data.api_token);
+        alert("Usuario logueado correctamente" + res.data.token + " rol   :" + res.data.role);
+        document.cookie = `api_token=${res.data.token}`;
+        document.cookie = `user_id=${res.data.user_id}`;
+        document.cookie = `role=${res.data.role}`;
+
+        if (res.data.role == "admin") {
+          window.location.href = "http://localhost:3000/homeadmin";
+          alert("Usuario logueado como admin");
+        } else if (res.data.role == "user") {
+          window.location.href = "http://localhost:3000/homeusuario";
+          alert("Usuario logueado como usuario");
+        } else if (res.data.role == "propietario") {
+          window.location.href = "http://localhost:3000/homepropietario";
+          alert("Usuario logueado como propietario");
+        } else {
+          alert("No se ha podido loguear correctamente");
+        }
 
       })
       .catch((err) => {

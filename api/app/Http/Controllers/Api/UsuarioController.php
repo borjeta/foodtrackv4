@@ -25,14 +25,25 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
+        $usuario = new usuario();
+        $usuario->nombre = $request->nombre;
+        $usuario->apellidos = $request->apellidos;
+        $usuario->email = $request->email;
+        $usuario->password = password_hash($request->password, PASSWORD_DEFAULT);
+        $usuario->save();
+        return $usuario;
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(usuario $usuario)
+    public function show(Request $request, usuario $usuario)
     {
-        return $usuario;
+        /* miramos la peticion tiene token valido y en la fecha de uso */
+        if ($request->api_token == $usuario->api_token && $usuario->expires_at > now()) {
+            return $usuario;
+        }
+        return response()->json(['error' => 'No tienes permisos para acceder a este recurso'], 401);
     }
 
     /**
@@ -57,13 +68,14 @@ class UsuarioController extends Controller
             if (password_verify($request->password, $usuario->password)) {
                 /* Si el usuario existe y la contraseña es correcta , generamos el token con 60 caracteres aleatorios */
                 $token = Str::class::random(60);
-                /*guardamos el token en la base de datos */
+                $role = $usuario->role;
+                $user_id = $usuario->id;
                 $usuario->api_token = $token;
-                /*y actualizamos la fecha de creación del token y la fecha de expiración */
                 $usuario->date_createtoken = now();
                 $usuario->expires_at = now()->addDays(1);
+
                 $usuario->save();
-                return response()->json(['token' => $token], 200);
+                return response()->json(['token' => $token, 'user_id' => $user_id, 'role' => $role], 200);
             }
         }
         return response()->json(['error' => 'Usuario o contraseña incorrectos'], 401);
