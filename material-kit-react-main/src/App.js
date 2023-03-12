@@ -30,6 +30,7 @@ import HomeUsuario from "pages/Usuario/HomeUsuario";
 import Signin from "pages/LandingPages/SignIn";
 import InfoCuenta from "pages/Usuario/InfoCuenta";
 import Registro from "pages/Usuario/Registro";
+import InfoFoodtruck from "pages/Foodtruck/InfoFoodtruck";
 // Material Kit 2 React routes
 import routes from "routes";
 
@@ -66,6 +67,9 @@ export default function App() {
         <Route path="/login" element={<Signin />} />
         <Route path="/micuenta" element={<InfoCuenta />} />
         <Route path="/registro" element={<Registro />} />
+        <Route path="/foodtrucks/:id/info" element={<InfoFoodtruck />} />
+        <Route path="/foodtrucks/dondeesta/:id/info" element={<InfoFoodtruck />} />
+
       </Routes>
     </ThemeProvider>
   );

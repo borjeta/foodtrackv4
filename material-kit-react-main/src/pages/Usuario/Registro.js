@@ -7,10 +7,6 @@ import Grid from "@mui/material/Grid";
 import Modal from "@mui/material/Modal";
 import Divider from "@mui/material/Divider";
 import Slide from "@mui/material/Slide";
-import Switch from "@mui/material/Switch";
-import Stack from "@mui/material/Stack";
-
-
 
 // @mui icons
 import CloseIcon from "@mui/icons-material/Close";
@@ -20,24 +16,6 @@ import MKBox from "components/MKBox";
 import MKButton from "components/MKButton";
 import MKTypography from "components/MKTypography";
 import MKInput from "components/MKInput";
-import MKAvatar from "components/MKAvatar";
-/*
- columnas de la tabla usuarios
-id	
-name	
-email	
-email_verified_at	
-password	
-remember_token	
-api_token	
-date_createtoken	
-expires_at	
-role	
-avatar	
-telefono	
-ubicacion	
-created_at	
-updated_at*/
 
 function SimpleModal() {
     const [user, setUser] = useState([]);
@@ -73,7 +51,7 @@ function SimpleModal() {
             alert("El email debe ser válido");
             return;
         }
-        if (password !== document.getElementById("password_nuevousuario2").value) {
+        if (password !== document.getElementById("password_confirmation_nuevousuario").value) {
             alert("Las contraseñas no coinciden");
             return;
         }
@@ -94,7 +72,7 @@ function SimpleModal() {
             .then((response) => {
                 console.log(response);
                 if (response.status === 200) {
-                    window.location.href = "/homeusuario";
+                    window.location.href = "/login";
                 }
             })
             .catch((error) => {
@@ -102,10 +80,6 @@ function SimpleModal() {
                 alert("Error al crear el usuario");
             });
     };
-
-
-
-
 
 
     const toggleModal = () => setShow(show);

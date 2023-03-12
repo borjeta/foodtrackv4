@@ -21,6 +21,7 @@ return new class extends Migration
                 $table->string('telefono');
                 $table->string('ubicacion');
                 $table->string('avatar')->nullable();
+                $table->string('status');
                 $table->string('TipoComida');
                 $table->string('horario');
                 $table->string('user_id');

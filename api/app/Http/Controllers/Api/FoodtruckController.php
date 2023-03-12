@@ -32,12 +32,10 @@ class FoodtruckController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(foodtruck $foodtruck)
+    public function show($id)
     {
         //busca la foodtruck por id
-        $foodtruck = foodtruck::find($foodtruck->id);
-
-
+        $foodtruck = foodtruck::find($id);
         return $foodtruck;
     }
 

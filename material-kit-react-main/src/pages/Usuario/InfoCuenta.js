@@ -42,7 +42,6 @@ updated_at*/
 function SimpleModal() {
     const [user, setUser] = useState([]);
     const [show, setShow] = useState(true);
-    const [checked, setChecked] = useState(true);
 
     const api_token = document.cookie.replace(/(?:(?:^|.*;\s*)api_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const user_id = document.cookie.replace(/(?:(?:^|.*;\s*)user_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
@@ -68,7 +67,7 @@ function SimpleModal() {
                 document.getElementById("email").value = res.data.email;
                 document.getElementById("phone").value = res.data.telefono;
                 document.getElementById("ubicacion").value = res.data.ubicacion;
-                alert(res.data.avatar);
+
             })
 
             .catch((err) => {
@@ -133,6 +132,7 @@ function SimpleModal() {
                     }
                 })
                 .then((res) => {
+
                     console.log(res.data);
                     window.location.href = `/login`;
                 }
@@ -148,7 +148,10 @@ function SimpleModal() {
 
 
 
-    const toggleModal = () => setShow(show);
+    const toggleModal = () => {
+        setShow(!show);
+        window.location.href = `/homeusuario`;
+    };
 
 
     return (
@@ -166,7 +169,6 @@ function SimpleModal() {
                             maxWidth="1000px"
                             display="flex"
                             flexDirection="column"
-
                             borderRadius="xl"
                             bgColor="white"
                             shadow="xl"
@@ -182,11 +184,12 @@ function SimpleModal() {
                                 borderRadius="xl"
                                 bgColor="white"
                                 shadow="xl"
-                            > <MKBox component="section" >
+                            >
+                                <MKBox component="section" variant="contained">
                                     <Container>
                                         <Grid container justifyContent="center">
                                             <Stack direction="row" alignItems="flex-end" spacing={1}>
-                                                <MKAvatar src={user.avatar}
+                                                <MKAvatar src="https://png.pngtree.com/png-vector/20220817/ourmid/pngtree-cartoon-man-avatar-vector-ilustration-png-image_6111064.png"
                                                     alt="xxl" size="xxl" />
                                             </Stack>
                                         </Grid>

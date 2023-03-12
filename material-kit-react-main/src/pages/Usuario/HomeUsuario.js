@@ -4,24 +4,20 @@ import axios from "axios";
 
 import NavbarUsuario from "./NavbarUsuario";
 import AppBar from '@mui/material/AppBar';
-import Button from '@mui/material/Button';
-import CameraIcon from '@mui/icons-material/PhotoCamera';
+
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Link from '@mui/material/Link';
+import { Link } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import Footer from "pages/LandingPages/Author/sections/Footer";
 import Card from "@mui/material/Card";
-import MKButton from "components/MKButton";
 
 
 function HomeUsuario() {
@@ -50,11 +46,19 @@ function HomeUsuario() {
             .then((res) => {
                 setFoodtrucks(res.data);
                 console.log(res.data);
+
             })
             .catch((err) => {
                 console.log(err);
             });
     }, []);
+
+    const handleDetalles = (id) => {
+        window.location.href = `/foodtrucks/${id}/info`;
+
+
+    }
+
 
 
 
@@ -128,21 +132,20 @@ function HomeUsuario() {
                                         <Typography>
                                             {foodtruck.direccion}
                                         </Typography>
+                                        &nbsp;
 
-                                        <Typography variant="body2" color="text.secondary">
+                                        <Typography color="text.primary">
                                             {foodtruck.horario}
                                         </Typography>
-
+                                        &nbsp;
                                         <Typography >
-                                            Estado: {foodtruck.estado}
+                                            Estado: {foodtruck.status}
                                         </Typography>
                                     </CardContent>
                                     <CardActions >
-                                        <Button size="large" color="success">
-                                            Ver
-                                        </Button>
-
-
+                                        <Link to={`/foodtrucks/dondeesta/${foodtruck.id}/info`} className='btn btn-primary btn-lg'>
+                                            Ver donde está ahora
+                                            </Link>
                                     </CardActions>
                                 </Card>
                             </Grid>
@@ -171,7 +174,7 @@ function HomeUsuario() {
                     </Typography>
                 </Box>
                 {/* End footer */}
-            </ThemeProvider>
+            </ThemeProvider >
 
 
             <Footer />
