@@ -230,7 +230,6 @@ function SimpleModal() {
                                                         style={{ marginBottom: "20px" }}
                                                         required
                                                         fullWidth
-
                                                     />
                                                     <MKTypography variant="h6" mb={1}>
                                                         Email

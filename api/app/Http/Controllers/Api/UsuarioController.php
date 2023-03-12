@@ -41,7 +41,7 @@ class UsuarioController extends Controller
         $usuario->date_createtoken = null;
         $usuario->expires_at = null;
         $usuario->save();
-        return $usuario;
+        return Response()->json(['message' => 'Usuario creado correctamente'], 200);
     }
 
     /**

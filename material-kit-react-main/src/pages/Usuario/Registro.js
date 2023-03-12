@@ -51,15 +51,49 @@ function SimpleModal() {
 
     const handleSubmit = (e) => {
 
+        const name = document.getElementById("name_nuevousuario").value;
+        const email = document.getElementById("email_nuevousuario").value;
+        const phone = document.getElementById("phone_nuevousuario").value;
+        const ubicacion = document.getElementById("ubicacion_nuevousuario").value;
+        const password = document.getElementById("password_nuevousuario").value;
 
-        
+        if (name === "" || email === "" || phone === "" || ubicacion === "" || password === "") {
+            alert("Todos los campos son obligatorios");
+            return;
+        }
+        if (password.length < 4) {
+            alert("La contraseña debe tener al menos 8 caracteres");
+            return;
+        }
+        if (phone.length < 9) {
+            alert("El teléfono debe tener al menos 9 caracteres");
+            return;
+        }
+        if (email.indexOf("@") === -1) {
+            alert("El email debe ser válido");
+            return;
+        }
+        if (password !== document.getElementById("password_nuevousuario2").value) {
+            alert("Las contraseñas no coinciden");
+            return;
+        }
+
         e.preventDefault();
-              axios.post("http://localhost:8000/api/usuarios/registro/newuser", formData)
+        axios.post("http://localhost:8000/api/usuarios/registro/newuser", {
+            name: name,
+            email: email,
+            telefono: phone,
+            ubicacion: ubicacion,
+            password: password
+        }, {
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json",
+            }
+        })
             .then((response) => {
                 console.log(response);
                 if (response.status === 200) {
-
-                    alert("Usuario creado correctamente");
                     window.location.href = "/homeusuario";
                 }
             })
@@ -141,7 +175,7 @@ function SimpleModal() {
                                                     </MKTypography>
 
                                                     <MKInput
-                                                        id="name"
+                                                        id="name_nuevousuario"
                                                         name="name"
                                                         variant="outlined"
                                                         style={{ marginBottom: "20px" }}
@@ -154,9 +188,8 @@ function SimpleModal() {
                                                     </MKTypography>
 
                                                     <MKInput
-                                                        id="email"
+                                                        id="email_nuevousuario"
                                                         name="email"
-                                                        label=""
                                                         variant="outlined"
                                                         style={{ marginBottom: "20px" }}
                                                         fullWidth
@@ -167,7 +200,7 @@ function SimpleModal() {
                                                         Teléfono
                                                     </MKTypography>
                                                     <MKInput
-                                                        id="phone"
+                                                        id="phone_nuevousuario"
                                                         name="phone"
                                                         variant="outlined"
                                                         style={{ marginBottom: "20px" }}
@@ -179,7 +212,7 @@ function SimpleModal() {
                                                         Password
                                                     </MKTypography>
                                                     <MKInput
-                                                        id="password"
+                                                        id="password_nuevousuario"
                                                         name="password"
                                                         type="password"
                                                         variant="outlined"
@@ -191,7 +224,7 @@ function SimpleModal() {
                                                         Confirmación Password
                                                     </MKTypography>
                                                     <MKInput
-                                                        id="password_confirmation"
+                                                        id="password_confirmation_nuevousuario"
                                                         name="password_confirmation"
                                                         type="password"
                                                         variant="outlined"
@@ -204,7 +237,7 @@ function SimpleModal() {
                                                         Ubicación
                                                     </MKTypography>
                                                     <MKInput
-                                                        id="ubicacion"
+                                                        id="ubicacion_nuevousuario"
                                                         name="ubicacion"
                                                         fullWidth
                                                         style={{ marginBottom: "20px" }}
