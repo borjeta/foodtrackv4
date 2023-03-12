@@ -52,18 +52,29 @@ function Presentation() {
     }
   }, []);
 
+  const rutas = [
+    {
+      label: "Home",
+      route: "/", //ruta a la que va
+      icon: <i class='fas fa-home'></i>,
+    },
+    {
+      label: "Registro",
+      route: "/registro",
+      icon: <i class='fas fa-user-plus'>&nbsp; Regístrate</i>,
+    },
+    {
+      label: "Login",
+      route: "/login",
+      icon: <i class='fas fa-sign-in-alt'> Iniciar sesión</i>,
+    }
+  ];
 
 
   return (
     <>
       <DefaultNavbar
-        routes={routes}
-        action={{
-          type: "external",
-          route: "https://www.creative-tim.com/product/material-kit-react",
-          label: "free download",
-          color: "info",
-        }}
+        routes={rutas}
         sticky
       />
       <MKBox
@@ -99,7 +110,7 @@ function Presentation() {
               px={{ xs: 6, lg: 12 }}
               mt={1}
             >
-              Todas las mejores foodtrucks de tu zona en tu movil
+              Las mejores foodtrucks de tu zona en tu alcance
 
             </MKTypography>
           </Grid>

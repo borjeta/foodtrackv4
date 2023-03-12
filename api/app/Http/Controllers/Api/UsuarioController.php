@@ -26,11 +26,20 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
+        //guarda un usuario en bd   
         $usuario = new usuario();
-        $usuario->nombre = $request->nombre;
-        $usuario->apellidos = $request->apellidos;
+        $usuario->name = $request->name;
         $usuario->email = $request->email;
+        $usuario->email_verified_at = now();
         $usuario->password = password_hash($request->password, PASSWORD_DEFAULT);
+        $usuario->remember_token = null;
+        $usuario->avatar = null;
+        $usuario->telefono = $request->telefono;
+        $usuario->ubicacion = $request->ubicacion;
+        $usuario->role = 'user';
+        $usuario->api_token = null;
+        $usuario->date_createtoken = null;
+        $usuario->expires_at = null;
         $usuario->save();
         return $usuario;
     }

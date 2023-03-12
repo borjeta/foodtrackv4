@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/usuarios', 'App\Http\Controllers\Api\UsuarioController@index');
 Route::get('/usuarios/{usuario}', 'App\Http\Controllers\Api\UsuarioController@show');
-Route::post('/usuarios', 'App\Http\Controllers\Api\UsuarioController@store');
+Route::post('/usuarios/registro/newuser', 'App\Http\Controllers\Api\UsuarioController@store');
 Route::put('/usuarios/editar/usuario', 'App\Http\Controllers\Api\UsuarioController@update');
 Route::delete('/usuarios/{usuario}', 'App\Http\Controllers\Api\UsuarioController@destroy');
 Route::post('/usuarios/login', 'App\Http\Controllers\Api\UsuarioController@login')->middleware('canAccess');

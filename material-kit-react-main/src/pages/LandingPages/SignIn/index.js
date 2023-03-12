@@ -97,18 +97,25 @@ function SignInBasic() {
       );
 
 
+
+
   };
+  const rutas = [
+    {
+      label: "Home",
+      route: "/", //ruta a la que va
+      icon: <i class='fas fa-home'></i>,
+    }
+
+
+  ]
+
 
   return (
     <>
       <DefaultNavbar
-        routes={routes}
-        action={{
-          type: "external",
-          route: "https://www.creative-tim.com/product/material-kit-react",
-          label: "Get started",
-          color: "info",
-        }}
+        routes={rutas}
+
         transparent
         light
       />
