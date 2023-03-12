@@ -21,20 +21,20 @@ Coded by www.creative-tim.com
   the Navbar.
 
   For adding a new route you can follow the existing routes in the routes array.
-  1. The `name` key is used for the name of the route on the Navbar.
-  2. The `icon` key is used for the icon of the route on the Navbar.
-  3. The `collapse` key is used for making a collapsible item on the Navbar that contains other routes
-  inside (nested routes), you need to pass the nested routes inside an array as a value for the `collapse` key.
-  4. The `route` key is used to store the route location which is used for the react router.
-  5. The `href` key is used to store the external links location.
-  6. The `component` key is used to store the component of its route.
-  7. The `dropdown` key is used to define that the item should open a dropdown for its collapse items .
-  8. The `description` key is used to define the description of
-          a route under its name.
-  9. The `columns` key is used to define that how the content should look inside the dropdown menu as columns,
-          you can set the columns amount based on this key.
-  10. The `rowsPerColumn` key is used to define that how many rows should be in a column.
-*/
+  1. El `name` es usado para el nombre de la ruta en la barra de navegación.
+  2. El `icon` es usado para el ícono de la ruta en la barra de navegación.
+  3. La clave `collapse` se usa para hacer un elemento colapsable en la barra de navegación que contiene otras rutas
+  dentro (rutas anidadas), debe pasar las rutas anidadas dentro de una matriz como valor para la clave `collapse`.
+  4. La clave `route` se usa para almacenar la ubicación de la ruta que se usa para el enrutador de react.
+  5. La clave `href` se usa para almacenar la ubicación de los enlaces externos.
+  6. La clave `component` se usa para almacenar el componente de su ruta.
+  7. La clave `dropdown` se usa para definir que el elemento debe abrir un menú desplegable para sus elementos colapsados.
+  8. La clave `description` se usa para definir la descripción de
+          una ruta debajo de su nombre.
+  9. La clave `columns` se usa para definir que cómo debe verse el contenido dentro del menú desplegable como columnas,
+          puede establecer la cantidad de columnas en función de esta clave.
+  10. La clave `rowsPerColumn` se usa para definir cuántas filas deben estar en una columna.
+  */
 
 // @mui material components
 import Icon from "@mui/material/Icon";

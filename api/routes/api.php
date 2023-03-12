@@ -23,3 +23,12 @@ Route::delete('/usuarios/{usuario}', 'App\Http\Controllers\Api\UsuarioController
 Route::post('/usuarios/login', 'App\Http\Controllers\Api\UsuarioController@login')->middleware('canAccess');
 Route::get('/usuarios/logout', 'App\Http\Controllers\Api\UsuarioController@logout')->middleware('canAccess');
 Route::post('/usuarios/buscador/usuario', 'App\Http\Controllers\Api\UsuarioController@buscaUsuario');
+
+
+/*Rutas API Foodtrucks*/
+Route::get('/foodtrucks', 'App\Http\Controllers\Api\FoodtruckController@index');
+Route::get('/foodtrucks/{foodtruck}', 'App\Http\Controllers\Api\FoodtruckController@show');
+Route::post('/foodtrucks', 'App\Http\Controllers\Api\FoodtruckController@store');
+Route::put('/foodtrucks/editar/foodtruck', 'App\Http\Controllers\Api\FoodtruckController@update');
+Route::delete('/foodtrucks/{foodtruck}', 'App\Http\Controllers\Api\FoodtruckController@destroy');
+Route::post('/foodtrucks/buscador/foodtruck', 'App\Http\Controllers\Api\FoodtruckController@buscaFoodtruck');
