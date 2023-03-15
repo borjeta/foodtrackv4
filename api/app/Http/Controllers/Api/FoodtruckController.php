@@ -54,4 +54,10 @@ class FoodtruckController extends Controller
     {
         //
     }
+
+    public function getFoodtrucksByUser($id)
+    {
+        $foodtrucks = foodtruck::where('user_id', $id)->get();
+        return $foodtrucks;
+    }
 }

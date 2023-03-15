@@ -32,3 +32,4 @@ Route::post('/foodtrucks', 'App\Http\Controllers\Api\FoodtruckController@store')
 Route::put('/foodtrucks/editar/foodtruck', 'App\Http\Controllers\Api\FoodtruckController@update');
 Route::delete('/foodtrucks/{foodtruck}', 'App\Http\Controllers\Api\FoodtruckController@destroy');
 Route::post('/foodtrucks/buscador/foodtruck', 'App\Http\Controllers\Api\FoodtruckController@buscaFoodtruck');
+Route::get('/foodtrucks/listaporpropietario/{id}', 'App\Http\Controllers\Api\FoodtruckController@getFoodtrucksByUser');

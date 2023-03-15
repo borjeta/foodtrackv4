@@ -21,6 +21,8 @@
     "@emotion/cache": "11.4.0",
     "@emotion/react": "11.5.0",
     "@emotion/styled": "11.3.0",
+    "@iconify/icons-mdi": "^1.2.44",
+    "@iconify/react": "^4.1.0",
     "@mui/icons-material": "5.2.0",
     "@mui/material": "5.2.0",
     "@mui/styled-engine": "5.2.0",
@@ -29,6 +31,7 @@
     "@testing-library/user-event": "12.1.10",
     "chroma-js": "2.1.2",
     "flatpickr": "4.6.9",
+    "iconify": "^1.4.0",
     "prop-types": "15.7.2",
     "react": "17.0.2",
     "react-copy-to-clipboard": "5.0.4",
@@ -47,7 +50,6 @@
     "eject": "react-scripts eject",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start"
   },
- 
   "browserslist": {
     "production": [
       ">0.2%",
@@ -61,7 +63,6 @@
     ]
   },
   "devDependencies": {
-    
     "prettier": "2.3.2"
   }
 }

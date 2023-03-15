@@ -74,10 +74,10 @@ export default {
   ],
   copyright: (
     <MKTypography variant="button" fontWeight="regular">
-      All rights reserved. Copyright &copy; {date} Material Kit by{" "}
+       {date} Material Kit by{"Borja Alventosa "} &copy;
       <MKTypography
         component="a"
-        href="https://www.creative-tim.com"
+        href="https://github.com/borjeta"
         target="_blank"
         rel="noreferrer"
         variant="button"

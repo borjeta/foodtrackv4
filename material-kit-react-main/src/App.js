@@ -34,6 +34,7 @@ import InfoFoodtruck from "pages/Foodtruck/InfoFoodtruck";
 import HomePropietario from "pages/Propietario/HomePropietario";
 // Material Kit 2 React routes
 import routes from "routes";
+import ListaFoodtrucksPropietario from "pages/Propietario/ListaFoodtrucksPropietario";
 
 export default function App() {
   const { pathname } = useLocation();
@@ -72,6 +73,7 @@ export default function App() {
         <Route path="/foodtrucks/dondeesta/:id/info" element={<InfoFoodtruck />} />
         <Route path="*" element={<Navigate to="/login" />} />
         <Route path="/homepropietario" element={<HomePropietario />} />
+        <Route path="/foodtrucks/propietario/listafoodtrucks" element={<ListaFoodtrucksPropietario />} />
       </Routes>
     </ThemeProvider>
   );

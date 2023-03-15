@@ -12,11 +12,11 @@ const HomePropietario = () => {
     const api_token = document.cookie.replace(/(?:(?:^|.*;\s*)api_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const user_id = document.cookie.replace(/(?:(?:^|.*;\s*)user_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const role = document.cookie.replace(/(?:(?:^|.*;\s*)role\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-    
+
 
     useEffect(() => {
         axios
-            .get(`http://localhost:8000/api/propietarios/listaporpropietario/${user_id}`, {
+            .get(`http://localhost:8000/api/foodtrucks/listaporpropietario/${user_id}`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
@@ -29,36 +29,22 @@ const HomePropietario = () => {
             .then((res) => {
                 setFoodtrucks(res.data);
                 console.log(res.data);
+                    window.location.href = "/foodtrucks/propietario/listafoodtrucks";
+               
             })
             .catch((err) => {
                 console.log(err);
             });
     }, []);
 
-    if (foodtrucks.length > 1) {
-        window.location.href = "/propietario/listafoodtrucks";
-    } else if (foodtrucks.length == 1) {
-        window.location.href = `/foodtrucks/${foodtrucks[0].id}/info`;
-    } else {
-        window.location.href = "/propietario/crearfoodtruck";
-    }
 
-    
-
-    
-
-
-
-
-
+    /*Cuenta las foodtrucks que tiene el propietario*/
 
 
 
     return (
         <div>
             <NavbarPropietario />
-
-
         </div>
     )
 }
