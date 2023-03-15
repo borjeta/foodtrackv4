@@ -195,7 +195,7 @@ function SignInBasic() {
                   </MKBox>
                   <MKBox mt={4} mb={1}>
                     <MKButton onClick={handleSubmit} variant="gradient" color="info" fullWidth>
-                      INiciar SEsion
+                      Iniciar SEsion
                     </MKButton>
                   </MKBox>
                   <MKBox mt={3} mb={1} textAlign="center">

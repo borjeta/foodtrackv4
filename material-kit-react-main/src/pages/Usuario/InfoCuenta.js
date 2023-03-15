@@ -203,6 +203,7 @@ function SimpleModal() {
                                         volver
                                     </MKButton>
                                     <Grid container item justifyContent="center" xs={10} lg={7} mx="auto" textAlign="center">
+                                        
                                         <MKTypography variant="h3" >
                                             Mi cuenta
                                         </MKTypography>

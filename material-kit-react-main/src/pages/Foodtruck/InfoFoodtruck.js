@@ -10,17 +10,16 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
 import NavbarUsuario from "pages/Usuario/NavbarUsuario";
-
 import Footer from "pages/LandingPages/Author/sections/Footer";
-
+import MKAlert from "components/MKAlert";
+import Card from "@mui/material/Card";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import MKButton from "components/MKButton";
 
 
 function InfoFoodtruck() {
-    const [data, setData] = useState([]);
-    const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     const [foodtruck, setFoodtruck] = useState([]);
     const api_token = document.cookie.replace(/(?:(?:^|.*;\s*)api_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const user_id = document.cookie.replace(/(?:(?:^|.*;\s*)user_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
@@ -30,7 +29,7 @@ function InfoFoodtruck() {
     useEffect(() => {
 
         axios
-            .get(`http://localhost:8000/api/foodtrucks/${id.id}/infofoodtruck`, {
+            .get(`http://localhost:8000/api/foodtrucks/${id.id}`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
@@ -55,7 +54,7 @@ function InfoFoodtruck() {
             <NavbarUsuario />
             <CssBaseline />
             <AppBar position="relative">
-               
+
             </AppBar>
             <main>
                 {/* Hero unit */}
@@ -67,12 +66,58 @@ function InfoFoodtruck() {
                     }}
                 >
                     <Container maxWidth="sm">
-                       
-                        <Typography variant="h2" align="center" color="text.secondary" paragraph>
-                           Nombre: {foodtruck.name}
+                        <br>
+                        </br>
+                        <MKButton variant="gradient" color="info" size="large" onClick={() => {
+                            window.location.href = `/homeusuario`;
+                        }}>
+                            volver
+                        </MKButton>
+                        <br>
+                        </br>
+                        <Card sx={{ maxWidth: 345 }}>
+
+                            <CardMedia
+                                component="img"
+                                height="140"
+                                image={foodtruck.avatar}
+                                alt="green iguana"
+                            />
+                            <CardContent>
+                                <Typography gutterBottom variant="h5" component="div">
+                                    {foodtruck.nombre}
+                                </Typography>
+                                <Typography variant="body2" color="text.secondary">
+                                    {foodtruck.descripcion}
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                        <br>
+                        </br>
+                        <Typography
+                            component="h1"
+                            variant="h2"
+                            align="center"
+                            color="text.primary"
+                            gutterBottom
+                        >
+                            {foodtruck.nombre}
                         </Typography>
+                        <Typography variant="h5" align="center" color="text.secondary" paragraph>
+                            {foodtruck.descripcion}
+                        </Typography>
+                        <Typography variant="h5" align="center" color="text.secondary" paragraph>
+                            {foodtruck.direccion}
+                        </Typography>
+                        <Typography variant="h5" align="center" color="text.secondary" paragraph>
+                            {foodtruck.horario}
+                        </Typography>
+
+
+
+
                         <div>
-                           
+
                         </div>
                     </Container>
                 </Box>
@@ -80,7 +125,7 @@ function InfoFoodtruck() {
             {/* Footer */}
             <Footer />
             {/* End footer */}
-        </div>
+        </div >
     )
 }
 

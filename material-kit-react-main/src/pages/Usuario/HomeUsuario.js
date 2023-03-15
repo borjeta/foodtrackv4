@@ -133,7 +133,6 @@ function HomeUsuario() {
                                             {foodtruck.direccion}
                                         </Typography>
                                         &nbsp;
-
                                         <Typography color="text.primary">
                                             {foodtruck.horario}
                                         </Typography>
