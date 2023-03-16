@@ -87,7 +87,7 @@ function ListaFoodtrucksPropietario() {
                                             </MKButton>
                                             &nbsp;
                                             <MKButton
-                                                href={`/foodtrucks/${foodtruck.id}/editar`}
+                                                href={`/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/info`}
                                                 variant="gradient"
                                                 color="info"
                                                 size="large"

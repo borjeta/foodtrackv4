@@ -47,11 +47,20 @@ class UsuarioController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request, usuario $usuario)
+    public function show(Request $request, $id)
     {
-        /* miramos la peticion tiene token valido y en la fecha de uso */
-        if ($request->api_token == $usuario->api_token && $usuario->expires_at > now()) {
-            return $usuario;
+        $api_token =  $request->header('api_token');
+        $user_id = $request->header('user_id');
+        $role = $request->header('role');
+
+        
+
+
+
+        $user = usuario::where('id', $id)->first();
+        if ($user) {
+            $usuario = usuario::where('id', $id)->first();
+            return response()->json($usuario, 200);
         }
         return response()->json(['error' => 'No tienes permisos para acceder a este recurso'], 401);
     }
@@ -73,10 +82,10 @@ class UsuarioController extends Controller
             $user->email = $request->email;
             $user->telefono = $request->telefono;
             $user->ubicacion = $request->ubicacion;
-            if($request->password != null){
+            if ($request->password != null) {
                 $user->password = password_hash($request->password, PASSWORD_DEFAULT);
             }
-            
+
             $user->save();
             return $user;
         }
