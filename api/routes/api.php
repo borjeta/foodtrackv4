@@ -29,7 +29,9 @@ Route::post('/usuarios/buscador/usuario', 'App\Http\Controllers\Api\UsuarioContr
 Route::get('/foodtrucks', 'App\Http\Controllers\Api\FoodtruckController@index');
 Route::get('/foodtrucks/{id}', 'App\Http\Controllers\Api\FoodtruckController@show');
 Route::post('/foodtrucks', 'App\Http\Controllers\Api\FoodtruckController@store');
-Route::put('/foodtrucks/editar/foodtruck', 'App\Http\Controllers\Api\FoodtruckController@update');
+Route::put('/foodtrucks/{id}/editar', 'App\Http\Controllers\Api\FoodtruckController@update');
 Route::delete('/foodtrucks/{foodtruck}', 'App\Http\Controllers\Api\FoodtruckController@destroy');
 Route::post('/foodtrucks/buscador/foodtruck', 'App\Http\Controllers\Api\FoodtruckController@buscaFoodtruck');
 Route::get('/foodtrucks/listaporpropietario/{id}', 'App\Http\Controllers\Api\FoodtruckController@getFoodtrucksByUser');
+Route::get('/foodtrucks/listaporpropietario/{id}/abrirfoodtruck', 'App\Http\Controllers\Api\FoodtruckController@abrirfoodtruck');
+Route::get('/foodtrucks/listaporpropietario/{id}/cerrarfoodtruck', 'App\Http\Controllers\Api\FoodtruckController@cerrarfoodtruck');

@@ -107,7 +107,14 @@ function SimpleModal() {
             })
             .then((res) => {
                 console.log(res.data);
+                if(res.data.role =="propietario")
+                window.location.href = `/homepropietario`;
+                else if(res.data.role =="usuario")
                 window.location.href = `/homeusuario`;
+                else if(res.data.role =="admin")
+                window.location.href = `/homeadmin`;
+                else
+                window.location.href = `/login`;
             }
             )
             .catch((err) => {
