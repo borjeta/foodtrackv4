@@ -77,6 +77,7 @@ function ListaFoodtrucksPropietario() {
                                         <div className="d-flex justify-content-center">
 
                                             <MKButton
+                                            /*/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/editar*/
                                                 href={`/foodtrucks/${foodtruck.id}/info`}
                                                 variant="gradient"
                                                 color="info"
@@ -87,7 +88,7 @@ function ListaFoodtrucksPropietario() {
                                             </MKButton>
                                             &nbsp;
                                             <MKButton
-                                                href={`/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/info`}
+                                                href={`/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/editar`}
                                                 variant="gradient"
                                                 color="info"
                                                 size="large"

@@ -32,10 +32,10 @@ import InfoCuenta from "pages/Usuario/InfoCuenta";
 import Registro from "pages/Usuario/Registro";
 import InfoFoodtruck from "pages/Foodtruck/InfoFoodtruck";
 import HomePropietario from "pages/Propietario/HomePropietario";
-// Material Kit 2 React routes
 import routes from "routes";
 import ListaFoodtrucksPropietario from "pages/Propietario/ListaFoodtrucksPropietario";
 import InfoFoodtruckPropietario from "pages/Propietario/InfoFoodtruckPropietario";
+import EditarFoodtruck from "pages/Propietario/EditarFoodtruck";
 
 export default function App() {
   const { pathname } = useLocation();
@@ -75,7 +75,8 @@ export default function App() {
         <Route path="*" element={<Navigate to="/login" />} />
         <Route path="/homepropietario" element={<HomePropietario />} />
         <Route path="/foodtrucks/propietario/listafoodtrucks" element={<ListaFoodtrucksPropietario />} />
-        <Route path="/foodtrucks/propietario/listafoodtrucks/:id/info" element={<InfoFoodtruckPropietario/>} />
+        <Route path="/foodtrucks/propietario/listafoodtrucks/:id/info" element={<InfoFoodtruckPropietario />} />
+        <Route path="/foodtrucks/propietario/listafoodtrucks/:id/editar" element={<EditarFoodtruck />} />
       </Routes>
     </ThemeProvider>
   );

@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
+import { Link, animateScroll as scroll } from "react-scroll";
 import axios from "axios";
 
 // @mui material components
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Modal from "@mui/material/Modal";
-import Divider from "@mui/material/Divider";
 import Slide from "@mui/material/Slide";
 
 import CardMedia from "@mui/material/CardMedia";
@@ -41,6 +41,11 @@ function InfoFoodtruckPropietario() {
     const role = document.cookie.replace(/(?:(?:^|.*;\s*)role\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 
     useEffect(() => {
+
+        document.documentElement.scrollTop = 0;
+        document.scrollingElement.scrollTop = 0;
+        document.getElementById("root").scrollTop = 0;
+
         /*OBtener datos del foodtruck*/
         axios
             .get(`http://localhost:8000/api/foodtrucks/${id.id}`, {
@@ -125,6 +130,7 @@ function InfoFoodtruckPropietario() {
                 "estado": "Inactivo"
             }, {
                 headers: {
+                    
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
                     "user_id": `${user_id}`,
@@ -148,8 +154,9 @@ function InfoFoodtruckPropietario() {
     };
     const handleSubmit = () => {
 
-        alert(document.getElementById("telefono").value);
+
         axios.put(`http://localhost:8000/api/foodtrucks/${foodtruck.id}/editar`, {
+
             "nombre": document.getElementById("nombre").value,
             "descripcion": document.getElementById("descripcion").value,
             "ubicacion": document.getElementById("ubicacion").value,
@@ -171,14 +178,16 @@ function InfoFoodtruckPropietario() {
 
             .then((res) => {
                 console.log(res.data);
-                window.location.href = `/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/info`;
+
             }
             )
             .catch((err) => {
                 console.log(err);
+                window.location.href = `http://localhost:3000/foodtrucks/propietario/listafoodtrucks`;
 
             }
             );
+
     };
 
 
@@ -222,7 +231,7 @@ function InfoFoodtruckPropietario() {
                                 <MKButton
                                     variant="text"
                                     color="primary"
-                                    size="small"
+                                    size="large"
                                     onClick={toggleModal}
                                     startIcon={<CloseIcon />}
                                 >
@@ -239,7 +248,7 @@ function InfoFoodtruckPropietario() {
                                     <MKInput
                                         id="nombre"
                                         variant="outlined"
-                                        size="medium"
+                                        size="small"
                                         required
                                         fullWidth
 
@@ -250,7 +259,7 @@ function InfoFoodtruckPropietario() {
                                     <MKInput
                                         id="descripcion"
                                         variant="outlined"
-                                        size="medium"
+                                        size="small"
                                     />
                                     <MKTypography variant="h6" >
                                         Ubicacion
@@ -258,7 +267,7 @@ function InfoFoodtruckPropietario() {
                                     <MKInput
                                         id="ubicacion"
                                         variant="outlined"
-                                        size="medium"
+                                        size="small"
                                     />
                                     <MKTypography variant="h6" >
                                         Teléfono
@@ -266,7 +275,7 @@ function InfoFoodtruckPropietario() {
                                     <MKInput
                                         id="telefono"
                                         variant="outlined"
-                                        size="medium"
+                                        size="small"
                                     />
                                     <MKTypography variant="h6" >
                                         Categoria
@@ -274,7 +283,7 @@ function InfoFoodtruckPropietario() {
                                     <MKInput
                                         id="TipoComida"
                                         variant="outlined"
-                                        size="medium"
+                                        size="small"
                                     />
 
                                     <MKTypography variant="h6" >
@@ -283,7 +292,7 @@ function InfoFoodtruckPropietario() {
                                     <MKInput
                                         id="avatar"
                                         variant="outlined"
-                                        size="medium"
+                                        size="small"
                                         onChange={handleAvatar}
                                     />
 
@@ -333,7 +342,7 @@ function InfoFoodtruckPropietario() {
 
 
                                     <MKBox display="flex" justifyContent="flex-end" p={2}>
-                                        <MKButton variant="contained" color="primary" onClick={toggleModal}>
+                                        <MKButton id="btnGuardar" variant="contained" type="button" color="primary" onClick={toggleModal}>
                                             Guardar cambios
                                         </MKButton>
 

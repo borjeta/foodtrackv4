@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\foodtruck;
+use Dotenv\Repository\RepositoryInterface;
 use Illuminate\Http\Request;
 
 class FoodtruckController extends Controller
@@ -42,28 +43,28 @@ class FoodtruckController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, foodtruck $foodtruck)
+    public function update(Request $request)
     {
-
         $api_token =  $request->header('api_token');
         $user_id = $request->header('user_id');
         $role = $request->header('role');
 
-        /*buscamos en bases de datos la foodtruck con id de la foodtruck y el id del usuario que la creo*/
-        $foodtruck = foodtruck::where('id', $foodtruck->id)->where('user_id', $user_id)->first();
 
+        $foodtruck = new foodtruck();
+        $foodtruck =  foodtruck::where('id', $request->id)->where('user_id', $user_id)->first();
         $foodtruck->nombre = $request->nombre;
         $foodtruck->descripcion = $request->descripcion;
         $foodtruck->status = $request->status;
-        $foodtruck->avatar = $request->avatar;
-        $foodtruck->telefono = $request->telefono;
         $foodtruck->ubicacion = $request->ubicacion;
+        $foodtruck->telefono = $request->telefono;
+        $foodtruck->avatar = $request->avatar;
+        $foodtruck->tipocomida = $request->tipocomida;
         $foodtruck->horario = $request->horario;
-        $foodtruck->TipoComida = $request->tipocomida;
-        $foodtruck->user_id = $user_id;
         $foodtruck->save();
 
-        return $foodtruck;
+
+
+        return Response()->json(['message' => 'Foodtruck actualizado correctamente'], 200);
     }
 
     /**
