@@ -30,6 +30,7 @@ function EditarFoodtruck() {
     const [foodtruck, setfoodtruck] = useState([]);
     const [user, setUser] = useState([]);
     const [show, setShow] = useState(true);
+    const [imagen, setImagen] = useState([]);
     const id = useParams();
 
 

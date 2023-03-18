@@ -68,8 +68,9 @@ function ListaFoodtrucksPropietario() {
             <NavbarPropietario />
             <br />
             <br />
-            <Toolbar />
-            <Container maxWidth="lg">
+            <Toolbar /> 
+            {/*align-center justify-content-center*/}
+            <Container maxWidth="lg" align="center">
                 <Box sx={{ width: '100%' }}>
                     <Table >
                         <thead>
@@ -87,16 +88,7 @@ function ListaFoodtrucksPropietario() {
                                     <td>
                                         <div className="d-flex justify-content-center">
 
-                                            <MKButton
-                                                /*/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/editar*/
-                                                href={`/foodtrucks/${foodtruck.id}/info`}
-                                                variant="gradient"
-                                                color="info"
-                                                size="large"
-                                                startIcon={<Icon icon={eyeIcon} />}
-                                            >
-                                                Ver
-                                            </MKButton>
+                                           
                                             &nbsp;
                                             <MKButton
                                                 href={`/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/editar`}
@@ -145,5 +137,3 @@ function ListaFoodtrucksPropietario() {
 }
 export default ListaFoodtrucksPropietario;
 
-/*                                        <a href={`/foodtrucks/${foodtruck.id}/info`}>Ver detalles</a>
-*/

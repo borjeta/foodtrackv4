@@ -36,6 +36,7 @@ import routes from "routes";
 import ListaFoodtrucksPropietario from "pages/Propietario/ListaFoodtrucksPropietario";
 import InfoFoodtruckPropietario from "pages/Propietario/InfoFoodtruckPropietario";
 import EditarFoodtruck from "pages/Propietario/EditarFoodtruck";
+import HomeAdmin from "pages/Admin/HomeAdmin";
 
 export default function App() {
   const { pathname } = useLocation();
@@ -77,6 +78,7 @@ export default function App() {
         <Route path="/foodtrucks/propietario/listafoodtrucks" element={<ListaFoodtrucksPropietario />} />
         <Route path="/foodtrucks/propietario/listafoodtrucks/:id/info" element={<InfoFoodtruckPropietario />} />
         <Route path="/foodtrucks/propietario/listafoodtrucks/:id/editar" element={<EditarFoodtruck />} />
+        <Route path="/homeadmin" element={<HomeAdmin />} />
       </Routes>
     </ThemeProvider>
   );

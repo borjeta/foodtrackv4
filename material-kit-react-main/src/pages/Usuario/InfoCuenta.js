@@ -158,9 +158,9 @@ function SimpleModal() {
     const toggleModal = () => {
         setShow(!show);
 
-        if (user.role === "propietario") {
+        if (user.role == "propietario") {
             window.location.href = `/homepropietario`;
-        } else if (user.role === "usuario")
+        } else if (user.role == "usuario")
             window.location.href = `/homeusuario`;
 
     };

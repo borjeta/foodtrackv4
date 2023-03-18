@@ -10,16 +10,10 @@ function NavbarPropietario() {
 
     const rutas = [
 
-
         {
-            name: "home",
+            name: "Mis foodtrucks",
             icon: <i className="fas fa-home" />,
-            component: <HomePropietario />,
-        },
-        {
-            name: "Datos de mi foodtruck",
-            icon: <i className="fas fa-home" />,
-            route: "/mifoodtruck",
+            route: "/foodtrucks/propietario/listafoodtrucks",
 
         },
         {
