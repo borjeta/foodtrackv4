@@ -1,6 +1,7 @@
 import react from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import styled from "styled-components";
 
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
@@ -25,6 +26,14 @@ function ListaFoodtrucksPropietario() {
     const user_id = document.cookie.replace(/(?:(?:^|.*;\s*)user_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const role = document.cookie.replace(/(?:(?:^|.*;\s*)role\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 
+    const tabla = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid #000;
+    border-radius: 5px;
+    padding: 10px;
+    `;
 
 
 
@@ -52,6 +61,8 @@ function ListaFoodtrucksPropietario() {
     }, []);
 
 
+
+
     return (
         <div >
             <NavbarPropietario />
@@ -70,14 +81,14 @@ function ListaFoodtrucksPropietario() {
                         </thead>
                         <tbody>
                             {foodtrucks.map((foodtruck) => (
-                                <tr>
+                                <tr key={foodtruck.id}>
                                     <td>{foodtruck.nombre}</td>
                                     <td>{foodtruck.status}</td>
                                     <td>
                                         <div className="d-flex justify-content-center">
 
                                             <MKButton
-                                            /*/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/editar*/
+                                                /*/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/editar*/
                                                 href={`/foodtrucks/${foodtruck.id}/info`}
                                                 variant="gradient"
                                                 color="info"

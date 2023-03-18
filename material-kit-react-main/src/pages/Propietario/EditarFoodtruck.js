@@ -41,6 +41,7 @@ function EditarFoodtruck() {
 
     const handleSubmit = () => {
 
+
         axios.put(`http://localhost:8000/api/foodtrucks/${foodtruck.id}/editar`, {
             "id": foodtruck.id,
             "nombre": document.getElementById("nombre").value,
@@ -66,6 +67,8 @@ function EditarFoodtruck() {
 
             .then((res) => {
                 console.log(res.data);
+                window.location.href = `/foodtrucks/propietario/listafoodtrucks`;
+
             }
             )
             .catch((err) => {
@@ -74,15 +77,20 @@ function EditarFoodtruck() {
             }
             );
 
+
+
+
+
+
+
+
     };
 
 
     const toggleModal = () => {
-
         handleSubmit();
-        setShow(!show);
     };
-   
+
 
     const handleAvatar = (e) => {
         /* Lector de archivos
@@ -94,7 +102,7 @@ function EditarFoodtruck() {
         reader.readAsDataURL(file);
         */
 
-        window.location.href = `/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/info`;
+        window.location.href = `/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/editar`;
 
     }
     useEffect(() => {
@@ -123,8 +131,7 @@ function EditarFoodtruck() {
                 document.getElementById("avatar").value = res.data.avatar;
                 document.getElementById("horario").value = res.data.horario;
                 document.getElementById("tipocomida").value = res.data.TipoComida;
-                document.getElementById("status").value = res.data.status;
-                
+
             })
             .catch((err) => {
                 console.log(err);
@@ -169,7 +176,7 @@ function EditarFoodtruck() {
             })
             .then((res) => {
                 console.log(res.data);
-                window.location.href = `/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/info`;
+                window.location.href = `/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/editar`;
 
             })
             .catch((err) => {
@@ -183,8 +190,29 @@ function EditarFoodtruck() {
     const handleClose = () => {
         axios
             .get(`http://localhost:8000/api/foodtrucks/listaporpropietario/${foodtruck.id}/cerrarfoodtruck`, {
-                "estado": "Inactivo"
-            }, {
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Content-Type": "application/json",
+                    "user_id": `${user_id}`,
+                    "api_token": `${api_token}`,
+                    "role": `${role}`
+                }
+            })
+            .then((res) => {
+                console.log(res.data);
+                window.location.href = `/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/editar`;
+
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
+
+
+    const dondeestaras = () => {
+        axios
+            .get(`http://localhost:8000/api/foodtrucks/listaporpropietario/${foodtruck.id}/dondeestaras`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
@@ -202,13 +230,19 @@ function EditarFoodtruck() {
     }
 
 
+
     /*Editar foodtruck*/
 
     return (
         <div>
-            <MKBox component="section" py={4} >
-                <Container>
 
+
+            <MKBox component="section" py={4} >
+                <br />
+                <br />
+                <br />
+                <Container>
+                    x
                     <Grid container item xs={12} lg={10} justifyContent="center" mx="auto">
 
                     </Grid>
@@ -234,48 +268,98 @@ function EditarFoodtruck() {
                                         onClick={toggleModal}
                                         startIcon={<CloseIcon />}
                                     >
-                                        Cerrar
+                                        Volver a la lista
                                     </MKButton>
                                 </MKBox>
 
                                 <MKBox p={4}>
                                     <MKBox display="flex" flexDirection="column" gap={1}>
-                                        <MKTypography variant="h6" >
-                                            Nombre
-                                        </MKTypography>
+                                        {/* <!--Fila 1--> */}
+                                        <div className="row">
 
-                                        <MKInput
-                                            id="nombre"
-                                            variant="outlined"
-                                            size="small"
-                                            required
-                                            fullWidth
+                                            {/* <!--Columna 1--> */}
+                                            <div className="col">
+                                                <MKTypography variant="h6" >
+                                                    Nombre
+                                                </MKTypography>
+                                                <MKInput
+                                                    id="nombre"
+                                                    variant="outlined"
+                                                    size="small"
+                                                    required
+                                                    fullWidth
 
-                                        />
-                                        <MKTypography variant="h6" >
-                                            Descripción
-                                        </MKTypography>
-                                        <MKInput
-                                            id="descripcion"
-                                            variant="outlined"
-                                            size="small"
-                                        />
-                                        <MKTypography variant="h6" >
-                                            Ubicacion
-                                        </MKTypography>
-                                        <MKInput
-                                            id="ubicacion"
-                                            variant="outlined"
-                                            size="small"
-                                        />
-                                        <MKTypography variant="h6" >
-                                            Teléfono
-                                        </MKTypography>
-                                        <MKInput
-                                            id="telefono"
-                                            variant="outlined"
-                                            size="small"
-                                        />
+                                                />
+                                            </div>
+
+                                            {/* <!--Columna 2--> */}
+                                            <div className="col">
+                                                <MKTypography variant="h6" >
+                                                    Descripción
+                                                </MKTypography>
+                                                <MKInput
+                                                    id="descripcion"
+                                                    variant="outlined"
+                                                    size="small"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        {/* <!--Fila 2--> */}
+                                        <div className="row">
+
+
+                                            {/* <!--Columna 1--> */}
+                                            <div className="col">
+                                                <MKTypography variant="h6" >
+                                                    Ubicacion
+                                                </MKTypography>
+                                                <MKInput
+                                                    id="ubicacion"
+                                                    variant="outlined"
+                                                    size="small"
+
+                                                />
+                                            </div>
+
+
+
+                                            {/* <!--Columna 3--> */}
+                                            <div className="col">
+
+                                                <MKTypography variant="h6" >
+                                                    Teléfono
+                                                </MKTypography>
+                                                <MKInput
+                                                    id="telefono"
+                                                    variant="outlined"
+                                                    size="small"
+                                                />
+
+
+                                            </div>
+
+
+                                        </div>
+                                        <div className="row">
+
+                                            {/* <!--Columna 2--> */}
+
+                                            <div className="col">
+                                                <MKBox display="flex" flexDirection="column" gap={3}
+                                                    py={3}>
+                                                    <MKTypography variant="h6" >
+                                                        Guarda cambios antes para ubicación
+                                                    </MKTypography>
+                                                    <MKButton variant="contained"
+
+                                                        color="primary"
+                                                        size="large"
+                                                        onClick={() => { window.location.href = `https://www.google.com/maps/search/?api=1&query=${foodtruck.ubicacion}` }}
+                                                    >Dónde estarás</MKButton>
+                                                </MKBox>
+                                            </div>
+                                        </div>
                                         <MKTypography variant="h6" >
                                             Categoria
                                         </MKTypography>
@@ -286,7 +370,7 @@ function EditarFoodtruck() {
                                         />
 
                                         <MKTypography variant="h6" >
-                                            Avatar (Los cambios se mostrarán después de guardar)
+                                            Avatar URL (Los cambios se mostrarán después de guardar)
                                         </MKTypography>
                                         <MKInput
                                             id="avatar"
@@ -301,8 +385,8 @@ function EditarFoodtruck() {
                                         <CardMedia
                                             component="img"
                                             height="140"
-                                            url={foodtruck.avatar}
                                             alt="green iguana"
+                                            image={foodtruck.avatar}
                                         />
                                         <br />
                                         {
@@ -318,34 +402,47 @@ function EditarFoodtruck() {
 
                                         }
 
+                                        <div className="row align-center justify-content-center">
 
-                                        <MKBox display="flex" flexDirection="column" gap={2}>
-                                            <MKTypography variant="h3">Hora de cierre</MKTypography>
+
                                             <MKBox display="flex" flexDirection="column" gap={2}>
-                                                <MKBox display="flex" flexDirection="row" gap={2}>
-                                                    <MKBox display="flex" flexDirection="column" gap={2}>
-                                                        <MKBox display="flex" flexDirection="row" gap={2}>
-                                                            <MKInput
-                                                                id="horario"
-                                                                label="Hora"
-                                                                size="large"
-                                                                type="time"
-                                                                defaultValue={foodtruck.horario}
-                                                            />
+                                                <MKTypography variant="h4">Hora de cierre</MKTypography>
+                                                <MKBox display="flex" flexDirection="column" gap={2}>
+                                                    <MKBox display="flex" flexDirection="row" gap={2}>
+                                                        <MKBox display="flex" flexDirection="column" gap={2}>
+                                                            <MKBox display="flex" flexDirection="row" gap={2}>
+                                                                <MKInput
+                                                                    id="horario"
+                                                                    size="large"
+                                                                    type="time"
+                                                                    defaultValue={foodtruck.horario}
+                                                                />
 
+                                                            </MKBox>
                                                         </MKBox>
                                                     </MKBox>
                                                 </MKBox>
                                             </MKBox>
-                                        </MKBox>
 
 
-                                        <MKBox display="flex" justifyContent="flex-end" p={2}>
-                                            <MKButton variant="contained" color="primary" onClick={toggleModal}>
-                                                Guardar cambios
-                                            </MKButton>
+                                            <MKBox display="flex" justifyContent="flex-end" p={2}>
+                                                <MKButton variant="contained" color="primary"
+                                                    sx={
+                                                        {
+                                                            backgroundColor: "#FFA500",
+                                                            color: "white",
+                                                            "&:hover": {
+                                                                backgroundColor: "#FFA500",
+                                                                color: "white",
+                                                            },
+                                                        }
+                                                    }
 
-                                        </MKBox>
+                                                    size="small" onClick={toggleModal}>
+                                                    Guardar cambios
+                                                </MKButton>
+                                            </MKBox>
+                                        </div>
                                     </MKBox>
                                 </MKBox>
                             </MKBox>
@@ -353,7 +450,7 @@ function EditarFoodtruck() {
                     </Modal>
                 </Container>
             </MKBox>
-        </div>
+        </div >
     );
 }
 

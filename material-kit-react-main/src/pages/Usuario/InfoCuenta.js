@@ -107,14 +107,14 @@ function SimpleModal() {
             })
             .then((res) => {
                 console.log(res.data);
-                if(res.data.role =="propietario")
-                window.location.href = `/homepropietario`;
-                else if(res.data.role =="usuario")
-                window.location.href = `/homeusuario`;
-                else if(res.data.role =="admin")
-                window.location.href = `/homeadmin`;
+                if (res.data.role == "propietario")
+                    window.location.href = `/homepropietario`;
+                else if (res.data.role == "usuario")
+                    window.location.href = `/homeusuario`;
+                else if (res.data.role == "admin")
+                    window.location.href = `/homeadmin`;
                 else
-                window.location.href = `/login`;
+                    window.location.href = `/login`;
             }
             )
             .catch((err) => {
@@ -157,7 +157,12 @@ function SimpleModal() {
 
     const toggleModal = () => {
         setShow(!show);
-        window.location.href = `/homeusuario`;
+
+        if (user.role === "propietario") {
+            window.location.href = `/homepropietario`;
+        } else if (user.role === "usuario")
+            window.location.href = `/homeusuario`;
+
     };
 
 
@@ -205,12 +210,18 @@ function SimpleModal() {
 
                                 <Container  >
                                     <MKButton variant="gradient" color="info" size="large" onClick={() => {
-                                        window.location.href = `/homeusuario`;
+                                        if (user.role === "propietario") {
+                                            window.location.href = `/homepropietario`;
+                                        } else if (user.role === "usuario") {
+                                            window.location.href = `/homeusuario`;
+                                        } else if (user.role === "admin") {
+                                            window.location.href = `/homeadmin`;
+                                        }
                                     }}>
                                         volver
                                     </MKButton>
                                     <Grid container item justifyContent="center" xs={10} lg={7} mx="auto" textAlign="center">
-                                        
+
                                         <MKTypography variant="h3" >
                                             Mi cuenta
                                         </MKTypography>

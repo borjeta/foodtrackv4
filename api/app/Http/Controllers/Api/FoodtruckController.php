@@ -61,9 +61,6 @@ class FoodtruckController extends Controller
         $foodtruck->tipocomida = $request->tipocomida;
         $foodtruck->horario = $request->horario;
         $foodtruck->save();
-
-
-
         return Response()->json(['message' => 'Foodtruck actualizado correctamente'], 200);
     }
 
@@ -72,6 +69,8 @@ class FoodtruckController extends Controller
      */
     public function destroy(foodtruck $foodtruck)
     {
+        $foodtruck->delete();
+        return Response()->json(['message' => 'Foodtruck eliminado correctamente'], 200);
     }
 
     public function getFoodtrucksByUser($id)

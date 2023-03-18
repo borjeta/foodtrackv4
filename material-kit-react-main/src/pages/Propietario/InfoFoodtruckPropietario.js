@@ -21,6 +21,7 @@ import MKBox from "components/MKBox";
 import MKButton from "components/MKButton";
 import MKTypography from "components/MKTypography";
 import MKInput from "components/MKInput";
+import NavbarPropietario from "./NavbarPropietario";
 
 
 
@@ -130,7 +131,7 @@ function InfoFoodtruckPropietario() {
                 "estado": "Inactivo"
             }, {
                 headers: {
-                    
+
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
                     "user_id": `${user_id}`,
@@ -207,160 +208,80 @@ function InfoFoodtruckPropietario() {
 
 
     return (
-        <MKBox component="section" py={4} >
-            <Container>
+        <div>
+            <NavbarPropietario />
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-12">
+                        <div className="card card-user">
+                            <div className="card-body">
+                                <div className="row">
+                                    <div className="col-md-5 pr-1">
+                                        <div className="form-group">
+                                            <label>Nombre</label>
+                                            <input type="text" className="form-control" id="nombre" placeholder="Nombre" />
+                                        </div>
+                                    </div>
+                                    <div className="col-md-3 px-1">
+                                        <div className="form-group">
+                                            <label>Telefono</label>
+                                            <input type="text" className="form-control" id="telefono" placeholder="Telefono" />
+                                        </div>
+                                    </div>
+                                    <div className="col-md-4 pl-1">
+                                        <div className="form-group">
+                                            <label>Ubicacion</label>
+                                            <input type="text" className="form-control" id="ubicacion" placeholder="Ubicacion" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-md-12">
+                                        <div className="form-group">
+                                            <label>Descripcion</label>
+                                            <input type="text" className="form-control" id="descripcion" placeholder="Descripcion" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-md-6 pr-1">
+                                        <div className="form-group">
+                                            <label>Horario</label>
+                                            <input type="text" className="form-control" id="horario" placeholder="Horario" />
+                                        </div>
+                                    </div>
+                                    <div className="col-md-6 pl-1">
+                                        <div className="form-group">
+                                            <label>Tipo de comida</label>
+                                            <input type="text" className="form-control" id="TipoComida" placeholder="Tipo de comida" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-md-12">
+                                        <div className="form-group">
+                                            <label>Avatar</label>
+                                            <input type="text" className="form-control" id="avatar" placeholder="Avatar" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="update ml-auto mr-auto">
+                                        <button type="submit" className="btn btn-primary btn-round" onClick={toggleModal}>Actualizar</button>
+                                    </div>
+                                </div>
+                            </div>
 
-                <Grid container item xs={12} lg={10} justifyContent="center" mx="auto">
+                        </div>
 
-                </Grid>
-                <Modal open={show} sx={{ display: "grid", placeItems: "center" }}>
-                    <Slide direction="down" in={show} timeout={500}>
-                        <MKBox
-                            position="relative"
-                            width="100%"
-                            maxWidth="1000px"
-                            display="flex"
-                            flexDirection="column"
-                            borderRadius="xl"
-                            bgColor="white"
-                            shadow="xl"
+                    </div>
 
-                        >
-                            <MKBox display="flex" alignItems="center" justifyContent="space-between" p={2}>
-                                <MKTypography variant="h5" alignItems="center">Ventana de edición de foodtruck</MKTypography>
-                                <MKButton
-                                    variant="text"
-                                    color="primary"
-                                    size="large"
-                                    onClick={toggleModal}
-                                    startIcon={<CloseIcon />}
-                                >
-                                    Cerrar
-                                </MKButton>
-                            </MKBox>
-
-                            <MKBox p={4}>
-                                <MKBox display="flex" flexDirection="column" gap={1}>
-                                    <MKTypography variant="h6" >
-                                        Nombre
-                                    </MKTypography>
-
-                                    <MKInput
-                                        id="nombre"
-                                        variant="outlined"
-                                        size="small"
-                                        required
-                                        fullWidth
-
-                                    />
-                                    <MKTypography variant="h6" >
-                                        Descripción
-                                    </MKTypography>
-                                    <MKInput
-                                        id="descripcion"
-                                        variant="outlined"
-                                        size="small"
-                                    />
-                                    <MKTypography variant="h6" >
-                                        Ubicacion
-                                    </MKTypography>
-                                    <MKInput
-                                        id="ubicacion"
-                                        variant="outlined"
-                                        size="small"
-                                    />
-                                    <MKTypography variant="h6" >
-                                        Teléfono
-                                    </MKTypography>
-                                    <MKInput
-                                        id="telefono"
-                                        variant="outlined"
-                                        size="small"
-                                    />
-                                    <MKTypography variant="h6" >
-                                        Categoria
-                                    </MKTypography>
-                                    <MKInput
-                                        id="TipoComida"
-                                        variant="outlined"
-                                        size="small"
-                                    />
-
-                                    <MKTypography variant="h6" >
-                                        Avatar (Los cambios se mostrarán después de guardar)
-                                    </MKTypography>
-                                    <MKInput
-                                        id="avatar"
-                                        variant="outlined"
-                                        size="small"
-                                        onChange={handleAvatar}
-                                    />
-
-                                    <MKTypography variant="h6" >
-                                        Previsualización
-                                    </MKTypography>
-                                    <CardMedia
-                                        component="img"
-                                        height="140"
-                                        URL image={foodtruck.avatar}
-                                        alt="green iguana"
-                                    />
-                                    <br />
-                                    {
-                                        foodtruck.status == 'Activo' ? (
-                                            <MKButton variant="contained" color="dark" onClick={handleClose}>
-                                                Cerrar foodtruck
-                                            </MKButton>
-                                        ) : (
-                                            <MKButton variant="contained" color="warning" onClick={handleOpen}>
-                                                Abrir foodtruck
-                                            </MKButton>
-                                        )
-
-                                    }
+                </div>
+            </div>
+        </div>
 
 
-                                    <MKBox display="flex" flexDirection="column" gap={2}>
-                                        <MKTypography variant="h3">Hora de cierre</MKTypography>
-                                        <MKBox display="flex" flexDirection="column" gap={2}>
-                                            <MKBox display="flex" flexDirection="row" gap={2}>
-                                                <MKBox display="flex" flexDirection="column" gap={2}>
-                                                    <MKBox display="flex" flexDirection="row" gap={2}>
-                                                        <MKInput
-                                                            id="horario"
-                                                            label="Hora"
-                                                            size="large"
-                                                            type="time"
-                                                            defaultValue={foodtruck.horario}
-                                                        />
 
-                                                    </MKBox>
-                                                </MKBox>
-                                            </MKBox>
-                                        </MKBox>
-                                    </MKBox>
-
-
-                                    <MKBox display="flex" justifyContent="flex-end" p={2}>
-                                        <MKButton id="btnGuardar" variant="contained" type="button" color="primary" onClick={toggleModal}>
-                                            Guardar cambios
-                                        </MKButton>
-
-                                    </MKBox>
-                                </MKBox>
-                            </MKBox>
-                        </MKBox>
-                    </Slide>
-                </Modal>
-            </Container>
-        </MKBox>
     );
-};
-
-
-
-
-
-
-
+}
 export default InfoFoodtruckPropietario;
