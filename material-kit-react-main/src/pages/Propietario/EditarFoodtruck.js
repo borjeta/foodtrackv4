@@ -68,7 +68,12 @@ function EditarFoodtruck() {
 
             .then((res) => {
                 console.log(res.data);
+
+                if(user.role == "propietario")
                 window.location.href = `/foodtrucks/propietario/listafoodtrucks`;
+                else if (user.role == "admin")
+                window.location.href = `/homeadmin`;
+                
 
             }
             )
@@ -89,6 +94,7 @@ function EditarFoodtruck() {
 
 
     const toggleModal = () => {
+
         handleSubmit();
     };
 
@@ -201,6 +207,8 @@ function EditarFoodtruck() {
             })
             .then((res) => {
                 console.log(res.data);
+
+
                 window.location.href = `/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/editar`;
 
             })

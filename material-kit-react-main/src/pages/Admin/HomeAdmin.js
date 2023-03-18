@@ -9,6 +9,16 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Icon } from "@iconify/react";
 import editIcon from "@iconify/icons-mdi/edit";
+import styled from "styled-components";
+import eyeIcon from "@iconify/icons-mdi/eye";
+import MKBox from "components/MKBox";
+import MKButton from "components/MKButton";
+import deleteIcon from "@iconify/icons-mdi/delete";
+
+
+import { useState, useEffect } from "react";
+import axios from "axios";
+import NavbarAdmin from "pages/Admin/NavbarAdmin";
 
 
 const useStyles = makeStyles({
@@ -53,7 +63,7 @@ function HomeAdmin() {
     useEffect(() => {
 
         axios
-            .get(`http://localhost:8000/api/foodtrucks/listaporpropietario/${user_id}`, {
+            .get(`http://localhost:8000/api/foodtrucks`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
@@ -78,6 +88,10 @@ function HomeAdmin() {
     return (
         <div>
             <NavbarAdmin />
+
+            <br />
+            <br />
+            <br />
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
@@ -111,7 +125,40 @@ function HomeAdmin() {
                                                         <TableCell align="right">{foodtruck.telefono}</TableCell>
                                                         <TableCell align="right">{foodtruck.email}</TableCell>
                                                         <TableCell align="right">
-                                                            <Icon icon={editIcon} />
+                                                            <MKButton
+                                                                href={`/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/editar`}
+                                                                variant="gradient"
+                                                                color="warning"
+                                                                size="large"
+                                                                startIcon={<Icon icon={editIcon} />}
+                                                            >
+                                                                Editar
+                                                            </MKButton>
+                                                            
+                                                            <MKButton variant="gradient" color="dark" size="large"
+                                                                startIcon={<Icon icon={deleteIcon} />} onClick={() => {
+                                                                    axios
+                                                                        .delete(`http://localhost:8000/api/foodtrucks/${foodtruck.id}`, {
+                                                                            headers: {
+                                                                                "Access-Control-Allow-Origin": "*",
+                                                                                "Content-Type": "application/json",
+                                                                                "user_id": `${user_id}`,
+                                                                                "api_token": `${api_token}`,
+                                                                                "role": `${role}`
+                                                                            }
+
+                                                                        })
+                                                                        .then((res) => {
+                                                                            console.log(res.data);
+                                                                            window.location.reload();
+                                                                        }
+                                                                        )
+                                                                        .catch((err) => {
+                                                                            console.log(err);
+                                                                        }
+                                                                        );
+                                                                }}>Eliminar</MKButton>
+
                                                         </TableCell>
                                                     </TableRow>
                                                 ))}
