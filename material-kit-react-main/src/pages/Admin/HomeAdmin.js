@@ -88,89 +88,52 @@ function HomeAdmin() {
     return (
         <div>
             <NavbarAdmin />
-
+            Opciones de administrador
             <br />
             <br />
             <br />
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-12">
-                        <div className="card">
-                            <div className="card-header card-header-primary">
-                                <h4 className="card-title ">Foodtrucks</h4>
-                                <p className="card-category"> Listado de foodtrucks</p>
-                            </div>
-                            <div className="card-body">
-                                <div className="table-responsive">
-                                    <TableContainer component={Paper}>
-                                        <Table className={classes.table} aria-label="simple table">
-                                            <TableHead>
-                                                <TableRow>
-                                                    <TableCell>Nombre</TableCell>
-                                                    <TableCell align="right">Descripción</TableCell>
-                                                    <TableCell align="right">Dirección</TableCell>
-                                                    <TableCell align="right">Teléfono</TableCell>
-                                                    <TableCell align="right">Email</TableCell>
-                                                    <TableCell align="right">Acciones</TableCell>
-                                                </TableRow>
-                                            </TableHead>
-                                            <TableBody>
-                                                {foodtrucks.map((foodtruck) => (
-                                                    <TableRow key={foodtruck.id}>
-                                                        <TableCell component="th" scope="row">
-                                                            {foodtruck.nombre}
-                                                        </TableCell>
-                                                        <TableCell align="right">{foodtruck.descripcion}</TableCell>
-                                                        <TableCell align="right">{foodtruck.direccion}</TableCell>
-                                                        <TableCell align="right">{foodtruck.telefono}</TableCell>
-                                                        <TableCell align="right">{foodtruck.email}</TableCell>
-                                                        <TableCell align="right">
-                                                            <MKButton
-                                                                href={`/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/editar`}
-                                                                variant="gradient"
-                                                                color="warning"
-                                                                size="large"
-                                                                startIcon={<Icon icon={editIcon} />}
-                                                            >
-                                                                Editar
-                                                            </MKButton>
-                                                            
-                                                            <MKButton variant="gradient" color="dark" size="large"
-                                                                startIcon={<Icon icon={deleteIcon} />} onClick={() => {
-                                                                    axios
-                                                                        .delete(`http://localhost:8000/api/foodtrucks/${foodtruck.id}`, {
-                                                                            headers: {
-                                                                                "Access-Control-Allow-Origin": "*",
-                                                                                "Content-Type": "application/json",
-                                                                                "user_id": `${user_id}`,
-                                                                                "api_token": `${api_token}`,
-                                                                                "role": `${role}`
-                                                                            }
 
-                                                                        })
-                                                                        .then((res) => {
-                                                                            console.log(res.data);
-                                                                            window.location.reload();
-                                                                        }
-                                                                        )
-                                                                        .catch((err) => {
-                                                                            console.log(err);
-                                                                        }
-                                                                        );
-                                                                }}>Eliminar</MKButton>
 
-                                                        </TableCell>
-                                                    </TableRow>
-                                                ))}
-                                            </TableBody>
-                                        </Table>
-                                    </TableContainer>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <MKBox align="center" justify-content="centerº">
+                <MKButton
+                    color="primary"
+                    size="lg"
+                    href="/admin/foodtrucks"
+                >
+                    Foodtrucks
+
+                </MKButton>
+                &nbsp;
+                &nbsp;
+                <MKButton
+                    color="primary"
+                    size="lg"
+                    href="/admin/usuarios"
+                >
+                    Usuarios
+
+                </MKButton>
+                &nbsp;
+                &nbsp;
+                <MKButton
+                    color="primary"
+                    size="lg"
+                    href="/admin/roles"
+                >
+                    Roles
+
+                </MKButton>
+                &nbsp;
+                &nbsp;
+                <MKButton
+                    color="primary"
+                    size="lg"
+                    href="/admin/permisos"
+                >
+                    Permisos
+                </MKButton>
+            </MKBox>
+
         </div>
     );
 }

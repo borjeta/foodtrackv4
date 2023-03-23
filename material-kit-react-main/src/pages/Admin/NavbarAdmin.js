@@ -14,7 +14,7 @@ function NavbarUsuario() {
         {
             name: "home",
             icon: <i className="fas fa-home" />,
-            component: <HomeAdmin />,
+            route: "/homeadmin",
         },
         {
             name: "Mi cuenta",
