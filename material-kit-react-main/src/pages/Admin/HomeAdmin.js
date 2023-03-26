@@ -107,7 +107,7 @@ function HomeAdmin() {
                 &nbsp;
                 <MKButton
                     color="primary"
-                    size="lg"
+                    size="large"
                     href="/admin/usuarios"
                 >
                     Usuarios
@@ -117,7 +117,7 @@ function HomeAdmin() {
                 &nbsp;
                 <MKButton
                     color="primary"
-                    size="lg"
+                    size="large"
                     href="/admin/roles"
                 >
                     Roles
@@ -127,7 +127,7 @@ function HomeAdmin() {
                 &nbsp;
                 <MKButton
                     color="primary"
-                    size="lg"
+                    size="large"
                     href="/admin/permisos"
                 >
                     Permisos

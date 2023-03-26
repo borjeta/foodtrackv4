@@ -9,13 +9,12 @@ import HomeAdmin from "./HomeAdmin";
 function NavbarUsuario() {
 
     const rutas = [
-
-
         {
-            name: "home",
+            name: "Panel de control",
             icon: <i className="fas fa-home" />,
             route: "/homeadmin",
         },
+
         {
             name: "Mi cuenta",
             icon: <i className="fas fa-user" />,

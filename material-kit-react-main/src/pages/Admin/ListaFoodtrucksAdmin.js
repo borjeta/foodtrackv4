@@ -9,6 +9,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Icon } from "@iconify/react";
 import editIcon from "@iconify/icons-mdi/edit";
+import closeIcon from "@iconify/icons-mdi/close";
 import styled from "styled-components";
 import eyeIcon from "@iconify/icons-mdi/eye";
 import MKBox from "components/MKBox";
@@ -89,8 +90,7 @@ function HomeAdmin() {
         <div>
             <NavbarAdmin />
 
-            <br />
-            <br />
+         
             <br />
             <div className="container">
                 <div className="row">
@@ -99,6 +99,30 @@ function HomeAdmin() {
                             <div className="card-header card-header-primary">
                                 <h4 className="card-title ">Foodtrucks</h4>
                                 <p className="card-category"> Listado de foodtrucks</p>
+                            </div>
+                            <div >
+                                <MKButton
+                                    href="/foodtrucks/propietario/listafoodtrucks/crear"
+                                    variant="gradient"
+                                    color="warning"
+                                    size="large"
+                                    startIcon={<Icon icon={editIcon} />}
+                                >
+                                    Crear
+                                </MKButton>
+                                &nbsp;
+                                &nbsp;
+                                <MKButton
+                                    href="/homeadmin"
+                                    variant="gradient"
+                                    color="warning"
+                                    alignItems="right"
+                                    size="large"
+                                    startIcon={<Icon icon={closeIcon} />}
+                                >
+                                    Volver
+                                </MKButton>
+
                             </div>
                             <div className="card-body">
                                 <div className="table-responsive">

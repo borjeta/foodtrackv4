@@ -39,6 +39,7 @@ import EditarFoodtruck from "pages/Propietario/EditarFoodtruck";
 import HomeAdmin from "pages/Admin/HomeAdmin";
 import ListaFoodtrucksAdmin from "pages/Admin/ListaFoodtrucksAdmin";
 import ListaUsuariosAdmin from "pages/Admin/ListaUsuariosAdmin";
+import EditarUsuarioAdmin from "pages/Admin/EditarUsuarioAdmin";
 export default function App() {
   const { pathname } = useLocation();
 
@@ -82,6 +83,8 @@ export default function App() {
         <Route path="/homeadmin" element={<HomeAdmin />} />
         <Route path="/admin/foodtrucks" element={<ListaFoodtrucksAdmin />} />
         <Route path="/admin/usuarios" element={<ListaUsuariosAdmin />} />
+        <Route path="/admin/usuarios/:id/editar" element={<EditarUsuarioAdmin />} />
+
       </Routes>
     </ThemeProvider>
   );

@@ -32,6 +32,7 @@ function EditarFoodtruck() {
     const [show, setShow] = useState(true);
     const [imagen, setImagen] = useState([]);
     const id = useParams();
+    const [usuarioAmodificar, setUsuarioAmodificar] = useState([]);
 
 
     const [open, setOpen] = useState(false);
@@ -40,10 +41,31 @@ function EditarFoodtruck() {
     const user_id = document.cookie.replace(/(?:(?:^|.*;\s*)user_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const role = document.cookie.replace(/(?:(?:^|.*;\s*)role\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 
+    useEffect(() => {
+        axios
+            .get(`http://localhost:8000/api/usuarios/${id.id}`, {
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Content-Type": "application/json",
+                    "user_id": `${user_id}`,
+                    "api_token": `${api_token}`,
+                    "role": `${role}`
+                }
+            })
+            .then((res) => {
+                setUsuarioAmodificar(res.data);
+
+                console.log(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+
     const handleSubmit = () => {
 
-
-        axios.put(`http://localhost:8000/api/foodtrucks/${foodtruck.id}/editar`, {
+        /*Editar por usuario*/
+        axios.put(`http://localhost:8000/api/foodtrucks/${userAmodificar.id}/editaradmin`, {
             "id": foodtruck.id,
             "nombre": document.getElementById("nombre").value,
             "descripcion": document.getElementById("descripcion").value,
@@ -56,8 +78,6 @@ function EditarFoodtruck() {
 
         }, {
             headers: {
-                "Access-Control-Allow-Origin": "localhost:3000/*/*/*",
-                'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
                 'Accept': 'application/json',
                 "Content-Type": "application/json",
                 "user_id": `${user_id}`,
@@ -68,6 +88,7 @@ function EditarFoodtruck() {
 
             .then((res) => {
                 console.log(res.data);
+
 
                 if (user.role == "propietario")
                     window.location.href = `/foodtrucks/propietario/listafoodtrucks`;
@@ -82,11 +103,6 @@ function EditarFoodtruck() {
 
             }
             );
-
-
-
-
-
 
 
 
@@ -108,65 +124,15 @@ function EditarFoodtruck() {
         };
         reader.readAsDataURL(file);
         */
-
         window.location.href = `/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/editar`;
-
     }
-    useEffect(() => {
-
-        document.documentElement.scrollTop = 0;
-        document.scrollingElement.scrollTop = 0;
-        document.getElementById("root").scrollTop = 0;
-
-        /*OBtener datos del foodtruck*/
-        axios
-            .get(`http://localhost:8000/api/foodtrucks/${id.id}`, {
-                headers: {
-                    "Access-Control-Allow-Origin": "*",
-                    "Content-Type": "application/json",
-                    "user_id": `${user_id}`,
-                    "api_token": `${api_token}`,
-                    "role": `${role}`
-                }
-            })
-            .then((res) => {
-                setfoodtruck(res.data);
-                document.getElementById("nombre").value = res.data.nombre;
-                document.getElementById("descripcion").value = res.data.descripcion;
-                document.getElementById("ubicacion").value = res.data.ubicacion;
-                document.getElementById("telefono").value = res.data.telefono;
-                document.getElementById("avatar").value = res.data.avatar;
-                document.getElementById("horario").value = res.data.horario;
-                document.getElementById("tipocomida").value = res.data.TipoComida;
-
-            })
-            .catch((err) => {
-                console.log(err);
-            });
 
 
 
-        axios
-            .get(`http://localhost:8000/api/usuarios/${user_id}`, {
-                headers: {
-                    "Access-Control-Allow-Origin": "*",
-                    "Content-Type": "application/json",
-                    "user_id": `${user_id}`,
-                    "api_token": `${api_token}`,
-                    "role": `${role}`
-                }
-            })
-            .then((res) => {
-                setUser(res.data);
-                console.log(res.data);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
 
 
 
-    }, []);
+
 
     /*ACtivar y desactivar foodtruck*/
 
@@ -219,24 +185,6 @@ function EditarFoodtruck() {
 
 
 
-    const dondeestaras = () => {
-        axios
-            .get(`http://localhost:8000/api/foodtrucks/listaporpropietario/${foodtruck.id}/dondeestaras`, {
-                headers: {
-                    "Access-Control-Allow-Origin": "*",
-                    "Content-Type": "application/json",
-                    "user_id": `${user_id}`,
-                    "api_token": `${api_token}`,
-                    "role": `${role}`
-                }
-            })
-            .then((res) => {
-                console.log(res.data);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }
 
 
 
@@ -297,6 +245,7 @@ function EditarFoodtruck() {
                                                     size="small"
                                                     required
                                                     fullWidth
+                                                    value={user.nombre}
 
                                                 />
                                             </div>
@@ -330,13 +279,12 @@ function EditarFoodtruck() {
 
                                                 />
                                                 <MKTypography variant="h6" >
-                                                Horario
-                                            </MKTypography>
+                                                    Horario
+                                                </MKTypography>
                                                 <MKInput
                                                     id="horario"
                                                     size="large"
                                                     type="time"
-                                                    defaultValue={foodtruck.horario}
                                                 />
 
                                             </div>
@@ -364,84 +312,10 @@ function EditarFoodtruck() {
 
                                             {/* <!--Columna 2--> */}
 
-                                            <div className="col">
-                                                <MKBox display="flex" flexDirection="column" gap={3}
-                                                    py={3}>
-                                                    <MKTypography variant="h6" >
-                                                        Guarda cambios antes para ubicación
-                                                    </MKTypography>
-                                                    <MKButton variant="contained"
-
-                                                        color="primary"
-                                                        size="large"
-                                                        onClick={() => { window.location.href = `https://www.google.com/maps/search/?api=1&query=${foodtruck.ubicacion}` }}
-                                                    >Dónde estarás</MKButton>
-                                                </MKBox>
-                                            </div>
                                         </div>
-                                        <MKTypography variant="h6" >
-                                            Categoria
-                                        </MKTypography>
-                                        <MKInput
-                                            id="tipocomida"
-                                            variant="outlined"
-                                            size="small"
-                                        />
-
-                                        <MKTypography variant="h6" >
-                                            Avatar URL (Los cambios se mostrarán después de guardar)
-                                        </MKTypography>
-                                        <MKInput
-                                            id="avatar"
-                                            variant="outlined"
-                                            size="small"
-                                            onChange={handleAvatar}
-                                        />
-
-                                        <MKTypography variant="h6" >
-                                            Previsualización
-                                        </MKTypography>
-                                        <CardMedia
-                                            component="img"
-                                            height="140"
-                                            alt="green iguana"
-                                            image={foodtruck.avatar}
-                                        />
-                                        <br />
-                                        {
-                                            foodtruck.status == 'Activo' ? (
-                                                <MKButton variant="contained" color="dark" onClick={handleClose}>
-                                                    Cerrar foodtruck
-                                                </MKButton>
-                                            ) : (
-                                                <MKButton variant="contained" color="warning" onClick={handleOpen}>
-                                                    Abrir foodtruck
-                                                </MKButton>
-                                            )
-
-                                        }
-
                                         <div className="row align-center justify-content-center">
 
 
-                                            <MKBox display="flex" flexDirection="column" gap={2}>
-                                                <MKTypography variant="h4">Hora de cierre</MKTypography>
-                                                <MKBox display="flex" flexDirection="column" gap={2}>
-                                                    <MKBox display="flex" flexDirection="row" gap={2}>
-                                                        <MKBox display="flex" flexDirection="column" gap={2}>
-                                                            <MKBox display="flex" flexDirection="row" gap={2}>
-                                                                <MKInput
-                                                                    id="horario"
-                                                                    size="large"
-                                                                    type="time"
-                                                                    defaultValue={foodtruck.horario}
-                                                                />
-
-                                                            </MKBox>
-                                                        </MKBox>
-                                                    </MKBox>
-                                                </MKBox>
-                                            </MKBox>
 
 
                                             <MKBox display="flex" justifyContent="flex-end" p={2}>

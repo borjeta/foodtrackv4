@@ -14,7 +14,8 @@ import eyeIcon from "@iconify/icons-mdi/eye";
 import MKBox from "components/MKBox";
 import MKButton from "components/MKButton";
 import deleteIcon from "@iconify/icons-mdi/delete";
-
+import MKTypography from "components/MKTypography";
+import { Link } from "react-router-dom";
 
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -40,33 +41,33 @@ function ListaUsuariosAdmin() {
     const user_id = document.cookie.replace(/(?:(?:^|.*;\s*)user_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const role = document.cookie.replace(/(?:(?:^|.*;\s*)role\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 
-   /*
-   la tabla sera de un ancho de 650px y tendra un borde de 2px y sera redondeada
-    */
-    const tabla = styled.div`   
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 650px;
-    border: 2px solid #000;
-    border-radius: 10px;
-    `;
     const StyledTableCell = styled(TableCell)`
-    background-color: #000;
-    color: #fff;
+    background-color: #f5f5f5;
+    color: #000000;
+    font-weight: bold;
     `;
     const StyledTableRow = styled(TableRow)`
-    background-color: #fff;
-    color: #000;
+    background-color: #f5f5f5;
+    color: #000000;
+    font-weight: bold;
     `;
     const StyledButton = styled(MKButton)`
-    background-color: #000;
-    color: #fff;
+    background-color: #f5f5f5;
+    color: #000000;
+    font-weight: bold;
     `;
     const StyledIcon = styled(Icon)`
-    color: #fff;
+    color: #000000;
+    font-weight: bold;
     `;
-    
+
+    const TableContainer = styled(Paper)`
+    background-color: #f5f5f5;
+    color: #000000;
+    font-weight: bold;
+    margin: 10%;
+    `;
+
 
 
     useEffect(() => {
@@ -98,14 +99,13 @@ function ListaUsuariosAdmin() {
         <div>
             <NavbarAdmin />
             <br />
-            <br />
-            <br />
+
 
             <MKBox>
-                <h1>Lista de usuarios</h1>
                 <TableContainer component={Paper}>
                     <Table className="table" aria-label="customized table">
                         <TableHead>
+                            <MKTypography variant="h6" >Lista de usuarios</MKTypography>
                             <TableRow>
                                 <StyledTableCell>Nombre</StyledTableCell>
                                 <StyledTableCell align="right">Email</StyledTableCell>
@@ -123,13 +123,22 @@ function ListaUsuariosAdmin() {
                                     <StyledTableCell align="right">{foodtruck.role}</StyledTableCell>
                                     <StyledTableCell align="right">
                                         <StyledButton>
-                                            <StyledIcon icon={eyeIcon} />
+                                            <MKButton color="primary" href="/admin/ver-usuario">
+                                                <StyledIcon icon={eyeIcon} />
+                                            </MKButton>
+
                                         </StyledButton>
                                         <StyledButton>
-                                            <StyledIcon icon={editIcon} />
+                                            <Link to={`/admin/usuarios/${foodtruck.id}/editar`} className='btn btn-primary btn-lg'>
+                                                <StyledIcon icon={editIcon} />
+                                            </Link>
+
+
                                         </StyledButton>
                                         <StyledButton>
-                                            <StyledIcon icon={deleteIcon} />
+                                            <MKButton color="primary" href="/admin/eliminar-usuario">
+                                                <StyledIcon icon={deleteIcon} />
+                                            </MKButton>
                                         </StyledButton>
                                     </StyledTableCell>
                                 </StyledTableRow>
