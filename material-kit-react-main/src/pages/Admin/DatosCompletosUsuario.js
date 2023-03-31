@@ -13,6 +13,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import MKBox from "components/MKBox";
 import MKButton from "components/MKButton";
 import MKTypography from "components/MKTypography";
+import Slide from "@mui/material/Slide";
+
 
 
 
@@ -115,6 +117,7 @@ const DatosCompletosUsuario = () => {
                                 <MKBox sx={{ mt: 2 }} align="center">
                                     <MKButton id="btnCancelar" variant="contained" color="secondary" onClick={() => {
                                         setShow(false);
+                                        setShowDatos(true);
                                     }}>
                                         Cancelar
                                     </MKButton>
@@ -144,7 +147,7 @@ const DatosCompletosUsuario = () => {
 
                     </Grid>
                     <Modal open={showDatos} sx={{ display: "grid", placeItems: "center" }}>
-                        <Slide direction="down" in={show} timeout={500}>
+                        <Slide direction="down" in={showDatos} timeout={500}>
                             <MKBox
                                 position="relative"
                                 width="100%"
@@ -157,12 +160,15 @@ const DatosCompletosUsuario = () => {
 
                             >
                                 <MKBox display="flex" alignItems="center" justifyContent="space-between" p={2}>
-                                    <MKTypography variant="h5" alignItems="center">Ventana de edición de usuario</MKTypography>
+                                    <MKTypography variant="h5" alignItems="center">Ventana de datos completos de usuario</MKTypography>
                                     <MKButton
                                         variant="text"
                                         color="primary"
                                         size="large"
-                                        startIcon={<CloseIcon />}
+                                        onClick={() => {
+                                            window.location.href = "/admin/usuarios";
+                                        }}
+                                        startIcon={< CloseIcon />}
                                     >
                                         Volver a la lista
                                     </MKButton>
@@ -176,17 +182,17 @@ const DatosCompletosUsuario = () => {
                                             {/* <!--Columna 1--> */}
                                             <div className="col">
                                                 <MKTypography variant="h6" >
-                                                    Nombre
+                                                    Nombre :
                                                 </MKTypography>
-
+                                                {usuarioinfo.name}
                                             </div>
 
                                             {/* <!--Columna 2--> */}
                                             <div className="col">
                                                 <MKTypography variant="h6" >
-                                                    Email
+                                                    Email :
                                                 </MKTypography>
-
+                                                {usuarioinfo.email}
                                             </div>
                                         </div>
 
@@ -197,43 +203,36 @@ const DatosCompletosUsuario = () => {
                                             {/* <!--Columna 1--> */}
                                             <div className="col">
                                                 <MKTypography variant="h6" >
-                                                    Ubicacion
+                                                    Ubicacion :
                                                 </MKTypography>
-
+                                                {usuarioinfo.ubicacion}
 
 
                                             </div>
-
-
-
                                             {/* <!--Columna 3--> */}
                                             <div className="col">
 
                                                 <MKTypography variant="h6" >
-                                                    Teléfono
+                                                    Teléfono :
                                                 </MKTypography>
-
-
-
+                                                {usuarioinfo.telefono}
                                             </div>
-
-
                                         </div>
+                                        
                                         <div className="row">
-
                                             {/* <!--Columna 2--> */}
                                             <div className="col">
                                                 <MKTypography variant="h6" >
-                                                    Password
+                                                    Password :
                                                 </MKTypography>
-
-
+                                                {usuarioinfo.password}
                                             </div>
+
                                             <div className="col">
                                                 <MKTypography variant="h6" >
-                                                    Rol
+                                                    Rol :
                                                 </MKTypography>
-
+                                                {usuarioinfo.role}
                                             </div>
 
                                         </div>
@@ -255,9 +254,12 @@ const DatosCompletosUsuario = () => {
                                                         }
                                                     }
 
-                                                    size="small" onClick={toggleModal}>
-                                                    Guardar cambios
-                                                </MKButton>
+                                                    size="large" onClick={() => {
+                                                        setShowDatos(false);
+                                                        setShow(true);
+
+                                                    }}>
+                                                    Borrar usuario                                                </MKButton>
                                             </MKBox>
                                         </div>
                                     </MKBox>

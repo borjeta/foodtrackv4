@@ -49,14 +49,9 @@ class UsuarioController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $api_token =  $request->header('api_token');
+        $api_token = $request->header('api_token');
         $user_id = $request->header('user_id');
         $role = $request->header('role');
-
-        
-
-
-
         $user = usuario::where('id', $id)->first();
         if ($user) {
             $usuario = usuario::where('id', $id)->first();
@@ -133,13 +128,14 @@ class UsuarioController extends Controller
     }
 
     public function buscaUsuario(Request $request)
-    {/*Cogemos el body de la request */
+    { /*Cogemos el body de la request */
         $body = $request->all();
         /* Buscamos el usuario por el nombre */
         $api_token = $body['headers']['api_token'];
         $user_id = $body['headers']['user_id'];
         $role = $body['headers']['role'];
         $user = usuario::where('id', $user_id)->first();
+        dd($user);
         return response()->json($user, 200);
     }
 }

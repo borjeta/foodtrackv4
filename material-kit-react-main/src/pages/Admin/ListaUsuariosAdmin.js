@@ -99,9 +99,7 @@ function ListaUsuariosAdmin() {
     return (
         <div>
             <NavbarAdmin />
-            <br />
-
-
+            &nbsp;
             <MKBox>
                 <TableContainer component={Paper}>
                     <Table className="table" aria-label="customized table">

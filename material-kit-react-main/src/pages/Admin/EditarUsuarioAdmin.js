@@ -62,14 +62,6 @@ function EditarFoodtruck() {
             });
 
 
-
-
-
-
-
-
-
-
         /*Obtener usuario a modificar*/
         axios
             .get(`http://localhost:8000/api/usuarios/${id.id}`, {
@@ -267,9 +259,9 @@ function EditarFoodtruck() {
                                                 <MKInput
                                                     id="nombre"
                                                     variant="outlined"
-                                                    size="small"
+                                                    size="medium"
                                                     required
-                                                    fullWidth
+
                                                     value={usuarioAmodificar.name}
 
                                                 />
@@ -283,7 +275,10 @@ function EditarFoodtruck() {
                                                 <MKInput
                                                     id="descripcion"
                                                     variant="outlined"
-                                                    size="small"
+                                                    size="medium"
+                                                    value={usuarioAmodificar.email}
+                                                    required
+                                                    fullWidth
                                                 />
                                             </div>
                                         </div>
@@ -293,23 +288,7 @@ function EditarFoodtruck() {
 
 
                                             {/* <!--Columna 1--> */}
-                                            <div className="col">
-                                                <MKTypography variant="h6" >
-                                                    Ubicacion
-                                                </MKTypography>
-                                                <MKInput
-                                                    id="ubicacion"
-                                                    variant="outlined"
-                                                    size="small"
 
-                                                />
-
-
-                                            </div>
-
-
-
-                                            {/* <!--Columna 3--> */}
                                             <div className="col">
 
                                                 <MKTypography variant="h6" >
@@ -318,13 +297,33 @@ function EditarFoodtruck() {
                                                 <MKInput
                                                     id="telefono"
                                                     variant="outlined"
-                                                    size="small"
-                                                    defaultValue={usuarioAmodificar.phone}
+                                                    size="medium"
+                                                    value={usuarioAmodificar.telefono}
                                                 />
 
 
                                             </div>
 
+
+                                            {/* <!--Columna 3--> */}
+
+                                            <div className="col">
+                                                <MKTypography variant="h6" >
+                                                    Ubicacion
+                                                </MKTypography>
+                                                <MKInput
+                                                    id="ubicacion"
+                                                    variant="outlined"
+                                                    size="medium"
+                                                    required
+                                                    fullWidth
+                                                    value={usuarioAmodificar.ubicacion}
+                                                />
+
+
+
+
+                                            </div>
 
                                         </div>
                                         <div className="row">
