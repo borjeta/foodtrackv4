@@ -121,23 +121,17 @@ function EditarFoodtruck() {
                     window.location.href = `/foodtrucks/propietario/listafoodtrucks`;
                 else if (user.role == "admin")
                     window.location.href = `/homeadmin`;
-
-
             }
             )
             .catch((err) => {
                 console.log(err);
-
             }
             );
-
-
-
     };
 
 
     const toggleModal = () => {
-        setOpen(!open);
+        /*setOpen(!open);*/
         window.location.href = `/admin/usuarios`;
     };
 

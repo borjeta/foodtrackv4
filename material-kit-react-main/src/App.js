@@ -40,6 +40,7 @@ import HomeAdmin from "pages/Admin/HomeAdmin";
 import ListaFoodtrucksAdmin from "pages/Admin/ListaFoodtrucksAdmin";
 import ListaUsuariosAdmin from "pages/Admin/ListaUsuariosAdmin";
 import EditarUsuarioAdmin from "pages/Admin/EditarUsuarioAdmin";
+import DatosCompletosUsuario from "pages/Admin/DatosCompletosUsuario";
 export default function App() {
   const { pathname } = useLocation();
 
@@ -89,7 +90,7 @@ export default function App() {
         <Route path="/admin/foodtrucks" element={<ListaFoodtrucksAdmin />} />
         <Route path="/admin/usuarios" element={<ListaUsuariosAdmin />} />
         <Route path="/admin/usuarios/:id/editar" element={<EditarUsuarioAdmin />} />
-
+        <Route path="/admin/usuarios/:id/info" element={<DatosCompletosUsuario />} />
       </Routes>
     </ThemeProvider>
   );

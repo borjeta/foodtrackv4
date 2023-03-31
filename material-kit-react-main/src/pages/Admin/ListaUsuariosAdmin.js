@@ -9,8 +9,9 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Icon } from "@iconify/react";
 import editIcon from "@iconify/icons-mdi/edit";
+import showIcon from "@iconify/icons-mdi/eye";
 import styled from "styled-components";
-import eyeIcon from "@iconify/icons-mdi/eye";
+
 import MKBox from "components/MKBox";
 import MKButton from "components/MKButton";
 import deleteIcon from "@iconify/icons-mdi/delete";
@@ -123,9 +124,9 @@ function ListaUsuariosAdmin() {
                                     <StyledTableCell align="right">{foodtruck.role}</StyledTableCell>
                                     <StyledTableCell align="right">
                                         <StyledButton>
-                                            <MKButton color="primary" href="/admin/ver-usuario">
-                                                <StyledIcon icon={eyeIcon} />
-                                            </MKButton>
+                                            <Link to={`/admin/usuarios/${foodtruck.id}/info`} className='btn btn-primary btn-lg'>
+                                                <StyledIcon icon={showIcon} />
+                                            </Link>
 
                                         </StyledButton>
                                         <StyledButton>
@@ -136,9 +137,11 @@ function ListaUsuariosAdmin() {
 
                                         </StyledButton>
                                         <StyledButton>
-                                            <MKButton color="primary" href="/admin/eliminar-usuario">
+                                            <Link to={`/admin/usuarios/${foodtruck.id}/eliminar`} className='btn btn-primary btn-lg'>
                                                 <StyledIcon icon={deleteIcon} />
-                                            </MKButton>
+                                            </Link>
+                                            
+
                                         </StyledButton>
                                     </StyledTableCell>
                                 </StyledTableRow>
