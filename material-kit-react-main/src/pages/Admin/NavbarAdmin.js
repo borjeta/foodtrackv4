@@ -14,7 +14,6 @@ function NavbarUsuario() {
             icon: <i className="fas fa-home" />,
             route: "/homeadmin",
         },
-
         {
             name: "Mi cuenta",
             icon: <i className="fas fa-user" />,

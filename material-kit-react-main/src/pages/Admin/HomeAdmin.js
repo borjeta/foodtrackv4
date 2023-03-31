@@ -27,17 +27,6 @@ const useStyles = makeStyles({
     },
 });
 
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-    createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-    createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-    createData("Eclair", 262, 16.0, 24, 6.0),
-    createData("Cupcake", 305, 3.7, 67, 4.3),
-    createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
 
 function HomeAdmin() {
 
@@ -51,38 +40,6 @@ function HomeAdmin() {
     const user_id = document.cookie.replace(/(?:(?:^|.*;\s*)user_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const role = document.cookie.replace(/(?:(?:^|.*;\s*)role\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 
-    const tabla = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 2px solid #000;
-    border-radius: 5px;
-    padding: 10px;
-    `;
-
-    useEffect(() => {
-
-        axios
-            .get(`http://localhost:8000/api/foodtrucks`, {
-                headers: {
-                    "Access-Control-Allow-Origin": "*",
-                    "Content-Type": "application/json",
-                    "user_id": `${user_id}`,
-                    "api_token": `${api_token}`,
-                    "role": `${role}`
-                }
-
-            })
-            .then((res) => {
-                setFoodtrucks(res.data);
-                console.log(res.data);
-
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }
-        , []);
 
 
     return (
@@ -97,7 +54,7 @@ function HomeAdmin() {
             <MKBox align="center" justify-content="centerº">
                 <MKButton
                     color="primary"
-                    size="lg"
+                    size="large"
                     href="/admin/foodtrucks"
                 >
                     Foodtrucks

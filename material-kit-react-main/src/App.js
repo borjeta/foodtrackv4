@@ -63,11 +63,15 @@ export default function App() {
     });
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={
+      pathname.indexOf("/presentation") !== -1
+        ? Presentation
+        : theme
+    }>
       <CssBaseline />
       <Routes>
         {getRoutes(routes)}
-        <Route path="/" element={<Presentation />} />
+        <Route path=" " element={<Navigate to="/login" />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/homeusuario" element={<HomeUsuario />} />
         <Route path="/login" element={<Signin />} />
@@ -76,6 +80,7 @@ export default function App() {
         <Route path="/foodtrucks/:id/info" element={<InfoFoodtruck />} />
         <Route path="/foodtrucks/dondeesta/:id/info" element={<InfoFoodtruck />} />
         <Route path="*" element={<Navigate to="/login" />} />
+        <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/homepropietario" element={<HomePropietario />} />
         <Route path="/foodtrucks/propietario/listafoodtrucks" element={<ListaFoodtrucksPropietario />} />
         <Route path="/foodtrucks/propietario/listafoodtrucks/:id/info" element={<InfoFoodtruckPropietario />} />

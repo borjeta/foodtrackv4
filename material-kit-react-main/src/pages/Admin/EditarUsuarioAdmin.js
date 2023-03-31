@@ -30,9 +30,8 @@ function EditarFoodtruck() {
     const [foodtruck, setfoodtruck] = useState([]);
     const [user, setUser] = useState([]);
     const [show, setShow] = useState(true);
-    const [imagen, setImagen] = useState([]);
-    const id = useParams();
     const [usuarioAmodificar, setUsuarioAmodificar] = useState([]);
+    const id = useParams();
 
 
     const [open, setOpen] = useState(false);
@@ -42,6 +41,36 @@ function EditarFoodtruck() {
     const role = document.cookie.replace(/(?:(?:^|.*;\s*)role\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 
     useEffect(() => {
+
+        /*Obtener usuario logueado*/
+        axios
+            .get(`http://localhost:8000/api/usuarios/${user_id}`, {
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Content-Type": "application/json",
+                    "user_id": `${user_id}`,
+                    "api_token": `${api_token}`,
+                    "role": `${role}`
+                }
+            })
+            .then((res) => {
+                setUser(res.data);
+                console.log(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
+
+
+
+
+
+
+
+
+
+        /*Obtener usuario a modificar*/
         axios
             .get(`http://localhost:8000/api/usuarios/${id.id}`, {
                 headers: {
@@ -54,7 +83,6 @@ function EditarFoodtruck() {
             })
             .then((res) => {
                 setUsuarioAmodificar(res.data);
-
                 console.log(res.data);
             })
             .catch((err) => {
@@ -62,19 +90,20 @@ function EditarFoodtruck() {
             });
     }, []);
 
+
+
+
+
     const handleSubmit = () => {
 
         /*Editar por usuario*/
         axios.put(`http://localhost:8000/api/foodtrucks/${userAmodificar.id}/editaradmin`, {
-            "id": foodtruck.id,
-            "nombre": document.getElementById("nombre").value,
-            "descripcion": document.getElementById("descripcion").value,
-            "ubicacion": document.getElementById("ubicacion").value,
-            "telefono": document.getElementById("telefono").value,
-            "avatar": document.getElementById("avatar").value,
-            "horario": document.getElementById("horario").value,
-            "tipocomida": document.getElementById("tipocomida").value,
-            "status": foodtruck.status,
+            "name": `${userAmodificar.name}`,
+            "email": `${userAmodificar.email}`,
+            "telefono": `${userAmodificar.telefono}`,
+            "password": `${userAmodificar.password}`,
+            "location": `${userAmodificar.location}`,
+
 
         }, {
             headers: {
@@ -88,8 +117,6 @@ function EditarFoodtruck() {
 
             .then((res) => {
                 console.log(res.data);
-
-
                 if (user.role == "propietario")
                     window.location.href = `/foodtrucks/propietario/listafoodtrucks`;
                 else if (user.role == "admin")
@@ -110,8 +137,8 @@ function EditarFoodtruck() {
 
 
     const toggleModal = () => {
-
-        handleSubmit();
+        setOpen(!open);
+        window.location.href = `/admin/usuarios`;
     };
 
 
@@ -173,8 +200,6 @@ function EditarFoodtruck() {
             })
             .then((res) => {
                 console.log(res.data);
-
-
                 window.location.href = `/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/editar`;
 
             })
@@ -188,7 +213,13 @@ function EditarFoodtruck() {
 
 
 
-    /*Editar foodtruck*/
+    /*Editar usuario
+    Nombre
+    Email
+    Teléfono
+    Password
+    Confirmación Password
+    Ubicación*/
 
     return (
         <div>
@@ -217,7 +248,7 @@ function EditarFoodtruck() {
 
                             >
                                 <MKBox display="flex" alignItems="center" justifyContent="space-between" p={2}>
-                                    <MKTypography variant="h5" alignItems="center">Ventana de edición de foodtruck</MKTypography>
+                                    <MKTypography variant="h5" alignItems="center">Ventana de edición de usuario</MKTypography>
                                     <MKButton
                                         variant="text"
                                         color="primary"
@@ -245,7 +276,7 @@ function EditarFoodtruck() {
                                                     size="small"
                                                     required
                                                     fullWidth
-                                                    value={user.nombre}
+                                                    value={usuarioAmodificar.name}
 
                                                 />
                                             </div>
@@ -253,7 +284,7 @@ function EditarFoodtruck() {
                                             {/* <!--Columna 2--> */}
                                             <div className="col">
                                                 <MKTypography variant="h6" >
-                                                    Descripción
+                                                    Email
                                                 </MKTypography>
                                                 <MKInput
                                                     id="descripcion"
@@ -278,14 +309,7 @@ function EditarFoodtruck() {
                                                     size="small"
 
                                                 />
-                                                <MKTypography variant="h6" >
-                                                    Horario
-                                                </MKTypography>
-                                                <MKInput
-                                                    id="horario"
-                                                    size="large"
-                                                    type="time"
-                                                />
+
 
                                             </div>
 
@@ -301,6 +325,7 @@ function EditarFoodtruck() {
                                                     id="telefono"
                                                     variant="outlined"
                                                     size="small"
+                                                    defaultValue={usuarioAmodificar.phone}
                                                 />
 
 
@@ -311,6 +336,29 @@ function EditarFoodtruck() {
                                         <div className="row">
 
                                             {/* <!--Columna 2--> */}
+                                            <div className="col">
+                                                <MKTypography variant="h6" >
+                                                    Password
+                                                </MKTypography>
+                                                <MKInput
+                                                    id="password"
+                                                    variant="outlined"
+                                                    size="small"
+                                                    type="text"
+                                                />
+
+                                            </div>
+                                            <div className="col">
+                                                <MKTypography variant="h6" >
+                                                    Rol
+                                                </MKTypography>
+                                                <select className="form-select">
+                                                    <option selected>{usuarioAmodificar.rol}</option>
+                                                    <option value="admin">Administrador</option>
+                                                    <option value="propietario">Propietario</option>
+                                                    <option value="user">Cliente</option>
+                                                </select>
+                                            </div>
 
                                         </div>
                                         <div className="row align-center justify-content-center">

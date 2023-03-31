@@ -116,7 +116,6 @@ function HomeAdmin() {
                                     href="/homeadmin"
                                     variant="gradient"
                                     color="warning"
-                                    alignItems="right"
                                     size="large"
                                     startIcon={<Icon icon={closeIcon} />}
                                 >
