@@ -1,24 +1,11 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import { Icon } from "@iconify/react";
-import editIcon from "@iconify/icons-mdi/edit";
-import styled from "styled-components";
-import eyeIcon from "@iconify/icons-mdi/eye";
 import MKBox from "components/MKBox";
 import MKButton from "components/MKButton";
-import deleteIcon from "@iconify/icons-mdi/delete";
-
-
+import { Container } from "@material-ui/core";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import NavbarAdmin from "pages/Admin/NavbarAdmin";
+import MKTypography from "components/MKTypography";
 
 
 const useStyles = makeStyles({
@@ -50,42 +37,59 @@ function HomeAdmin() {
             <br />
             <br />
 
-            <MKBox className="container" align="center" justify-content="center" py={10}>
+            <Container className="container" align="center" justify-content="center" py={10}>
+                <MKTypography variant="h4" component="h2" gutterBottom>
+                    Bienvenido al panel de administración
+                </MKTypography>
 
-                <MKBox align="center" justify-content="centerº">
-                    <MKButton
-                        color="primary"
-                        size="large"
-                        href="/admin/foodtrucks"
-                    >
-                        Foodtrucks
+                <MKBox className="container"
+                    align="center"
+                    justify-content="center"
+                    py={10}
+                >
+                    <div class="btn-group btn-group-justified" id = "btnsGlobales" role="group" aria-label="Basic example">
 
-                    </MKButton>
-                    &nbsp;
-                    &nbsp;
-                    <MKButton
-                        color="primary"
-                        size="large"
-                        href="/admin/usuarios"
-                    >
-                        Usuarios
+                        <MKBox align="center" justify-content="center">
+                            <MKButton
+                                color="primary"
+                                size="large"
+                                href="/admin/foodtrucks"
+                                className="btn"
+                                
+                            >
+                                Foodtrucks
 
-                    </MKButton>
-                    &nbsp;
-                    &nbsp;
-                    <MKButton
-                        color="primary"
-                        size="large"
-                        href="/admin/roles"
-                    >
-                        Opciones globales
+                            </MKButton>
+                            &nbsp;
+                            &nbsp;
+                            <MKButton
+                                color="primary"
+                                size="large"
+                                href="/admin/usuarios"
+                                className="btn"
+                            >
+                                Usuarios
 
-                    </MKButton>
-                    &nbsp;
-                    &nbsp;
+                            </MKButton>
+                            &nbsp;
+                            &nbsp;
+                            <MKButton
+                                color="primary"
+                                size="large"
+                                href="/admin/roles"
+                                className="btn"
+                            >
+                                Opciones globales
+
+                            </MKButton>
+                            &nbsp;
+                            &nbsp;
+
+                        </MKBox>
+                    </div>
 
                 </MKBox>
-            </MKBox>
+            </Container>
         </div>
     );
 }

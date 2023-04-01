@@ -274,7 +274,10 @@ function EditarFoodtruck() {
                                         variant="text"
                                         color="primary"
                                         size="large"
-                                        onClick={toggleModal}
+                                        onClick={() => {
+                                            window.location.href = `/foodtrucks/propietario/listafoodtrucks`;
+                                        }
+                                        }
                                         startIcon={<CloseIcon />}
                                     >
                                         Volver a la lista
@@ -330,8 +333,8 @@ function EditarFoodtruck() {
 
                                                 />
                                                 <MKTypography variant="h6" >
-                                                Horario
-                                            </MKTypography>
+                                                    Horario
+                                                </MKTypography>
                                                 <MKInput
                                                     id="horario"
                                                     size="large"
@@ -375,7 +378,7 @@ function EditarFoodtruck() {
                                                         color="primary"
                                                         size="large"
                                                         onClick={() => { window.location.href = `https://www.google.com/maps/search/?api=1&query=${foodtruck.ubicacion}` }}
-                                                    >Dónde estarás</MKButton>
+                                                    > Dónde estarás</MKButton>
                                                 </MKBox>
                                             </div>
                                         </div>
@@ -464,11 +467,11 @@ function EditarFoodtruck() {
                                         </div>
                                     </MKBox>
                                 </MKBox>
-                            </MKBox>
-                        </Slide>
-                    </Modal>
-                </Container>
-            </MKBox>
+                            </MKBox >
+                        </Slide >
+                    </Modal >
+                </Container >
+            </MKBox >
         </div >
     );
 }

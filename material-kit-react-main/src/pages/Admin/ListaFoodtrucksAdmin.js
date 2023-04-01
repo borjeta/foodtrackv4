@@ -90,7 +90,7 @@ function HomeAdmin() {
         <div>
             <NavbarAdmin />
 
-         
+
             <br />
             <div className="container">
                 <div className="row">
@@ -147,19 +147,22 @@ function HomeAdmin() {
                                                         <TableCell align="right">{foodtruck.ubicacion}</TableCell>
                                                         <TableCell align="right">{foodtruck.telefono}</TableCell>
                                                         <TableCell align="right">{foodtruck.TipoComida}</TableCell>
+
                                                         <TableCell align="right">
                                                             <MKButton
                                                                 href={`/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/editar`}
                                                                 variant="gradient"
-                                                                color="warning"
                                                                 size="large"
                                                                 startIcon={<Icon icon={editIcon} />}
+                                                                className="btn"
+
                                                             >
                                                                 Editar
                                                             </MKButton>
-                                                            &nbsp;
-                                                            &nbsp;
-                                                            <MKButton variant="gradient" color="dark" size="large"
+                                                           <br />
+
+                                                            <MKButton variant="gradient" className="btn"
+                                                                size="large"
                                                                 startIcon={<Icon icon={deleteIcon} />} onClick={() => {
                                                                     axios
                                                                         .delete(`http://localhost:8000/api/foodtrucks/${foodtruck.id}`, {
@@ -182,8 +185,8 @@ function HomeAdmin() {
                                                                         }
                                                                         );
                                                                 }}>Eliminar</MKButton>
-
                                                         </TableCell>
+
                                                     </TableRow>
                                                 ))}
                                             </TableBody>

@@ -48,30 +48,33 @@ function SimpleModal() {
     const user_id = document.cookie.replace(/(?:(?:^|.*;\s*)user_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const role = document.cookie.replace(/(?:(?:^|.*;\s*)role\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 
-    axios
-        .get(`http://localhost:8000/api/usuarios/${user_id}`, {
-            headers: {
-                "Content-Type": "application/json",
-                "user_id": `${user_id}`,
-                "api_token": `${api_token}`,
-                "role": `${role}`
-            }
+    useEffect(() => {
+        axios
+            .post(`http://localhost:8000/api/usuarios/${user_id}/buscausuario`, {
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Content-Type": "application/json",
+                    "user_id": `${user_id}`,
+                    "api_token": `${api_token}`,
+                    "role": `${role}`
+                }
+            })
+            .then((res) => {
+                console.log(res.data);
+                setUser(res.data);
+                document.getElementById("name").value = res.data.name;
+                document.getElementById("email").value = res.data.email;
+                document.getElementById("phone").value = res.data.telefono;
+                document.getElementById("ubicacion").value = res.data.ubicacion;
+                alert(res.data);
 
-        })
-        .then((res) => {
-            console.log(res.data);
-            setUser(res.data);
-            document.getElementById("name").value = res.data.name;
-            document.getElementById("email").value = res.data.email;
-            document.getElementById("phone").value = res.data.telefono;
-            document.getElementById("ubicacion").value = res.data.ubicacion;
+            })
 
-        })
-
-        .catch((err) => {
-            alert(err);
-            console.log(err);
-        });
+            .catch((err) => {
+                alert(err);
+                console.log(err);
+            });
+    }, []);
 
 
     const handleSubmit = (e) => {
@@ -116,7 +119,6 @@ function SimpleModal() {
             )
             .catch((err) => {
                 alert(err);
-                <MKAlert severity="error">Error al actualizar los datos</MKAlert>
             }
             );
 

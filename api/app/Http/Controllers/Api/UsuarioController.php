@@ -7,13 +7,7 @@ use App\Models\usuario;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Auth;
-
-use SplTempFileObject;
-
-use function PHPSTORM_META\map;
+use Illuminate\Support\Facades\Crypt;
 
 class UsuarioController extends Controller
 {
@@ -130,10 +124,23 @@ class UsuarioController extends Controller
         return response()->json(['error' => 'No se ha podido cerrar la sesión'], 401);
     }
 
-    public function buscaUsuario(Request $request)
-    { /*Cogemos el body de la request */
 
-        return response($request->all(), 200);
+    public function buscausuario(Request $request): Response
+    {
+        $body = $request->all();
+        /* Buscamos el usuario por el nombre */
+        $api_token = $body['headers']['api_token'];
+        $user_id = $body['headers']['user_id'];
+        $role = $body['headers']['role'];
+        $user = usuario::where('id', $user_id)->first();
+
+        if ($user->api_token == $api_token) {
+            return response($user, 200);
+        } else {
+            return response()->json(['error' => 'No tienes permisos para acceder a este recurso'], 401);
+        }
+
+
     }
 
     public function buscaUsuariosPorToken(Request $request)
@@ -144,8 +151,6 @@ class UsuarioController extends Controller
         $user_id = $body['headers']['user_id'];
         $role = $body['headers']['role'];
         $user = usuario::where('api_token', $api_token)->first();
-        /*desencriptamos la constraseña para mostrarla en texto plano */
-        $user->password = decrypt($user->password);
         return response()->json($user, 200);
     }
 }
