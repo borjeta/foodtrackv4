@@ -21,6 +21,7 @@ import MKButton from "components/MKButton";
 import MKTypography from "components/MKTypography";
 import MKInput from "components/MKInput";
 import MKAvatar from "components/MKAvatar";
+import MKAlert from "components/MKAlert";
 /*
  columnas de la tabla usuarios
 id	
@@ -47,34 +48,30 @@ function SimpleModal() {
     const user_id = document.cookie.replace(/(?:(?:^|.*;\s*)user_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const role = document.cookie.replace(/(?:(?:^|.*;\s*)role\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 
-    useEffect(() => {
+    axios
+        .get(`http://localhost:8000/api/usuarios/${user_id}`, {
+            headers: {
+                "Content-Type": "application/json",
+                "user_id": `${user_id}`,
+                "api_token": `${api_token}`,
+                "role": `${role}`
+            }
 
-        axios
-            .post(`http://localhost:8000/api/usuarios/buscador/usuario`, {
-                headers: {
-                    "Access-Control-Allow-Origin": "*",
-                    "Content-Type": "application/json",
-                    "user_id": `${user_id}`,
-                    "api_token": `${api_token}`,
-                    "role": `${role}`
-                }
+        })
+        .then((res) => {
+            console.log(res.data);
+            setUser(res.data);
+            document.getElementById("name").value = res.data.name;
+            document.getElementById("email").value = res.data.email;
+            document.getElementById("phone").value = res.data.telefono;
+            document.getElementById("ubicacion").value = res.data.ubicacion;
 
-            })
-            .then((res) => {
-                console.log(res.data);
-                setUser(res.data);
-                document.getElementById("name").value = res.data.name;
-                document.getElementById("email").value = res.data.email;
-                document.getElementById("phone").value = res.data.telefono;
-                document.getElementById("ubicacion").value = res.data.ubicacion;
+        })
 
-            })
-
-            .catch((err) => {
-                alert(err);
-                console.log(err);
-            });
-    }, []);
+        .catch((err) => {
+            alert(err);
+            console.log(err);
+        });
 
 
     const handleSubmit = (e) => {
@@ -119,9 +116,11 @@ function SimpleModal() {
             )
             .catch((err) => {
                 alert(err);
-                <MKAlert color="error">A simple error alert—check it out!</MKAlert>
+                <MKAlert severity="error">Error al actualizar los datos</MKAlert>
             }
             );
+
+
     }
 
 
@@ -162,6 +161,10 @@ function SimpleModal() {
             window.location.href = `/homepropietario`;
         } else if (user.role == "usuario")
             window.location.href = `/homeusuario`;
+        else if (user.role == "admin")
+            window.location.href = `/homeadmin`;
+        else
+            window.location.href = `/login`;
 
     };
 

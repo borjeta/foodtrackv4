@@ -1,18 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Link, animateScroll as scroll } from "react-scroll";
 import axios from "axios";
 
 // @mui material components
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Modal from "@mui/material/Modal";
-import Divider from "@mui/material/Divider";
 import Slide from "@mui/material/Slide";
-
-import CardMedia from "@mui/material/CardMedia";
-
-
 
 // @mui icons
 import CloseIcon from "@mui/icons-material/Close";
@@ -31,6 +25,19 @@ function EditarFoodtruck() {
     const [user, setUser] = useState([]);
     const [show, setShow] = useState(true);
     const [usuarioAmodificar, setUsuarioAmodificar] = useState([]);
+    const [nombre, setNombre] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [roleUsuarioAModificar, setRoleUsuarioAModificar] = useState("");
+    const [telefono, setTelefono] = useState("");
+    const [ubicacion, setUbicacion] = useState("");
+
+
+
+
+
+
+
     const id = useParams();
 
 
@@ -75,6 +82,13 @@ function EditarFoodtruck() {
             })
             .then((res) => {
                 setUsuarioAmodificar(res.data);
+                setNombre(res.data.name);
+                setEmail(res.data.email);
+                setPassword(res.data.password);
+                setRoleUsuarioAModificar(res.data.role);
+                setTelefono(res.data.telefono);
+                setUbicacion(res.data.ubicacion);
+
                 console.log(res.data);
             })
             .catch((err) => {
@@ -261,10 +275,10 @@ function EditarFoodtruck() {
                                                     variant="outlined"
                                                     size="medium"
                                                     required
-
-                                                    value={usuarioAmodificar.name}
-
+                                                    value={nombre}
+                                                    onChange={e => setNombre(e.target.value)}
                                                 />
+
                                             </div>
 
                                             {/* <!--Columna 2--> */}
@@ -276,9 +290,10 @@ function EditarFoodtruck() {
                                                     id="descripcion"
                                                     variant="outlined"
                                                     size="medium"
-                                                    value={usuarioAmodificar.email}
                                                     required
                                                     fullWidth
+                                                    value={email}
+                                                    onChange={e => setEmail(e.target.value)}
                                                 />
                                             </div>
                                         </div>
@@ -298,7 +313,11 @@ function EditarFoodtruck() {
                                                     id="telefono"
                                                     variant="outlined"
                                                     size="medium"
-                                                    value={usuarioAmodificar.telefono}
+                                                    required
+                                                    fullWidth
+                                                    value={telefono}
+                                                    onChange={e => setTelefono(e.target.value)}
+
                                                 />
 
 
@@ -317,7 +336,9 @@ function EditarFoodtruck() {
                                                     size="medium"
                                                     required
                                                     fullWidth
-                                                    value={usuarioAmodificar.ubicacion}
+                                                    value={ubicacion}
+                                                    onChange={e => setUbicacion(e.target.value)}
+
                                                 />
 
 
@@ -338,15 +359,20 @@ function EditarFoodtruck() {
                                                     variant="outlined"
                                                     size="small"
                                                     type="text"
+                                                    required
+                                                    fullWidth
+                                                    value={password}
+                                                    onChange={e => setPassword(e.target.value)}
+
                                                 />
+
 
                                             </div>
                                             <div className="col">
                                                 <MKTypography variant="h6" >
                                                     Rol
                                                 </MKTypography>
-                                                <select className="form-select">
-                                                    <option selected>{usuarioAmodificar.rol}</option>
+                                                <select className="form-select" defaultValue={usuarioAmodificar.role}>
                                                     <option value="admin">Administrador</option>
                                                     <option value="propietario">Propietario</option>
                                                     <option value="user">Cliente</option>
@@ -355,10 +381,6 @@ function EditarFoodtruck() {
 
                                         </div>
                                         <div className="row align-center justify-content-center">
-
-
-
-
                                             <MKBox display="flex" justifyContent="flex-end" p={2}>
                                                 <MKButton variant="contained" color="primary"
                                                     sx={

@@ -104,7 +104,7 @@ function ListaUsuariosAdmin() {
                 <TableContainer component={Paper}>
                     <Table className="table" aria-label="customized table">
                         <TableHead>
-                            <MKTypography variant="h6" >Lista de usuarios</MKTypography>
+                            <MKTypography  >Lista de usuarios</MKTypography>
                             <TableRow>
                                 <StyledTableCell>Nombre</StyledTableCell>
                                 <StyledTableCell align="right">Email</StyledTableCell>
@@ -122,24 +122,19 @@ function ListaUsuariosAdmin() {
                                     <StyledTableCell align="right">{foodtruck.role}</StyledTableCell>
                                     <StyledTableCell align="right">
                                         <StyledButton>
-                                            <Link to={`/admin/usuarios/${foodtruck.id}/info`} className='btn btn-primary btn-lg'>
+                                            <Link to={`/admin/usuarios/${foodtruck.id}/info`}  className='btn btn-primary btn-sm'>
                                                 <StyledIcon icon={showIcon} />
                                             </Link>
-
                                         </StyledButton>
                                         <StyledButton>
-                                            <Link to={`/admin/usuarios/${foodtruck.id}/editar`} className='btn btn-primary btn-lg'>
+                                            <Link to={`/admin/usuarios/${foodtruck.id}/editar`} className='btn btn-primary btn-sm'>
                                                 <StyledIcon icon={editIcon} />
                                             </Link>
-
-
                                         </StyledButton>
                                         <StyledButton>
-                                            <Link to={`/admin/usuarios/${foodtruck.id}/eliminar`} className='btn btn-primary btn-lg'>
+                                            <Link to={`/admin/usuarios/${foodtruck.id}/eliminar`} className='btn btn-primary btn-sm'>
                                                 <StyledIcon icon={deleteIcon} />
                                             </Link>
-                                            
-
                                         </StyledButton>
                                     </StyledTableCell>
                                 </StyledTableRow>

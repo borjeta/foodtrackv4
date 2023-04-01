@@ -50,47 +50,42 @@ function HomeAdmin() {
             <br />
             <br />
 
+            <MKBox className="container" align="center" justify-content="center" py={10}>
 
-            <MKBox align="center" justify-content="centerº">
-                <MKButton
-                    color="primary"
-                    size="large"
-                    href="/admin/foodtrucks"
-                >
-                    Foodtrucks
+                <MKBox align="center" justify-content="centerº">
+                    <MKButton
+                        color="primary"
+                        size="large"
+                        href="/admin/foodtrucks"
+                    >
+                        Foodtrucks
 
-                </MKButton>
-                &nbsp;
-                &nbsp;
-                <MKButton
-                    color="primary"
-                    size="large"
-                    href="/admin/usuarios"
-                >
-                    Usuarios
+                    </MKButton>
+                    &nbsp;
+                    &nbsp;
+                    <MKButton
+                        color="primary"
+                        size="large"
+                        href="/admin/usuarios"
+                    >
+                        Usuarios
 
-                </MKButton>
-                &nbsp;
-                &nbsp;
-                <MKButton
-                    color="primary"
-                    size="large"
-                    href="/admin/roles"
-                >
-                    Roles
+                    </MKButton>
+                    &nbsp;
+                    &nbsp;
+                    <MKButton
+                        color="primary"
+                        size="large"
+                        href="/admin/roles"
+                    >
+                        Opciones globales
 
-                </MKButton>
-                &nbsp;
-                &nbsp;
-                <MKButton
-                    color="primary"
-                    size="large"
-                    href="/admin/permisos"
-                >
-                    Permisos
-                </MKButton>
+                    </MKButton>
+                    &nbsp;
+                    &nbsp;
+
+                </MKBox>
             </MKBox>
-
         </div>
     );
 }

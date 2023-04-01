@@ -47,17 +47,16 @@ class UsuarioController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request, $id)
+    public function show(Request $request)
     {
-        $api_token = $request->header('api_token');
-        $user_id = $request->header('user_id');
-        $role = $request->header('role');
-        $user = usuario::where('id', $id)->first();
-        if ($user) {
-            $usuario = usuario::where('id', $id)->first();
-            return response()->json($usuario, 200);
-        }
-        return response()->json(['error' => 'No tienes permisos para acceder a este recurso'], 401);
+        $body = $request->all();
+        /* Buscamos el usuario por el nombre */
+        $api_token = $body['headers']['api_token'];
+        $user_id = $body['headers']['user_id'];
+        $role = $body['headers']['role'];
+        $user = usuario::where('id', $user_id)->first();
+        /*desencriptamos la constraseña para mostrarla en texto plano */
+        return response()->json($user, 200);
     }
 
     /**
@@ -135,7 +134,21 @@ class UsuarioController extends Controller
         $user_id = $body['headers']['user_id'];
         $role = $body['headers']['role'];
         $user = usuario::where('id', $user_id)->first();
-        dd($user);
+        /*desencriptamos la constraseña para mostrarla en texto plano */
+        $user->password = decrypt($user->password);
+        return response()->json($user, 200);
+    }
+
+    public function buscaUsuariosPorToken(Request $request)
+    {
+        $body = $request->all();
+        /* Buscamos el usuario por el nombre */
+        $api_token = $body['headers']['api_token'];
+        $user_id = $body['headers']['user_id'];
+        $role = $body['headers']['role'];
+        $user = usuario::where('api_token', $api_token)->first();
+        /*desencriptamos la constraseña para mostrarla en texto plano */
+        $user->password = decrypt($user->password);
         return response()->json($user, 200);
     }
 }
