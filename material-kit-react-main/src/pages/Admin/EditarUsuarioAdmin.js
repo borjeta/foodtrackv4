@@ -51,7 +51,7 @@ function EditarFoodtruck() {
 
         /*Obtener usuario logueado*/
         axios
-            .get(`http://localhost:8000/api/usuarios/${user_id}`, {
+            .get(`http://localhost:8000/api/usuarios/${user_id}/buscausuario`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
@@ -66,6 +66,8 @@ function EditarFoodtruck() {
             })
             .catch((err) => {
                 console.log(err);
+                alert("No se pudo obtener el usuario logueado\n"+err);
+
             });
 
 

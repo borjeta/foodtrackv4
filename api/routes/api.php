@@ -24,6 +24,7 @@ Route::delete('/usuarios/{usuario}', 'App\Http\Controllers\Api\UsuarioController
 Route::post('/usuarios/login', 'App\Http\Controllers\Api\UsuarioController@login')->middleware('canAccess');
 Route::get('/usuarios/logout', 'App\Http\Controllers\Api\UsuarioController@logout')->middleware('canAccess');
 Route::post('/usuarios/buscador/usuario', 'App\Http\Controllers\Api\UsuarioController@buscaUsuario');
+Route::get('/usuarios/{id}/buscausuario', 'App\Http\Controllers\Api\UsuarioController@buscaUsuario')->middleware('canAccess');
 
 
 /*Rutas API Foodtrucks*/
