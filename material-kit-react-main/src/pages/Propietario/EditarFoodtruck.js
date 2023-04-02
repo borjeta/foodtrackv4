@@ -70,16 +70,14 @@ function EditarFoodtruck() {
                 console.log(res.data);
 
                 if (user.role == "propietario")
+                    /*recarga la pagina*/
                     window.location.href = `/foodtrucks/propietario/listafoodtrucks`;
                 else if (user.role == "admin")
                     window.location.href = `/homeadmin`;
-
-
             }
             )
             .catch((err) => {
                 console.log(err);
-
             }
             );
 
@@ -147,7 +145,7 @@ function EditarFoodtruck() {
 
 
         axios
-            .get(`http://localhost:8000/api/usuarios/${user_id}`, {
+            .post(`http://localhost:8000/api/usuarios/${user_id}/buscausuario`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",

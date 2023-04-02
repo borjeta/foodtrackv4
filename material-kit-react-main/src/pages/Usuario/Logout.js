@@ -5,17 +5,15 @@ import axios from "axios";
 function Logout() {
     const [data, setData] = useState([]);
 
-    const cookies = document.cookie.split("; ");
-    const api_token = cookies[0].split("=")[1];
-    const user_id = cookies[1].split("=")[1];
-    const role = cookies[2].split("=")[1];
+
 
     useEffect(() => {
-        /*borra el token y el id del usuario de las cookies*/
-        document.cookie = `api_token=""`;
-        document.cookie = `user_id=""`;
-        document.cookie = `role=""`;
-        window.location.href = `/login`;
+        /*elimina las id de usuario y api_token de las cookies*/
+
+        document.cookie = "user_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "api_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "role=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        window.location.href = "/";
 
     }, []);
 

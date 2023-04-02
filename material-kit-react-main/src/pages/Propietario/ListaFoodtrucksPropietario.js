@@ -68,11 +68,11 @@ function ListaFoodtrucksPropietario() {
             <NavbarPropietario />
             <br />
             <br />
-            <Toolbar /> 
+            <Toolbar />
             {/*align-center justify-content-center*/}
             <Container maxWidth="lg" align="center">
                 <Box sx={{ width: '100%' }}>
-                    <Table >
+                    <Table id="tablafoodtrucks">
                         <thead>
                             <tr>
                                 <th scope="col">Nombre</th>
@@ -88,7 +88,7 @@ function ListaFoodtrucksPropietario() {
                                     <td>
                                         <div className="d-flex justify-content-center">
 
-                                           
+
                                             &nbsp;
                                             <MKButton
                                                 href={`/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/editar`}
