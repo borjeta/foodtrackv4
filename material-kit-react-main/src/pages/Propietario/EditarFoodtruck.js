@@ -68,7 +68,6 @@ function EditarFoodtruck() {
 
             .then((res) => {
                 console.log(res.data);
-
                 if (user.role == "propietario")
                     /*recarga la pagina*/
                     window.location.href = `/foodtrucks/propietario/listafoodtrucks`;
@@ -134,9 +133,8 @@ function EditarFoodtruck() {
                 document.getElementById("ubicacion").value = res.data.ubicacion;
                 document.getElementById("telefono").value = res.data.telefono;
                 document.getElementById("avatar").value = res.data.avatar;
-                document.getElementById("horario").value = res.data.horario;
                 document.getElementById("tipocomida").value = res.data.TipoComida;
-
+                alert(res.data.horario)
             })
             .catch((err) => {
                 console.log(err);

@@ -58,7 +58,6 @@ function HomeAdmin() {
                                 
                             >
                                 Foodtrucks
-
                             </MKButton>
                             &nbsp;
                             &nbsp;
@@ -69,7 +68,6 @@ function HomeAdmin() {
                                 className="btn"
                             >
                                 Usuarios
-
                             </MKButton>
                             &nbsp;
                             &nbsp;
