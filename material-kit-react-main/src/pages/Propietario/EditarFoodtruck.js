@@ -131,6 +131,7 @@ function EditarFoodtruck() {
                 document.getElementById("nombre").value = res.data.nombre;
                 document.getElementById("descripcion").value = res.data.descripcion;
                 document.getElementById("ubicacion").value = res.data.ubicacion;
+                document.getElementById("horario").value = res.data.horario;
                 document.getElementById("telefono").value = res.data.telefono;
                 document.getElementById("avatar").value = res.data.avatar;
                 document.getElementById("tipocomida").value = res.data.TipoComida;
@@ -421,27 +422,6 @@ function EditarFoodtruck() {
                                         }
 
                                         <div className="row align-center justify-content-center">
-
-
-                                            <MKBox display="flex" flexDirection="column" gap={2}>
-                                                <MKTypography variant="h4">Hora de cierre</MKTypography>
-                                                <MKBox display="flex" flexDirection="column" gap={2}>
-                                                    <MKBox display="flex" flexDirection="row" gap={2}>
-                                                        <MKBox display="flex" flexDirection="column" gap={2}>
-                                                            <MKBox display="flex" flexDirection="row" gap={2}>
-                                                                <MKInput
-                                                                    id="horario"
-                                                                    size="large"
-                                                                    type="time"
-                                                                    defaultValue={foodtruck.horario}
-                                                                />
-
-                                                            </MKBox>
-                                                        </MKBox>
-                                                    </MKBox>
-                                                </MKBox>
-                                            </MKBox>
-
 
                                             <MKBox display="flex" justifyContent="flex-end" p={2}>
                                                 <MKButton variant="contained" color="primary"
