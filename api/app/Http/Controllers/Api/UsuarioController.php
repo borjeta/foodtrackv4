@@ -119,9 +119,9 @@ class UsuarioController extends Controller
             $usuario->date_createtoken = null;
             $usuario->expires_at = null;
             $usuario->save();
-            return response()->json(['message' => 'Sesión cerrada correctamente'], 200);
+            return response(['message' => 'Sesión cerrada correctamente'], 200);
         }
-        return response()->json(['error' => 'No se ha podido cerrar la sesión'], 401);
+        return response(['error' => 'No se ha podido cerrar la sesión'], 401);
     }
 
 

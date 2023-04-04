@@ -47,7 +47,7 @@ function HomeAdmin() {
                     justify-content="center"
                     py={10}
                 >
-                    <div class="btn-group btn-group-justified" id = "btnsGlobales" role="group" aria-label="Basic example">
+                    <div class="btn-group btn-group-justified" id="btnsGlobales" role="group" aria-label="Basic example">
 
                         <MKBox align="center" justify-content="center">
                             <MKButton
@@ -55,7 +55,7 @@ function HomeAdmin() {
                                 size="large"
                                 href="/admin/foodtrucks"
                                 className="btn"
-                                
+
                             >
                                 Foodtrucks
                             </MKButton>
@@ -78,7 +78,6 @@ function HomeAdmin() {
                                 className="btn"
                             >
                                 Opciones globales
-
                             </MKButton>
                             &nbsp;
                             &nbsp;

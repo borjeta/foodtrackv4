@@ -7,11 +7,9 @@ import axios from "axios";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Modal from "@mui/material/Modal";
-import Divider from "@mui/material/Divider";
 import Slide from "@mui/material/Slide";
 
 import CardMedia from "@mui/material/CardMedia";
-
 
 
 // @mui icons
@@ -22,7 +20,8 @@ import MKBox from "components/MKBox";
 import MKButton from "components/MKButton";
 import MKTypography from "components/MKTypography";
 import MKInput from "components/MKInput";
-
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
 
 function EditarFoodtruck() {
@@ -32,6 +31,7 @@ function EditarFoodtruck() {
     const [show, setShow] = useState(true);
     const [imagen, setImagen] = useState([]);
     const id = useParams();
+    const [categorias, setCategorias] = useState([]);
 
 
     const [open, setOpen] = useState(false);
@@ -51,7 +51,7 @@ function EditarFoodtruck() {
             "telefono": document.getElementById("telefono").value,
             "avatar": document.getElementById("avatar").value,
             "horario": document.getElementById("horario").value,
-            "tipocomida": document.getElementById("tipocomida").value,
+            "tipocomida": document.getElementById("categoria").value,
             "status": foodtruck.status,
 
         }, {
@@ -68,11 +68,7 @@ function EditarFoodtruck() {
 
             .then((res) => {
                 console.log(res.data);
-                if (user.role == "propietario")
-                    /*recarga la pagina*/
-                    window.location.href = `/foodtrucks/propietario/listafoodtrucks`;
-                else if (user.role == "admin")
-                    window.location.href = `/homeadmin`;
+                window.location.href = `/foodtrucks/propietario/listafoodtrucks`;
             }
             )
             .catch((err) => {
@@ -111,9 +107,6 @@ function EditarFoodtruck() {
     }
     useEffect(() => {
 
-        document.documentElement.scrollTop = 0;
-        document.scrollingElement.scrollTop = 0;
-        document.getElementById("root").scrollTop = 0;
 
         /*OBtener datos del foodtruck*/
         axios
@@ -134,34 +127,13 @@ function EditarFoodtruck() {
                 document.getElementById("horario").value = res.data.horario;
                 document.getElementById("telefono").value = res.data.telefono;
                 document.getElementById("avatar").value = res.data.avatar;
-                document.getElementById("tipocomida").value = res.data.TipoComida;
-                alert(res.data.horario)
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-
-
-
-        axios
-            .post(`http://localhost:8000/api/usuarios/${user_id}/buscausuario`, {
-                headers: {
-                    "Access-Control-Allow-Origin": "*",
-                    "Content-Type": "application/json",
-                    "user_id": `${user_id}`,
-                    "api_token": `${api_token}`,
-                    "role": `${role}`
-                }
-            })
-            .then((res) => {
-                setUser(res.data);
+                /*Seteamos el tipo de comida del foodtruck*/
+                document.getElementById("categoria").value = res.data.TipoComida;
                 console.log(res.data);
             })
             .catch((err) => {
                 console.log(err);
             });
-
-
 
     }, []);
 
@@ -252,7 +224,11 @@ function EditarFoodtruck() {
                     <Grid container item xs={12} lg={10} justifyContent="center" mx="auto">
 
                     </Grid>
-                    <Modal open={show} sx={{ display: "grid", placeItems: "center" }}>
+                    <Modal open={show} sx={{ display: "grid", placeItems: "center" }}
+                        display="flex"
+                        style={{ overflow: "scroll" }}
+
+                    >
                         <Slide direction="down" in={show} timeout={500}>
                             <MKBox
                                 position="relative"
@@ -265,7 +241,7 @@ function EditarFoodtruck() {
                                 shadow="xl"
 
                             >
-                                <MKBox display="flex" alignItems="center" justifyContent="space-between" p={2}>
+                                <MKBox display="flex" alignItems="center" p={2}>
                                     <MKTypography variant="h5" alignItems="center">Ventana de edición de foodtruck</MKTypography>
                                     <MKButton
                                         variant="text"
@@ -336,7 +312,6 @@ function EditarFoodtruck() {
                                                     id="horario"
                                                     size="large"
                                                     type="time"
-                                                    defaultValue={foodtruck.horario}
                                                 />
 
                                             </div>
@@ -371,7 +346,6 @@ function EditarFoodtruck() {
                                                         Guarda cambios antes para ubicación
                                                     </MKTypography>
                                                     <MKButton variant="contained"
-
                                                         color="primary"
                                                         size="large"
                                                         onClick={() => { window.location.href = `https://www.google.com/maps/search/?api=1&query=${foodtruck.ubicacion}` }}
@@ -382,11 +356,20 @@ function EditarFoodtruck() {
                                         <MKTypography variant="h6" >
                                             Categoria
                                         </MKTypography>
-                                        <MKInput
-                                            id="tipocomida"
-                                            variant="outlined"
-                                            size="small"
-                                        />
+                                        <select className="form-select" aria-label="Default select example" id="categoria">
+                                            <option value="Comida Japonesa">Comida Japonesa</option>
+                                            <option value="Comida Mexicana">Comida Mexicana</option>
+                                            <option value="Comida Italiana">Comida Italiana</option>
+                                            <option value="Comida China">Comida China</option>
+                                            <option value="Comida Francesa">Comida Francesa</option>
+                                            <option value="Comida Española">Comida Española</option>
+                                            <option value="Comida Americana">Comida Americana</option>
+                                            <option value="Comida Peruana">Comida Peruana</option>
+                                            <option value="Comida Colombiana">Comida Colombiana</option>
+                                            <option value="Comida Argentina">Comida Argentina</option>
+                                        </select>
+
+
 
                                         <MKTypography variant="h6" >
                                             Avatar URL (Los cambios se mostrarán después de guardar)
