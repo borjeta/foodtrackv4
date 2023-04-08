@@ -134,8 +134,10 @@ class UsuarioController extends Controller
         $role = $body['headers']['role'];
         $user = usuario::where('id', $user_id)->first();
 
-        if ($user->api_token == $api_token) {
-            return response($user, 200);
+        $id = $request->id;
+        $usuario = usuario::where('id', $id)->first();
+        if ($user->id == $user_id && $user->api_token == $api_token && $user->role == $role) {
+            return response($usuario, 200);
         } else {
             return response('No tienes permisos para acceder a este recurso', 401);
         }
@@ -158,5 +160,28 @@ class UsuarioController extends Controller
             return response('No tienes permisos para acceder a este recurso', 401);
         }
 
+    }
+    public function editarUsuarioAdmin(Request $request)
+    {
+
+        $body = $request->all();
+        /* Buscamos el usuario por el nombre */
+        $api_token = $body['headers']['api_token'];
+        $user_id = $body['headers']['user_id'];
+        $role = $body['headers']['role'];
+        $user = usuario::where('id', $user_id)->first();
+        if ($user->api_token == $api_token && $user->id == $user_id && $user->role == $role) {
+            $usuario = usuario::where('id', $request->id)->first();
+            $usuario->name = $body['data']['name'];
+            $usuario->email = $body['data']['email'];
+            $usuario->telefono = $body['data']['telefono'];
+            $usuario->ubicacion = $body['data']['ubicacion'];
+            $usuario->role = $body['data']['role'];
+            $usuario->save();
+            return response($usuario, 200);
+        } else {
+            return response('No tienes permisos para acceder a este recurso', 401);
+        }
+       
     }
 }

@@ -103,8 +103,14 @@ function ListaUsuariosAdmin() {
             <MKBox>
                 <TableContainer component={Paper}>
                     <Table className="table" aria-label="customized table">
+
                         <TableHead>
-                            <MKTypography  >Lista de usuarios</MKTypography>
+                            <TableRow>
+                                <MKTypography variant="h2" justify="center" align="center" color="textprimary" gutterBottom >
+                                    Lista de usuarios
+                                </MKTypography>
+                            </TableRow>
+
                             <TableRow>
                                 <StyledTableCell>Nombre</StyledTableCell>
                                 <StyledTableCell align="right">Email</StyledTableCell>
@@ -122,7 +128,7 @@ function ListaUsuariosAdmin() {
                                     <StyledTableCell align="right">{foodtruck.role}</StyledTableCell>
                                     <StyledTableCell align="right">
                                         <StyledButton>
-                                            <Link to={`/admin/usuarios/${foodtruck.id}/info`}  className='btn btn-primary btn-sm'>
+                                            <Link to={`/admin/usuarios/${foodtruck.id}/info`} className='btn btn-primary btn-sm'>
                                                 <StyledIcon icon={showIcon} />
                                             </Link>
                                         </StyledButton>
@@ -143,7 +149,7 @@ function ListaUsuariosAdmin() {
                     </Table>
                 </TableContainer>
             </MKBox>
-        </div>
+        </div >
     );
 }
 

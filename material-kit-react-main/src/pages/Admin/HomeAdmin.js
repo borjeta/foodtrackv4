@@ -32,7 +32,6 @@ function HomeAdmin() {
     return (
         <div>
             <NavbarAdmin />
-            Opciones de administrador
             <br />
             <br />
             <br />

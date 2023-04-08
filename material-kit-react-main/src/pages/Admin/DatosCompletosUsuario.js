@@ -38,7 +38,7 @@ const DatosCompletosUsuario = () => {
 
         /*Obtener usuario logueado*/
         axios
-            .get(`http://localhost:8000/api/usuarios/${user_id}`, {
+            .post(`http://localhost:8000/api/usuarios/${user_id}/buscausuario`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
@@ -57,7 +57,7 @@ const DatosCompletosUsuario = () => {
 
         /*Obtener usuario seleccionado*/
         axios
-            .get(`http://localhost:8000/api/usuarios/${id.id}`, {
+            .post(`http://localhost:8000/api/usuarios/${id.id}/buscausuario`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",

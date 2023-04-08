@@ -220,7 +220,7 @@ function EditarFoodtruck() {
                 <br />
                 <br />
                 <Container>
-                    
+
                     <Grid container item xs={12} lg={10} justifyContent="center" mx="auto">
 
                     </Grid>
@@ -251,6 +251,12 @@ function EditarFoodtruck() {
                                             window.location.href = `/foodtrucks/propietario/listafoodtrucks`;
                                         }
                                         }
+                                        sx={{
+                                            position: "absolute",
+                                            right: 0,
+                                            top: 0,
+                                        }}
+
                                         startIcon={<CloseIcon />}
                                     >
                                         Volver a la lista

@@ -13,6 +13,7 @@ import Modal from '@mui/material/Modal';
 
 import MKButton from "components/MKButton";
 import MenuFoodtrucks from "pages/Foodtruck/MenuFoodtrucks";
+import MKBox from "components/MKBox";
 
 
 function ListaFoodtrucksPropietario() {
@@ -30,7 +31,7 @@ function ListaFoodtrucksPropietario() {
     deleteCookie("api_token");
     deleteCookie("user_id");
     deleteCookie("role");
-    
+
 
 
 
@@ -64,62 +65,88 @@ function ListaFoodtrucksPropietario() {
 
 
     return (
-        <div >
+        <MKBox maxWidth="auto" >
             <NavbarPropietario />
             <br />
             <br />
-            <MenuFoodtrucks />
+            <br />
+            <nav className="navbar navbar-expand-lg navbar-transparent navbar-absolute  text-white">
+                <div className="container-fluid">
+
+                    <div className="collapse navbar-collapse justify-content-end">
+                        <MKButton href="/foodtrucks/propietario/crearfoodtruck" variant="gradient" color="info" size="large" startIcon={<Icon icon={editIcon} />}>
+                            Crear Foodtruck
+                        </MKButton>
+                        &nbsp;
+
+                        <ul className="navbar-nav">
+                            <li className="nav-item">
+                                <a className="nav-link" href="#pablo">
+                                    <i className="material-icons">settings</i>
+                                   
+                                </a>
+                            </li>
+                            <li className="nav-item dropdown">
+                                
+                            </li>
+                          
+                            
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <br />
+
+
+
+            {/*Contenedor para la los botones de crear foodtruck y contactar con soporte*/}
             {/*align-center justify-content-center*/}
             <Container maxWidth="lg" align="center">
                 <Box sx={{ width: '100%' }}>
-                    <Table
-                        border="12px solid black"
-                        border-spacing="0"
-                        width="100%"
-                        flex-direction="column"
-                        align-items="center"
-                        justify-content="center"
-                        bgcolor="white"
+                    <div className="d-flex justify-content-center align-text-center ">
+                        <table className="table table-striped table-hover">
 
-                    >
-                        <thead>
-                            <tr>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Estado</th>
-                                <th scope="col"><div className="d-flex justify-content-center align-text-center ">Acciones</div></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {foodtrucks.map((foodtruck) => (
-                                <tr key={foodtruck.id}>
-                                    <td>{foodtruck.nombre}</td>
-                                    <td>{foodtruck.status}</td>
-                                    <td>
-                                        <div className="d-flex justify-content-center">
-
-
-                                            &nbsp;
-                                            <MKButton
-                                                href={`/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/editar`}
-                                                variant="gradient"
-                                                color="info"
-                                                size="large"
-                                                startIcon={<Icon icon={editIcon} />}
-                                            >
-                                                Editar
-                                            </MKButton>
-                                            &nbsp;
-                                            <MKButton variant="gradient" color="info" size="large"
-                                                startIcon={<Icon icon={editIcon} />}
-                                                onClick={() => {
-                                                    setShow(true);
-                                                }}>Eliminar</MKButton>
-                                        </div>
-                                    </td>
+                            <thead>
+                                <tr>
+                                    <th scope="col"> <div className="d-flex justify-content-center align-text-center ">Nombre</div></th>
+                                    <th scope="col"> <div className="d-flex justify-content-center align-text-center ">Estado</div></th>
+                                    <th scope="col"><div className="d-flex justify-content-center align-text-center ">Acciones</div></th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </Table>
+                            </thead>
+                            <tbody>
+                                {foodtrucks.map((foodtruck) => (
+                                    <tr key={foodtruck.id}>
+                                        <td> <div className="d-flex justify-content-center align-text-center ">{foodtruck.nombre}</div></td>
+                                        <td> <div className="d-flex justify-content-center align-text-center ">{foodtruck.status}</div></td>
+                                        <td>
+                                            <div className="d-flex justify-content-center">
+
+
+                                                &nbsp;
+                                                <MKButton
+                                                    href={`/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/editar`}
+                                                    variant="gradient"
+                                                    color="info"
+                                                    size="large"
+                                                    startIcon={<Icon icon={editIcon} />}
+                                                >
+                                                    Editar
+                                                </MKButton>
+                                                &nbsp;
+                                                <MKButton variant="gradient" color="info" size="large"
+                                                    startIcon={<Icon icon={editIcon} />}
+                                                    onClick={() => {
+                                                        setShow(true);
+                                                    }}>Eliminar</MKButton>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+
                 </Box>
             </Container>
             <Modal open={show} onClose={() => setShow(false)}>
@@ -159,7 +186,7 @@ function ListaFoodtrucksPropietario() {
                 </div>
             </Modal>
 
-        </div>
+        </MKBox >
     )
 
 

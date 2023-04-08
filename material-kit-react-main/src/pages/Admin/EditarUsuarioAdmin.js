@@ -51,7 +51,7 @@ function EditarFoodtruck() {
 
         /*Obtener usuario logueado*/
         axios
-            .get(`http://localhost:8000/api/usuarios/${user_id}/buscausuario`, {
+            .post(`http://localhost:8000/api/usuarios/${user_id}/buscausuario`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
@@ -62,18 +62,19 @@ function EditarFoodtruck() {
             })
             .then((res) => {
                 setUser(res.data);
+
                 console.log(res.data);
             })
             .catch((err) => {
                 console.log(err);
-                alert("No se pudo obtener el usuario logueado\n"+err);
+                alert("No se pudo obtener el usuario logueado\n" + err);
 
             });
 
 
         /*Obtener usuario a modificar*/
         axios
-            .get(`http://localhost:8000/api/usuarios/${id.id}`, {
+            .post(`http://localhost:8000/api/usuarios/${id.id}/buscausuario`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
@@ -90,6 +91,8 @@ function EditarFoodtruck() {
                 setRoleUsuarioAModificar(res.data.role);
                 setTelefono(res.data.telefono);
                 setUbicacion(res.data.ubicacion);
+                setRoleUsuarioAModificar(res.data.role);
+
 
                 console.log(res.data);
             })
@@ -101,116 +104,49 @@ function EditarFoodtruck() {
 
 
 
-
     const handleSubmit = () => {
 
         /*Editar por usuario*/
-        axios.put(`http://localhost:8000/api/foodtrucks/${userAmodificar.id}/editaradmin`, {
-            "name": `${userAmodificar.name}`,
-            "email": `${userAmodificar.email}`,
-            "telefono": `${userAmodificar.telefono}`,
-            "password": `${userAmodificar.password}`,
-            "location": `${userAmodificar.location}`,
-
-
-        }, {
+        axios.post(`http://localhost:8000/api/usuarios/${id.id}/editarusuarioadmin`, {
             headers: {
-                'Accept': 'application/json',
+                "Access-Control-Allow-Origin": "*",
                 "Content-Type": "application/json",
                 "user_id": `${user_id}`,
                 "api_token": `${api_token}`,
                 "role": `${role}`
-            }
-        })
+            },
+            data: {
 
+                "name": nombre,
+                "email": email,
+                "password": password,
+                "telefono": telefono,
+                "ubicacion": ubicacion,
+                "role": roleUsuarioAModificar
+
+            }
+        }
+
+        )
             .then((res) => {
                 console.log(res.data);
-                if (user.role == "propietario")
-                    window.location.href = `/foodtrucks/propietario/listafoodtrucks`;
-                else if (user.role == "admin")
-                    window.location.href = `/homeadmin`;
+                alert("Usuario editado correctamente");
             }
             )
             .catch((err) => {
                 console.log(err);
+                alert("No se pudo editar el usuario\n" + err);
             }
             );
+
     };
 
 
     const toggleModal = () => {
+        handleSubmit();
         /*setOpen(!open);*/
-        window.location.href = `/admin/usuarios`;
+
     };
-
-
-    const handleAvatar = (e) => {
-        /* Lector de archivos
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            setAvatar(reader.result);
-        };
-        reader.readAsDataURL(file);
-        */
-        window.location.href = `/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/editar`;
-    }
-
-
-
-
-
-
-
-
-    /*ACtivar y desactivar foodtruck*/
-
-    const handleOpen = () => {
-        axios
-            .get(`http://localhost:8000/api/foodtrucks/listaporpropietario/${foodtruck.id}/abrirfoodtruck`, {
-                headers: {
-                    "Access-Control-Allow-Origin": "*",
-                    "Content-Type": "application/json",
-                    "user_id": `${user_id}`,
-                    "api_token": `${api_token}`,
-                    "role": `${role}`
-                }
-            })
-            .then((res) => {
-                console.log(res.data);
-                window.location.href = `/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/editar`;
-
-            })
-            .catch((err) => {
-                console.log(err);
-
-            });
-    }
-
-
-
-    const handleClose = () => {
-        axios
-            .get(`http://localhost:8000/api/foodtrucks/listaporpropietario/${foodtruck.id}/cerrarfoodtruck`, {
-                headers: {
-                    "Access-Control-Allow-Origin": "*",
-                    "Content-Type": "application/json",
-                    "user_id": `${user_id}`,
-                    "api_token": `${api_token}`,
-                    "role": `${role}`
-                }
-            })
-            .then((res) => {
-                console.log(res.data);
-                window.location.href = `/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/editar`;
-
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }
-
-
 
 
 
@@ -363,6 +299,7 @@ function EditarFoodtruck() {
                                                     type="text"
                                                     required
                                                     fullWidth
+                                                    disabled
                                                     value={password}
                                                     onChange={e => setPassword(e.target.value)}
 
