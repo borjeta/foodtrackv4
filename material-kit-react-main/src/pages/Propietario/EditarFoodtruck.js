@@ -220,7 +220,7 @@ function EditarFoodtruck() {
                 <br />
                 <br />
                 <Container>
-                    x
+                    
                     <Grid container item xs={12} lg={10} justifyContent="center" mx="auto">
 
                     </Grid>

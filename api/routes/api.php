@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/usuarios', 'App\Http\Controllers\Api\UsuarioController@index');
 Route::get('/usuarios/{id}', 'App\Http\Controllers\Api\UsuarioController@show');
-Route::get('/usuarios/{id}/buscaportoken', 'App\Http\Controllers\Api\UsuarioController@buscaUsuariosPorToken');
+Route::post('/usuarios/{id}/buscaportoken', 'App\Http\Controllers\Api\UsuarioController@buscaUsuariosPorToken');
 Route::post('/usuarios/registro/newuser', 'App\Http\Controllers\Api\UsuarioController@store');
 Route::put('/usuarios/editar/usuario', 'App\Http\Controllers\Api\UsuarioController@update');
 Route::delete('/usuarios/{usuario}', 'App\Http\Controllers\Api\UsuarioController@destroy');

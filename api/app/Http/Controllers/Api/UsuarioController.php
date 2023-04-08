@@ -150,7 +150,13 @@ class UsuarioController extends Controller
         $api_token = $body['headers']['api_token'];
         $user_id = $body['headers']['user_id'];
         $role = $body['headers']['role'];
-        $user = usuario::where('api_token', $api_token)->first();
-        return response()->json($user, 200);
+        $user = usuario::where('id', $user_id)->first();
+        if ($user->api_token == $api_token && $user->id == $user_id && $user->role == $role) {
+            $usuario = usuario::where('api_token', $api_token)->first();
+            return response($usuario, 200);
+        } else {
+            return response()->json(['error' => 'No tienes permisos para acceder a este recurso'], 401);
+        }
+
     }
 }

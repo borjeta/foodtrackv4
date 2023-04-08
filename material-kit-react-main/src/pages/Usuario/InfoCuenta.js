@@ -48,34 +48,10 @@ function SimpleModal() {
     const user_id = document.cookie.replace(/(?:(?:^|.*;\s*)user_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const role = document.cookie.replace(/(?:(?:^|.*;\s*)role\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 
-    useEffect(() => {
-        axios
-            .post(`http://localhost:8000/api/usuarios/${user_id}/buscausuario`, {
-                headers: {
-                    "Access-Control-Allow-Origin": "*",
-                    "Content-Type": "application/json",
-                    "user_id": `${user_id}`,
-                    "api_token": `${api_token}`,
-                    "role": `${role}`
-                }
-            })
-            .then((res) => {
-                console.log(res.data);
-                setUser(res.data);
-                document.getElementById("name").value = res.data.name;
-                document.getElementById("email").value = res.data.email;
-                document.getElementById("phone").value = res.data.telefono;
-                document.getElementById("ubicacion").value = res.data.ubicacion;
-                alert(res.data);
+    
+       
 
-            })
-
-            .catch((err) => {
-                alert(err);
-                console.log(err);
-            });
-    }, []);
-
+        
 
     const handleSubmit = (e) => {
         const name = document.getElementById("name").value;
