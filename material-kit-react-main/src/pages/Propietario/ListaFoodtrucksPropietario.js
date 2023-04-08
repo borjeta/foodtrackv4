@@ -18,9 +18,21 @@ import MenuFoodtrucks from "pages/Foodtruck/MenuFoodtrucks";
 function ListaFoodtrucksPropietario() {
     const [foodtrucks, setFoodtrucks] = useState([]);
     const [show, setShow] = useState(false);
+
     const api_token = document.cookie.replace(/(?:(?:^|.*;\s*)api_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const user_id = document.cookie.replace(/(?:(?:^|.*;\s*)user_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const role = document.cookie.replace(/(?:(?:^|.*;\s*)role\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
+    /*Borramos de las cookies el api_token, user_id y role*/
+    const deleteCookie = (name) => {
+        document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+    deleteCookie("api_token");
+    deleteCookie("user_id");
+    deleteCookie("role");
+    
+
+
 
 
 
@@ -47,8 +59,7 @@ function ListaFoodtrucksPropietario() {
             });
     }, []);
 
-    const confirmarborrado = () => {
-    }
+
 
 
 

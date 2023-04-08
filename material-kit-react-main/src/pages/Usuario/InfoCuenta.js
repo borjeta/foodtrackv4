@@ -48,10 +48,9 @@ function SimpleModal() {
     const user_id = document.cookie.replace(/(?:(?:^|.*;\s*)user_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const role = document.cookie.replace(/(?:(?:^|.*;\s*)role\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 
-    
-       
 
-        
+
+
 
     const handleSubmit = (e) => {
         const name = document.getElementById("name").value;
@@ -99,7 +98,39 @@ function SimpleModal() {
             );
 
 
+
+
     }
+    /*Cuando haya acabado de cargar la vista se ejecuta el useEffect*/
+    useEffect(() => {
+        axios
+            .post(`http://localhost:8000/api/usuarios/${user_id}/buscausuario`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "user_id": `${user_id}`,
+                    "api_token": `${api_token}`,
+                    "role": `${role}`
+                }
+            })
+            .then((res) => {
+                console.log(res.data);
+                setUser(res.data);
+                document.getElementById("name").value = res.data.name;
+                document.getElementById("email").value = res.data.email;
+                document.getElementById("phone").value = res.data.telefono;
+                document.getElementById("ubicacion").value = res.data.ubicacion;
+
+            })
+
+            .catch((err) => {
+                console.log(err);
+                alert(err);
+            });
+
+
+
+    }, []);
+
 
 
     const handleConfirmDelete = (e) => {
@@ -134,17 +165,16 @@ function SimpleModal() {
 
     const toggleModal = () => {
         setShow(!show);
-
-        if (user.role == "propietario") {
+        if (user.role == "propietario")
             window.location.href = `/homepropietario`;
-        } else if (user.role == "usuario")
+        else if (user.role == "usuario")
             window.location.href = `/homeusuario`;
         else if (user.role == "admin")
             window.location.href = `/homeadmin`;
         else
             window.location.href = `/login`;
-
     };
+
 
 
     return (

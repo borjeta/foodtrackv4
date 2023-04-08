@@ -137,7 +137,7 @@ class UsuarioController extends Controller
         if ($user->api_token == $api_token) {
             return response($user, 200);
         } else {
-            return response()->json(['error' => 'No tienes permisos para acceder a este recurso'], 401);
+            return response('No tienes permisos para acceder a este recurso', 401);
         }
 
 
@@ -155,7 +155,7 @@ class UsuarioController extends Controller
             $usuario = usuario::where('api_token', $api_token)->first();
             return response($usuario, 200);
         } else {
-            return response()->json(['error' => 'No tienes permisos para acceder a este recurso'], 401);
+            return response('No tienes permisos para acceder a este recurso', 401);
         }
 
     }

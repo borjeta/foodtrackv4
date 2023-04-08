@@ -64,35 +64,39 @@ export default function App() {
     });
 
   return (
-    <ThemeProvider theme={
-      pathname.indexOf("/presentation") !== -1
-        ? Presentation
-        : theme
-    }>
-      <CssBaseline />
-      <Routes>
-        {getRoutes(routes)}
-        <Route path=" " element={<Navigate to="/login" />} />
-        <Route path="/logout" element={<Logout />} />
-        <Route path="/homeusuario" element={<HomeUsuario />} />
-        <Route path="/login" element={<Signin />} />
-        <Route path="/micuenta" element={<InfoCuenta />} />
-        <Route path="/registro" element={<Registro />} />
-        <Route path="/foodtrucks/:id/info" element={<InfoFoodtruck />} />
-        <Route path="/foodtrucks/dondeesta/:id/info" element={<InfoFoodtruck />} />
-        <Route path="*" element={<Navigate to="/login" />} />
-        <Route path="/" element={<Navigate to="/login" />} />
-        <Route path="/homepropietario" element={<HomePropietario />} />
-        <Route path="/foodtrucks/propietario/listafoodtrucks" element={<ListaFoodtrucksPropietario />} />
-        <Route path="/foodtrucks/propietario/listafoodtrucks/:id/info" element={<InfoFoodtruckPropietario />} />
-        <Route path="/foodtrucks/propietario/listafoodtrucks/:id/editar" element={<EditarFoodtruck />} />
-        <Route path="/homeadmin" element={<HomeAdmin />} />
-        <Route path="/admin/foodtrucks" element={<ListaFoodtrucksAdmin />} />
-        <Route path="/admin/usuarios" element={<ListaUsuariosAdmin />} />
-        <Route path="/admin/usuarios/:id/editar" element={<EditarUsuarioAdmin />} />
-        <Route path="/admin/usuarios/:id/info" element={<DatosCompletosUsuario />} />
-      </Routes>
-    </ThemeProvider>
+    <div style={{
+      backgroundImage: "/img2(Recortada).jpeg"
+    }} >
+      <ThemeProvider theme={
+        pathname.indexOf("/presentation") !== -1
+          ? Presentation
+          : theme
+      }>
+        <CssBaseline />
+        <Routes>
+          {getRoutes(routes)}
+          <Route path=" " element={<Navigate to="/login" />} />
+          <Route path="/logout" element={<Logout />} />
+          <Route path="/homeusuario" element={<HomeUsuario />} />
+          <Route path="/login" element={<Signin />} />
+          <Route path="/micuenta" element={<InfoCuenta />} />
+          <Route path="/registro" element={<Registro />} />
+          <Route path="/foodtrucks/:id/info" element={<InfoFoodtruck />} />
+          <Route path="/foodtrucks/dondeesta/:id/info" element={<InfoFoodtruck />} />
+          <Route path="*" element={<Navigate to="/login" />} />
+          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/homepropietario" element={<HomePropietario />} />
+          <Route path="/foodtrucks/propietario/listafoodtrucks" element={<ListaFoodtrucksPropietario />} />
+          <Route path="/foodtrucks/propietario/listafoodtrucks/:id/info" element={<InfoFoodtruckPropietario />} />
+          <Route path="/foodtrucks/propietario/listafoodtrucks/:id/editar" element={<EditarFoodtruck />} />
+          <Route path="/homeadmin" element={<HomeAdmin />} />
+          <Route path="/admin/foodtrucks" element={<ListaFoodtrucksAdmin />} />
+          <Route path="/admin/usuarios" element={<ListaUsuariosAdmin />} />
+          <Route path="/admin/usuarios/:id/editar" element={<EditarUsuarioAdmin />} />
+          <Route path="/admin/usuarios/:id/info" element={<DatosCompletosUsuario />} />
+        </Routes>
+      </ThemeProvider>
+    </div>
   );
 }
 
