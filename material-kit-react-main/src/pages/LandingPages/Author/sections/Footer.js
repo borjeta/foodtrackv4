@@ -37,7 +37,6 @@ function Footer() {
             mb={{ xs: 3, lg: 0 }}
           >
             <MKTypography variant="h6" textTransform="uppercase" mb={{ xs: 2, lg: 3 }}>
-              Material Design
             </MKTypography>
             <Stack
               component="ul"
@@ -55,26 +54,30 @@ function Footer() {
                   fontWeight="regular"
                   opacity={0.8}
                   component={Link}
-                  href="https://www.creative-tim.com"
+                  href="http://localhost:3000/homeusuario"
                   target="_blank"
                   rel="noreferrer"
                 >
                   Home
                 </MKTypography>
               </MKBox>
+
               <MKBox component="li">
                 <MKTypography
                   variant="button"
                   fontWeight="regular"
                   opacity={0.8}
                   component={Link}
-                  href="https://www.creative-tim.com/presentation"
+                  href="http://localhost:3000/micuenta"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  About
-                </MKTypography>
+                  Mi cuenta 
+                                  </MKTypography>
               </MKBox>
+
+
+
               <MKBox component="li">
                 <MKTypography
                   variant="button"
@@ -85,22 +88,11 @@ function Footer() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Blog
+                  
                 </MKTypography>
               </MKBox>
-              <MKBox component="li">
-                <MKTypography
-                  variant="button"
-                  fontWeight="regular"
-                  opacity={0.8}
-                  component={Link}
-                  href="https://www.creative-tim.com"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Services
-                </MKTypography>
-              </MKBox>
+
+
             </Stack>
             <MKTypography variant="button" opacity={0.8}>
               Copyright ©  2023 Creado por Borja Alventosa

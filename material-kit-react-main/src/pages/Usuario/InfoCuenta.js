@@ -48,17 +48,17 @@ function SimpleModal() {
     const user_id = document.cookie.replace(/(?:(?:^|.*;\s*)user_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const role = document.cookie.replace(/(?:(?:^|.*;\s*)role\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 
-
-
-
-
     const handleSubmit = (e) => {
+
         const name = document.getElementById("name").value;
         const email = document.getElementById("email").value;
         const phone = document.getElementById("phone").value;
         const ubicacion = document.getElementById("ubicacion").value;
         const password = document.getElementById("password").value;
         const password_confirmation = document.getElementById("password_confirmation").value;
+
+        e.preventDefault();
+
         if (password !== password_confirmation) {
             alert("Las contraseñas no coinciden");
             document.getElementById("password");
@@ -126,9 +126,6 @@ function SimpleModal() {
                 console.log(err);
                 alert(err);
             });
-
-
-
     }, []);
 
 
@@ -160,14 +157,23 @@ function SimpleModal() {
         }
 
     }
-
+    function redirect() {
+        if (user.role == "propietario")
+            window.location.href = `/homepropietario`;
+        else if (user.role == "user")
+            window.location.href = `/homeusuario`;
+        else if (user.role == "admin")
+            window.location.href = `/homeadmin`;
+        else
+            window.location.href = `/login`;
+    }
 
 
     const toggleModal = () => {
         setShow(!show);
         if (user.role == "propietario")
             window.location.href = `/homepropietario`;
-        else if (user.role == "usuario")
+        else if (user.role == "user")
             window.location.href = `/homeusuario`;
         else if (user.role == "admin")
             window.location.href = `/homeadmin`;
@@ -222,15 +228,7 @@ function SimpleModal() {
                                 </MKBox>
 
                                 <Container  >
-                                    <MKButton variant="gradient" color="info" size="large" onClick={() => {
-                                        if (user.role === "propietario") {
-                                            window.location.href = `/homepropietario`;
-                                        } else if (user.role === "usuario") {
-                                            window.location.href = `/homeusuario`;
-                                        } else if (user.role === "admin") {
-                                            window.location.href = `/homeadmin`;
-                                        }
-                                    }}>
+                                    <MKButton variant="gradient" color="info" size="large" onClick={redirect}>
                                         volver
                                     </MKButton>
                                     <Grid container item justifyContent="center" xs={10} lg={7} mx="auto" textAlign="center">
