@@ -38,7 +38,7 @@ function HomeAdmin() {
 
             <Container className="container" align="center" justify-content="center" py={10}>
                 <MKTypography variant="h4" component="h2" gutterBottom>
-                    Bienvenido al panel de administración
+                    Bienvenido al panel de administración del servicio
                 </MKTypography>
 
                 <MKBox className="container"

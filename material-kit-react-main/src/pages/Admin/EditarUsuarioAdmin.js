@@ -144,7 +144,7 @@ function EditarFoodtruck() {
 
     const toggleModal = () => {
         handleSubmit();
-        /*setOpen(!open);*/
+        window.location.href = "/admin/usuarios";
 
     };
 

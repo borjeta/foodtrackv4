@@ -96,10 +96,6 @@ function SimpleModal() {
                 alert(err);
             }
             );
-
-
-
-
     }
     /*Cuando haya acabado de cargar la vista se ejecuta el useEffect*/
     useEffect(() => {

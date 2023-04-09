@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import NavbarPropietario from "pages/Propietario/NavbarPropietario";
 import Box from '@mui/material/Box';
-import Table from '@mui/material/Table';
 import { Icon } from '@iconify/react';
 import editIcon from '@iconify/icons-mdi/edit';
 import Modal from '@mui/material/Modal';
@@ -12,7 +10,6 @@ import Modal from '@mui/material/Modal';
 
 
 import MKButton from "components/MKButton";
-import MenuFoodtrucks from "pages/Foodtruck/MenuFoodtrucks";
 import MKBox from "components/MKBox";
 
 
@@ -32,11 +29,6 @@ function ListaFoodtrucksPropietario() {
     deleteCookie("user_id");
     deleteCookie("role");
 
-
-
-
-
-
     useEffect(() => {
 
         axios
@@ -53,15 +45,11 @@ function ListaFoodtrucksPropietario() {
             .then((res) => {
                 setFoodtrucks(res.data);
                 console.log(res.data);
-
             })
             .catch((err) => {
                 console.log(err);
             });
     }, []);
-
-
-
 
 
     return (
@@ -74,7 +62,7 @@ function ListaFoodtrucksPropietario() {
                 <div className="container-fluid">
 
                     <div className="collapse navbar-collapse justify-content-end">
-                        <MKButton href="/foodtrucks/propietario/crearfoodtruck" variant="gradient" color="info" size="large" startIcon={<Icon icon={editIcon} />}>
+                        <MKButton href="/foodtrucks/propietario/nuevafoodtruck" variant="gradient" color="info" size="large" startIcon={<Icon icon={editIcon} />}>
                             Crear Foodtruck
                         </MKButton>
                         &nbsp;
@@ -83,15 +71,11 @@ function ListaFoodtrucksPropietario() {
                             <li className="nav-item">
                                 <a className="nav-link" href="#pablo">
                                     <i className="material-icons">settings</i>
-                                   
+
                                 </a>
                             </li>
                             <li className="nav-item dropdown">
-                                
                             </li>
-                          
-                            
-
                         </ul>
                     </div>
                 </div>
@@ -134,6 +118,7 @@ function ListaFoodtrucksPropietario() {
                                                     Editar
                                                 </MKButton>
                                                 &nbsp;
+                                                &nbsp;
                                                 <MKButton variant="gradient" color="info" size="large"
                                                     startIcon={<Icon icon={editIcon} />}
                                                     onClick={() => {
@@ -153,10 +138,9 @@ function ListaFoodtrucksPropietario() {
                 <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title">Eliminar Foodtruck</h5>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => setShow(false)}></button>
                             ¿Está seguro que desea eliminar el foodtruck?
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => setShow(false)}>Cancelar</button>
+                            &nbsp;
                             <button type="button" className="btn btn-primary" onClick={() => {
                                 axios
                                     .delete(`http://localhost:8000/api/foodtrucks/${foodtruck.id}`, {

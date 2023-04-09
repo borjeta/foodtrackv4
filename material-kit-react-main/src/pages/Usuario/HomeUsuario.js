@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import NavbarUsuario from "./NavbarUsuario";
-import AppBar from '@mui/material/AppBar';
 
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -59,109 +58,81 @@ function HomeUsuario() {
 
     }
 
-
-
-
     return (
         <div >
             <NavbarUsuario />
 
+            <br />
+            <br />
+            <br />
+            <br />
+            
+
 
             <ThemeProvider theme={theme}>
                 <CssBaseline />
-                <AppBar position="relative">
+                <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
 
-                </AppBar>
-                {/* Hero unit */}
-                <br />
+                    <Typography variant="h4" component="h1" gutterBottom align="center">
+                        Foodtrucks
+                    </Typography>
+                    <Typography variant="h5" component="h2" gutterBottom align="center">
+                        Encuentra los mejores foodtrucks cerca de ti
+                    </Typography>
+                    <Box sx={{ my: 4 }}>
 
-                <Box
-                    sx={{
-                        bgcolor: 'background.paper',
-                        pt: 6,
-                        pb: 6,
-                    }}
-                >
-                    <Container maxWidth="sm">
-                        <Typography
-                            component="h3"
-                            variant="h2"
-                            align="center"
-                            gutterBottom
-                            
+
+
+                        <Container sx={{ py: 2 }} maxWidth="md"
                         >
-                            <br />
-                            &nbsp;
-                            Foodtrucks activas ahora en tu zona
-                        </Typography>
-
-                        {/*<Stack
-                            sx={{ pt: 4 }}
-                            direction="row"
-                            spacing={2}
-                            justifyContent="center"
-                        >
-                            <Button variant="contained">Main call to action</Button>
-                            <Button variant="outlined">Secondary action</Button>
-                </Stack>*/}
-                    </Container>
-                </Box>
-                <Container sx={{ py: 2 }} maxWidth="md">
-                    {/* End hero unit */}
-                    <Grid container spacing={6}>
+                            {/* End hero unit */}
+                            <Grid container spacing={6}>
 
 
-                        {foodtrucks.map((foodtruck) => (
-                            <Grid item key={foodtruck.id} xs={12} sm={6} md={4}>
-                                <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-                                    <CardMedia
-                                        component="img"
-                                        sx={{
-                                            // 16:9
-                                        }}
-                                        image="https://source.unsplash.com/random"
-                                        alt="random"
-                                    />
-                                    <CardContent sx={{ flexGrow: 1 }}>
-                                        <Typography gutterBottom variant="h5" component="h5">
-                                            {foodtruck.nombre}
-                                        </Typography>
-                                        <Typography>
-                                            {foodtruck.descripcion}
-                                        </Typography>
-                                        <Typography>
-                                            {foodtruck.direccion}
-                                        </Typography>
-                                        &nbsp;
-                                        <Typography color="text.primary">
-                                            {foodtruck.horario}
-                                        </Typography>
-                                        &nbsp;
-                                        <Typography >
-                                            Estado: {foodtruck.status}
-                                        </Typography>
-                                    </CardContent>
-                                    <CardActions >
-                                        <Link to={`/foodtrucks/dondeesta/${foodtruck.id}/info`} className='btn btn-primary btn-lg'>
-                                            Ver donde está ahora
-                                            </Link>
-                                    </CardActions>
-                                </Card>
+                                {foodtrucks.map((foodtruck) => (
+                                    <Grid item key={foodtruck.id} xs={12} sm={6} md={4} >
+                                        <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }} border={1} borderColor="primary.main" borderRadius={16}>
+                                            <CardMedia
+                                                component="img"
+                                                sx={{
+                                                    // 16:9
+                                                }}
+                                                image="https://source.unsplash.com/random"
+                                                alt="random"
+                                            />
+                                            <CardContent sx={{ flexGrow: 1 }}>
+                                                <Typography gutterBottom variant="h5" component="h5">
+                                                    {foodtruck.nombre}
+                                                </Typography>
+                                                <Typography>
+                                                    {foodtruck.descripcion}
+                                                </Typography>
+                                                <Typography>
+                                                    {foodtruck.direccion}
+                                                </Typography>
+                                                &nbsp;
+                                                <Typography color="text.primary">
+                                                    {foodtruck.horario}
+                                                </Typography>
+                                                &nbsp;
+                                                <Typography >
+                                                    Estado: {foodtruck.status}
+                                                </Typography>
+                                            </CardContent>
+                                            <CardActions >
+                                                <Link to={`/foodtrucks/dondeesta/${foodtruck.id}/info`} className='btn btn-primary btn-lg'>
+                                                    Ver donde está ahora
+                                                </Link>
+                                            </CardActions>
+                                        </Card>
+                                    </Grid>
+                                ))}
+
                             </Grid>
-                        ))}
-
-
-
-
-
-
-
-                    </Grid>
+                        </Container>
+                    </Box>
                 </Container>
-              
             </ThemeProvider >
-
-
             <Footer />
         </div >
     );

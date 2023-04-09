@@ -44,9 +44,10 @@ import SimpleFooter from "examples/Footers/SimpleFooter";
 import routes from "routes";
 
 // Images
-import bgImage from "assets/images/bg-sign-in-basic.jpeg";
+import bgImage from "assets/images/img1.jpeg";
 
 function SignInBasic() {
+
   const [rememberMe, setRememberMe] = useState(false);
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
   const [data, setData] = useState([]);
@@ -95,6 +96,9 @@ function SignInBasic() {
         alert("Usuario o contraseña incorrectos" + err);
       }
       );
+
+    /*Colocamos la imagen de fondo en el body*/
+
 
 
 

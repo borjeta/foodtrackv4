@@ -41,6 +41,7 @@ import ListaFoodtrucksAdmin from "pages/Admin/ListaFoodtrucksAdmin";
 import ListaUsuariosAdmin from "pages/Admin/ListaUsuariosAdmin";
 import EditarUsuarioAdmin from "pages/Admin/EditarUsuarioAdmin";
 import DatosCompletosUsuario from "pages/Admin/DatosCompletosUsuario";
+import CrearFoodtruck from "pages/Propietario/CrearFoodtruck";
 export default function App() {
   const { pathname } = useLocation();
 
@@ -94,6 +95,7 @@ export default function App() {
           <Route path="/admin/usuarios" element={<ListaUsuariosAdmin />} />
           <Route path="/admin/usuarios/:id/editar" element={<EditarUsuarioAdmin />} />
           <Route path="/admin/usuarios/:id/info" element={<DatosCompletosUsuario />} />
+          <Route path="/foodtrucks/propietario/nuevafoodtruck" element={<CrearFoodtruck />} />
         </Routes>
       </ThemeProvider>
     </div>
