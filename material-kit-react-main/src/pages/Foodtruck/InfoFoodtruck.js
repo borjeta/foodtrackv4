@@ -66,55 +66,130 @@ function InfoFoodtruck() {
                     }}
                 >
                     <Container maxWidth="sm">
-                        <br>
-                        </br>
-                        <MKButton variant="gradient" color="info" size="large" onClick={() => {
-                            window.location.href = `/homeusuario`;
-                        }}>
-                            volver
-                        </MKButton>
-                        <br>
-                        </br>
-                        <Card sx={{ maxWidth: 345 }}>
+                        <br />
+                        <br />
+                        <br />
+                        <Modal open={showDatos} sx={{ display: "grid", placeItems: "center" }}>
+                            <Slide direction="down" in={showDatos} timeout={500}>
+                                <MKBox
+                                    position="relative"
+                                    width="100%"
+                                    maxWidth="1000px"
+                                    display="flex"
+                                    flexDirection="column"
+                                    borderRadius="xl"
+                                    bgColor="white"
+                                    shadow="xl"
 
-                            <CardMedia
-                                component="img"
-                                height="140"
-                                image={foodtruck.avatar}
-                                alt="green iguana"
-                            />
-                            <CardContent>
-                                <Typography gutterBottom variant="h5" component="div">
-                                    {foodtruck.nombre}
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    {foodtruck.descripcion}
-                                </Typography>
-                            </CardContent>
-                        </Card>
-                        <br>
-                        </br>
-                        <Typography
-                            component="h1"
-                            variant="h2"
-                            align="center"
-                            color="text.primary"
-                            gutterBottom
-                        >
-                            {foodtruck.nombre}
-                        </Typography>
-                        <Typography variant="h5" align="center" color="text.secondary" paragraph>
-                            {foodtruck.descripcion}
-                        </Typography>
-                        <Typography variant="h5" align="center" color="text.secondary" paragraph>
-                            {foodtruck.direccion}
-                        </Typography>
-                        <Typography variant="h5" align="center" color="text.secondary" paragraph>
-                            {foodtruck.horario}
-                        </Typography>
+                                >
+                                    <MKBox display="flex" alignItems="center" justifyContent="space-between" p={2}>
+                                        <MKTypography variant="h5" alignItems="center">Ventana de datos completos de usuario</MKTypography>
+                                        <MKButton
+                                            variant="text"
+                                            color="primary"
+                                            size="large"
+                                            onClick={() => {
+                                                window.location.href = "/admin/usuarios";
+                                            }}
+                                            startIcon={< CloseIcon />}
+                                        >
+                                            Volver a la lista
+                                        </MKButton>
+                                    </MKBox>
+
+                                    <MKBox p={4}>
+                                        <MKBox display="flex" flexDirection="column" gap={1}>
+                                            {/* <!--Fila 1--> */}
+                                            <div className="row">
+
+                                                {/* <!--Columna 1--> */}
+                                                <div className="col">
+                                                    <MKTypography variant="h6" >
+                                                        Nombre :
+                                                    </MKTypography>
+                                                    {usuarioinfo.name}
+                                                </div>
+
+                                                {/* <!--Columna 2--> */}
+                                                <div className="col">
+                                                    <MKTypography variant="h6" >
+                                                        Email :
+                                                    </MKTypography>
+                                                    {usuarioinfo.email}
+                                                </div>
+                                            </div>
+
+                                            {/* <!--Fila 2--> */}
+                                            <div className="row">
+
+
+                                                {/* <!--Columna 1--> */}
+                                                <div className="col">
+                                                    <MKTypography variant="h6" >
+                                                        Ubicacion :
+                                                    </MKTypography>
+                                                    {usuarioinfo.ubicacion}
+
+
+                                                </div>
+                                                {/* <!--Columna 3--> */}
+                                                <div className="col">
+
+                                                    <MKTypography variant="h6" >
+                                                        Teléfono :
+                                                    </MKTypography>
+                                                    {usuarioinfo.telefono}
+                                                </div>
+                                            </div>
+
+                                            <div className="row">
+                                                {/* <!--Columna 2--> */}
+                                                <div className="col">
+                                                    <MKTypography variant="h6" >
+                                                        Password :
+                                                    </MKTypography>
+                                                    {usuarioinfo.password}
+                                                </div>
+
+                                                <div className="col">
+                                                    <MKTypography variant="h6" >
+                                                        Rol :
+                                                    </MKTypography>
+                                                    {usuarioinfo.role}
+                                                </div>
+
+                                            </div>
+                                            <div className="row align-center justify-content-center">
 
 
 
+
+                                                <MKBox display="flex" justifyContent="flex-end" p={2}>
+                                                    <MKButton variant="contained" color="primary"
+                                                        sx={
+                                                            {
+                                                                backgroundColor: "#FFA500",
+                                                                color: "white",
+                                                                "&:hover": {
+                                                                    backgroundColor: "#FFA500",
+                                                                    color: "white",
+                                                                },
+                                                            }
+                                                        }
+
+                                                        size="large" onClick={() => {
+                                                            setShowDatos(false);
+                                                            setShow(true);
+
+                                                        }}>
+                                                        Borrar usuario                                                </MKButton>
+                                                </MKBox>
+                                            </div>
+                                        </MKBox>
+                                    </MKBox>
+                                </MKBox>
+                            </Slide>
+                        </Modal>
 
                         <div>
 

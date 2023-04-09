@@ -42,6 +42,9 @@ import ListaUsuariosAdmin from "pages/Admin/ListaUsuariosAdmin";
 import EditarUsuarioAdmin from "pages/Admin/EditarUsuarioAdmin";
 import DatosCompletosUsuario from "pages/Admin/DatosCompletosUsuario";
 import CrearFoodtruck from "pages/Propietario/CrearFoodtruck";
+import bgImage from "assets/images/img1.jpeg";
+import MKBox from "components/MKBox";
+
 export default function App() {
   const { pathname } = useLocation();
 
@@ -74,29 +77,40 @@ export default function App() {
           : theme
       }>
         <CssBaseline />
-        <Routes>
-          {getRoutes(routes)}
-          <Route path=" " element={<Navigate to="/login" />} />
-          <Route path="/logout" element={<Logout />} />
-          <Route path="/homeusuario" element={<HomeUsuario />} />
-          <Route path="/login" element={<Signin />} />
-          <Route path="/micuenta" element={<InfoCuenta />} />
-          <Route path="/registro" element={<Registro />} />
-          <Route path="/foodtrucks/:id/info" element={<InfoFoodtruck />} />
-          <Route path="/foodtrucks/dondeesta/:id/info" element={<InfoFoodtruck />} />
-          <Route path="*" element={<Navigate to="/login" />} />
-          <Route path="/" element={<Navigate to="/login" />} />
-          <Route path="/homepropietario" element={<HomePropietario />} />
-          <Route path="/foodtrucks/propietario/listafoodtrucks" element={<ListaFoodtrucksPropietario />} />
-          <Route path="/foodtrucks/propietario/listafoodtrucks/:id/info" element={<InfoFoodtruckPropietario />} />
-          <Route path="/foodtrucks/propietario/listafoodtrucks/:id/editar" element={<EditarFoodtruck />} />
-          <Route path="/homeadmin" element={<HomeAdmin />} />
-          <Route path="/admin/foodtrucks" element={<ListaFoodtrucksAdmin />} />
-          <Route path="/admin/usuarios" element={<ListaUsuariosAdmin />} />
-          <Route path="/admin/usuarios/:id/editar" element={<EditarUsuarioAdmin />} />
-          <Route path="/admin/usuarios/:id/info" element={<DatosCompletosUsuario />} />
-          <Route path="/foodtrucks/propietario/nuevafoodtruck" element={<CrearFoodtruck />} />
-        </Routes>
+        <MKBox  sx={{
+          backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
+            `${linearGradient(
+              rgba(gradients.dark.main, 0.6),
+              rgba(gradients.dark.state, 0.6)
+            )}, url(${bgImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}>
+          <Routes>
+            {getRoutes(routes)}
+            <Route path=" " element={<Navigate to="/login" />} />
+            <Route path="/logout" element={<Logout />} />
+            <Route path="/homeusuario" element={<HomeUsuario />} />
+            <Route path="/login" element={<Signin />} />
+            <Route path="/micuenta" element={<InfoCuenta />} />
+            <Route path="/registro" element={<Registro />} />
+            <Route path="/foodtrucks/:id/info" element={<InfoFoodtruck />} />
+            <Route path="/foodtrucks/dondeesta/:id/info" element={<InfoFoodtruck />} />
+            <Route path="*" element={<Navigate to="/login" />} />
+            <Route path="/" element={<Navigate to="/login" />} />
+            <Route path="/homepropietario" element={<HomePropietario />} />
+            <Route path="/foodtrucks/propietario/listafoodtrucks" element={<ListaFoodtrucksPropietario />} />
+            <Route path="/foodtrucks/propietario/listafoodtrucks/:id/info" element={<InfoFoodtruckPropietario />} />
+            <Route path="/foodtrucks/propietario/listafoodtrucks/:id/editar" element={<EditarFoodtruck />} />
+            <Route path="/homeadmin" element={<HomeAdmin />} />
+            <Route path="/admin/foodtrucks" element={<ListaFoodtrucksAdmin />} />
+            <Route path="/admin/usuarios" element={<ListaUsuariosAdmin />} />
+            <Route path="/admin/usuarios/:id/editar" element={<EditarUsuarioAdmin />} />
+            <Route path="/admin/usuarios/:id/info" element={<DatosCompletosUsuario />} />
+            <Route path="/foodtrucks/propietario/nuevafoodtruck" element={<CrearFoodtruck />} />
+          </Routes>
+        </MKBox>
       </ThemeProvider>
     </div>
   );

@@ -15,7 +15,7 @@ import eyeIcon from "@iconify/icons-mdi/eye";
 import MKBox from "components/MKBox";
 import MKButton from "components/MKButton";
 import deleteIcon from "@iconify/icons-mdi/delete";
-
+import Modal from "@material-ui/core/Modal";
 
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -28,25 +28,17 @@ const useStyles = makeStyles({
     },
 });
 
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-}
 
-const rows = [
-    createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-    createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-    createData("Eclair", 262, 16.0, 24, 6.0),
-    createData("Cupcake", 305, 3.7, 67, 4.3),
-    createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
 
 function HomeAdmin() {
+
 
     const classes = useStyles();
     const [data, setData] = useState([]);
     const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     const [foodtrucks, setFoodtrucks] = useState([]);
     const [foodtruck, setFoodtruck] = useState([]);
+    const [show, setShow] = useState(false);
 
     const api_token = document.cookie.replace(/(?:(?:^|.*;\s*)api_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const user_id = document.cookie.replace(/(?:(?:^|.*;\s*)user_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
@@ -92,6 +84,8 @@ function HomeAdmin() {
 
 
             <br />
+            <br />
+            <br />
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
@@ -100,7 +94,8 @@ function HomeAdmin() {
                                 <h4 className="card-title ">Foodtrucks</h4>
                                 <p className="card-category"> Listado de foodtrucks</p>
                             </div>
-                            <div >
+                            <MKBox display="flex" justifyContent="flex-end" p={2}>
+
                                 <MKButton
                                     href="/foodtrucks/propietario/listafoodtrucks/crear"
                                     variant="gradient"
@@ -121,8 +116,8 @@ function HomeAdmin() {
                                 >
                                     Volver
                                 </MKButton>
+                            </MKBox>
 
-                            </div>
                             <div className="card-body">
                                 <div className="table-responsive">
                                     <TableContainer component={Paper}>
@@ -159,31 +154,14 @@ function HomeAdmin() {
                                                             >
                                                                 Editar
                                                             </MKButton>
-                                                           <br />
+                                                            <br />
+                                                            &nbsp;
+                                                            <br />
 
                                                             <MKButton variant="gradient" className="btn"
                                                                 size="large"
                                                                 startIcon={<Icon icon={deleteIcon} />} onClick={() => {
-                                                                    axios
-                                                                        .delete(`http://localhost:8000/api/foodtrucks/${foodtruck.id}`, {
-                                                                            headers: {
-                                                                                "Access-Control-Allow-Origin": "*",
-                                                                                "Content-Type": "application/json",
-                                                                                "user_id": `${user_id}`,
-                                                                                "api_token": `${api_token}`,
-                                                                                "role": `${role}`
-                                                                            }
-
-                                                                        })
-                                                                        .then((res) => {
-                                                                            console.log(res.data);
-                                                                            window.location.reload();
-                                                                        }
-                                                                        )
-                                                                        .catch((err) => {
-                                                                            console.log(err);
-                                                                        }
-                                                                        );
+                                                                    setShow(true);
                                                                 }}>Eliminar</MKButton>
                                                         </TableCell>
 
@@ -192,6 +170,41 @@ function HomeAdmin() {
                                             </TableBody>
                                         </Table>
                                     </TableContainer>
+                                    <Modal open={show} onClose={() => setShow(false)}>
+                                        <div className="modal-dialog modal-dialog-centered">
+                                            <div className="modal-content">
+                                                <div className="modal-header">
+                                                    ¿Está seguro que desea eliminar el foodtruck?
+                                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => setShow(false)}>Cancelar</button>
+                                                    &nbsp;
+                                                    <button type="button" className="btn btn-primary" onClick={() => {
+                                                        axios
+                                                            .delete(`http://localhost:8000/api/foodtrucks/${foodtruck.id}`, {
+                                                                headers: {
+                                                                    "Access-Control-Allow-Origin": "*",
+                                                                    "Content-Type": "application/json",
+                                                                    "user_id": `${user_id}`,
+                                                                    "api_token": `${api_token}`,
+                                                                    "role": `${role}`
+                                                                }
+
+                                                            })
+                                                            .then((res) => {
+                                                                console.log(res.data);
+                                                                window.location.reload();
+                                                            }
+                                                            )
+                                                            .catch((err) => {
+                                                                console.log(err);
+                                                            }
+                                                            );
+                                                        setShow(false);
+                                                    }}>Eliminar</button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Modal>
                                 </div>
                             </div>
                         </div>
