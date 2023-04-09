@@ -1,0 +1,50 @@
+# Utiliza una imagen de PHP 7.4 con Apache
+FROM php:7.4-apache
+
+# Instala las dependencias necesarias para Laravel
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip
+
+# Instala las extensiones de PHP necesarias para Laravel
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+
+# Activa el módulo mod_rewrite de Apache
+RUN a2enmod rewrite
+
+# Copia los archivos de tu aplicación a la imagen
+COPY . /var/www/html
+
+# Configura el directorio de trabajo de Apache
+WORKDIR /var/www/html
+
+# Instala las dependencias de Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Instala las dependencias de Node.js
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+RUN apt-get install -y nodejs
+
+# Instala las dependencias de NPM
+RUN npm install
+
+RUN npm run build
+
+RUN rm -rf /var/www/html/public/*
+RUN cp -r /var/www/html/build/* /var/www/html/public/
+
+# Ejecuta los comandos de Laravel necesarios para la configuración inicial
+RUN composer install
+RUN php artisan key:generate
+RUN php artisan migrate
+
+# Exponer el puerto del servidor web
+EXPOSE 80
+
+# Comando por defecto al iniciar el contenedor
+CMD ["apache2-foreground"]
