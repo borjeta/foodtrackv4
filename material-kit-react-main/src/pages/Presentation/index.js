@@ -1,3 +1,17 @@
+/*
+=========================================================
+* Material Kit 2 React - v2.0.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/material-kit-react
+* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+
+Coded by www.creative-tim.com
+
+ =========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+*/
 
 // @mui material components
 import Container from "@mui/material/Container";
@@ -12,6 +26,18 @@ import MKSocialButton from "components/MKSocialButton";
 // Material Kit 2 React examples
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import DefaultFooter from "examples/Footers/DefaultFooter";
+import FilledInfoCard from "examples/Cards/InfoCards/FilledInfoCard";
+
+// Presentation page sections
+import Counters from "pages/Presentation/sections/Counters";
+import Information from "pages/Presentation/sections/Information";
+import DesignBlocks from "pages/Presentation/sections/DesignBlocks";
+import Pages from "pages/Presentation/sections/Pages";
+import Testimonials from "pages/Presentation/sections/Testimonials";
+import Download from "pages/Presentation/sections/Download";
+
+// Presentation page components
+import BuiltByDevelopers from "pages/Presentation/components/BuiltByDevelopers";
 
 // Routes
 import routes from "routes";
@@ -52,29 +78,18 @@ function Presentation() {
     }
   }, []);
 
-  const rutas = [
-    {
-      label: "Home",
-      route: "/", //ruta a la que va
-      icon: <i class='fas fa-home'></i>,
-    },
-    {
-      label: "Registro",
-      route: "/registro",
-      icon: <i class='fas fa-user-plus'>&nbsp; Regístrate</i>,
-    },
-    {
-      label: "Login",
-      route: "/login",
-      icon: <i class='fas fa-sign-in-alt'> Iniciar sesión</i>,
-    }
-  ];
 
 
   return (
     <>
       <DefaultNavbar
-        routes={rutas}
+        routes={routes}
+        action={{
+          type: "external",
+          route: "https://www.creative-tim.com/product/material-kit-react",
+          label: "free download",
+          color: "info",
+        }}
         sticky
       />
       <MKBox
@@ -110,7 +125,7 @@ function Presentation() {
               px={{ xs: 6, lg: 12 }}
               mt={1}
             >
-              Las mejores foodtrucks de tu zona en tu alcance
+              Todas las mejores foodtrucks de tu zona en tu movil
 
             </MKTypography>
           </Grid>

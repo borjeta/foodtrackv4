@@ -58,7 +58,28 @@ function SimpleFooter({ company, links, light }) {
         justifyContent="space-between"
         alignItems="center"
       >
-        Creado por Borja Alventosa
+        <MKBox
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          flexWrap="wrap"
+          color={light ? "white" : "text"}
+          fontSize={size.sm}
+        >
+          &copy; {new Date().getFullYear()}, made with
+          <MKBox fontSize={size.md} color={light ? "white" : "text"} mb={-0.5} mx={0.25}>
+            <Icon color="inherit" fontSize="inherit">
+              favorite
+            </Icon>
+          </MKBox>
+          by
+          <Link href={href} target="_blank">
+            <MKTypography variant="button" fontWeight="medium" color={light ? "white" : "dark"}>
+              &nbsp;{name}&nbsp;
+            </MKTypography>
+          </Link>
+          for a better web.
+        </MKBox>
         <MKBox
           component="ul"
           sx={({ breakpoints }) => ({
@@ -85,12 +106,12 @@ function SimpleFooter({ company, links, light }) {
 
 // Setting default values for the props of SimpleFooter
 SimpleFooter.defaultProps = {
-  company: {
-
-  },
+  company: { href: "https://www.creative-tim.com/", name: "Creative Tim" },
   links: [
-    /*Enlaces pie de pagina*/
-
+    { href: "https://www.creative-tim.com/", name: "Creative Tim" },
+    { href: "https://www.creative-tim.com/presentation", name: "About Us" },
+    { href: "https://www.creative-tim.com/blog", name: "Blog" },
+    { href: "https://www.creative-tim.com/license", name: "License" },
   ],
   light: false,
 };

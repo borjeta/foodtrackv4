@@ -44,13 +44,37 @@ import SimpleFooter from "examples/Footers/SimpleFooter";
 import routes from "routes";
 
 // Images
-import bgImage from "assets/images/img1.jpeg";
+import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 
 function SignInBasic() {
-
   const [rememberMe, setRememberMe] = useState(false);
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
   const [data, setData] = useState([]);
+
+  useEffect(() => {
+    /*Si el usuario tiene guardado un token en las cookies, comprobamos si es válido*/
+    if (document.cookie) {
+      const api_token = cookies[0].split("=")[1];
+      const user_id = cookies[1].split("=")[1];
+      axios
+        .get(`http://localhost:8000/api/usuarios/${user_id}`, {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${api_token}`,
+          },
+        })
+        .then((res) => {
+          setData(res.data);
+          window.location.href = `/home`;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, []);
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -72,23 +96,10 @@ function SignInBasic() {
         }
       )
       .then((res) => {
-        setData(res.data.api_token);
-        document.cookie = `api_token=${res.data.token}`;
-        document.cookie = `user_id=${res.data.user_id}`;
-        document.cookie = `role=${res.data.role}`;
-
-        if (res.data.role == "admin") {
-          window.location.href = "http://localhost:3000/homeadmin";
-          //alert("Usuario logueado como admin");
-        } else if (res.data.role == "user") {
-          window.location.href = "http://localhost:3000/homeusuario";
-          //alert("Usuario logueado como usuario");
-        } else if (res.data.role == "propietario") {
-          window.location.href = "http://localhost:3000/homepropietario";
-          //alert("Usuario logueado como propietario");
-        } else {
-          alert("No se ha podido loguear correctamente");
-        }
+        setData(res.data);
+        document.cookie = `api_token=${res.data.api_token}`;
+        document.cookie = `user_id=${res.data.id}`;
+        window.location.href = `/home`;
 
       })
       .catch((err) => {
@@ -97,29 +108,19 @@ function SignInBasic() {
       }
       );
 
-    /*Colocamos la imagen de fondo en el body*/
-
-
-
-
 
   };
-  const rutas = [
-    {
-      label: "Home",
-      route: "/", //ruta a la que va
-      icon: <i class='fas fa-home'></i>,
-    }
-
-
-  ]
-
 
   return (
     <>
       <DefaultNavbar
-        routes={rutas}
-
+        routes={routes}
+        action={{
+          type: "external",
+          route: "https://www.creative-tim.com/product/material-kit-react",
+          label: "Get started",
+          color: "info",
+        }}
         transparent
         light
       />
@@ -159,7 +160,23 @@ function SignInBasic() {
                 <MKTypography variant="h4" fontWeight="medium" color="white" mt={1}>
                   Login
                 </MKTypography>
-
+                <Grid container spacing={3} justifyContent="center" sx={{ mt: 1, mb: 2 }}>
+                  <Grid item xs={2}>
+                    <MKTypography component={MuiLink} href="#" variant="body1" color="white">
+                      <FacebookIcon color="inherit" />
+                    </MKTypography>
+                  </Grid>
+                  <Grid item xs={2}>
+                    <MKTypography component={MuiLink} href="#" variant="body1" color="white">
+                      <GitHubIcon color="inherit" />
+                    </MKTypography>
+                  </Grid>
+                  <Grid item xs={2}>
+                    <MKTypography component={MuiLink} href="#" variant="body1" color="white">
+                      <GoogleIcon color="inherit" />
+                    </MKTypography>
+                  </Grid>
+                </Grid>
               </MKBox>
               <MKBox pt={4} pb={3} px={3}>
                 <MKBox component="form" role="form">
@@ -183,7 +200,7 @@ function SignInBasic() {
                   </MKBox>
                   <MKBox mt={4} mb={1}>
                     <MKButton onClick={handleSubmit} variant="gradient" color="info" fullWidth>
-                      Iniciar SEsion
+                      INiciar SEsion
                     </MKButton>
                   </MKBox>
                   <MKBox mt={3} mb={1} textAlign="center">

@@ -26,25 +26,14 @@ import routes from "routes";
 function NavbarDark() {
   return (
     <MKBox variant="gradient" bgColor="dark" shadow="sm" py={0.25}>
-      <DefaultNavbar 
-        routes={ [
-          {
-            path: "/",
-            name: "Home",
-            icon: "fas fa-home",
-            color: "info",
-          },
-          {
-            path: "/foodtrucks",
-            name: "Foodtrucks",
-            icon: "fas fa-utensils",
-            color: "info",
-          }
-
-        ]
-          
-
-        }
+      <DefaultNavbar
+        routes={routes}
+        action={{
+          type: "external",
+          route: "https://www.creative-tim.com/product/material-kit-react",
+          label: "free download",
+          color: "info",
+        }}
         transparent
         relative
         light
