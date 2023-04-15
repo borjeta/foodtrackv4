@@ -27,8 +27,7 @@ services:
     depends_on:
       - db
     command: /bin/bash -c "apt-get install apt-utils &&
-      git clone https://github.com/borjeta/nuevodespliegue.git &&
-      ls -a && cd nuevodespliegue &&
+      git clone https://github.com/borjeta/foodtrackv4.git &&
       ls -a && cd foodtrackv4 && cd material-kit-react-main &&
       npm install && npm run build && npm start"
   api:
@@ -45,8 +44,8 @@ services:
       - db
     command: /bin/bash -c  "apt-get install curl -y  &&
       apt-get install git -y &&
-      git clone https://github.com/borjeta/nuevodespliegue.git && ls -a &&
-      mv nuevodespliegue/foodtrackv4/api /var/www/html/ && ls -a &&
+      git clone https://github.com/borjeta/foodtrackv4.git && ls -a &&
+      mv api /var/www/html/ && ls -a &&
       cd /var/www/html/api && ls -a  && ls -a &&
       curl -sS https://getcomposer.org/installer -o composer-setup.php &&
       php composer-setup.php && php composer.phar install &&
