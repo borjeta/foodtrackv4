@@ -74,7 +74,7 @@ function SignInBasic() {
         document.cookie = `api_token=${res.data.token}`;
         document.cookie = `user_id=${res.data.user_id}`;
         document.cookie = `role=${res.data.role}`;
-        alert("axios 1 con exito")
+        alert(res.data);
 
         if (res.data.role == "admin") {
           window.location.href = "http://localhost:3000/homeadmin";
