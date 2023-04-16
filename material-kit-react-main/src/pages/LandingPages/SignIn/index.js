@@ -46,6 +46,13 @@ function SignInBasic() {
   const [rememberMe, setRememberMe] = useState(false);
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
   const [data, setData] = useState([]);
+  const rutas = [
+    {
+      label: "Home",
+      route: "/", //ruta a la que va
+      icon: <i class='fas fa-home'></i>,
+    }
+  ]
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -74,7 +81,9 @@ function SignInBasic() {
         document.cookie = `api_token=${res.data.token}`;
         document.cookie = `user_id=${res.data.user_id}`;
         document.cookie = `role=${res.data.role}`;
-        alert(res.data);
+        alert("Logueado con éxito " + res.data);
+        console.log(res.data);
+
 
         if (res.data.role == "admin") {
           window.location.href = "http://localhost:3000/homeadmin";
@@ -96,64 +105,7 @@ function SignInBasic() {
 
       }
       );
-
-    /*Colocamos la imagen de fondo en el body*/
-    axios
-      .post('http://api:8000/api/usuarios/login', data,
-        {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-
-          },
-
-        }
-        //172.16.238.10 API LOCAL
-        //172.16.238.20 material-kit-react
-        //172.16.238.30 mysql-db
-      )
-      .then((res) => {
-        setData(res.data.api_token);
-        document.cookie = `api_token=${res.data.token}`;
-        document.cookie = `user_id=${res.data.user_id}`;
-        document.cookie = `role=${res.data.role}`;
-
-        if (res.data.role == "admin") {
-          window.location.href = "http://localhost:3000/homeadmin";
-          //alert("Usuario logueado como admin");
-        } else if (res.data.role == "user") {
-          window.location.href = "http://localhost:3000/homeusuario";
-          //alert("Usuario logueado como usuario");
-        } else if (res.data.role == "propietario") {
-          window.location.href = "http://localhost:3000/homepropietario";
-          //alert("Usuario logueado como propietario");
-        } else {
-          alert("No se ha podido loguear correctamente");
-        }
-        alert("axios 2 con exito")
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("Usuario o contraseña incorrectos axios 2 \n " + err);
-      }
-      );
-
-
-
-
-
   };
-  const rutas = [
-    {
-      label: "Home",
-      route: "/", //ruta a la que va
-      icon: <i class='fas fa-home'></i>,
-    }
-
-
-  ]
-
-
   return (
     <>
       <DefaultNavbar
